@@ -1,0 +1,28 @@
+/* Layout */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdemo\.layout\.sass}line{font-family:\0000316}}
+.screen {
+  top: 2.5em;
+  background: red;
+  -webkit-box-shadow: 0 0 0 2px lime inset;
+  -moz-box-shadow: 0 0 0 2px lime inset;
+  box-shadow: 0 0 0 2px lime inset; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdemo\.layout\.sass}line{font-family:\0000321}}
+.navigation {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  text-align: center;
+  background: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdemo\.layout\.sass}line{font-family:\0000329}}
+  .navigation li {
+    display: -moz-inline-box;
+    display: inline-block;
+    vertical-align: top; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdemo\.layout\.sass}line{font-family:\0000333}}
+  .navigation a {
+    display: block;
+    padding: 0.5em 20px; }
+
+/*@ sourceMappingURL=txdemo.layout.css.map */

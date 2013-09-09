@@ -1,0 +1,6 @@
+{
+"version": "3",
+"mappings": ";;AAeA,OAAO;EACN,GAAG,EAAE,KAAK;EACV,UAAU,EAAE,GAAI;ECHwC,kBAAoB,EC+BjE,oBAAsH;ED7BtE,eAAiB,EC6BjE,oBAAsH;ED1BjE,UAAY,EC0BjE,oBAAsH;;;AFzBlI,WAAW;EACV,QAAQ,EAAE,KAAK;EACf,KAAK,EAAE,IAAI;EACX,IAAI,EAAE,CAAC;EACP,GAAG,EAAE,CAAC;EACN,UAAU,EAAE,MAAM;EAClB,UAAU,EAAE,KAAI;;EAEhB,cAAE;IGqED,OAAO,EAAE,eAAe;IACxB,OAAO,EAAE,YAAY;IHpErB,cAAc,EAAE,GAAG;;EAEpB,aAAC;IACA,OAAO,EAAE,KAAK;IACd,OAAO,EAAE,UAAS",
+"sources": ["../sass.txsrc/txdemo.layout.sass","../../../../../.rvm/gems/ruby-2.0.0-p195/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/css3/_shared.scss","../../../../../.rvm/gems/ruby-2.0.0-p195/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/css3/_box-shadow.scss","../sass.txsrc/txsass/_tx.mixins.sass"],
+"file": "txdemo.layout.css"
+}

@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+
+<project name="Build AppX" default="build" basedir=".">
+
+	<property name="project.title" value="AppX"/>
+	<property name="project.lng" value="ru"/>
+	<property name="project.dir" value="./project"/>
+	<property name="project.app" value="appx"/>
+
+	<property name="build.dir" value="./build"/>
+	<condition property="build.exists">
+		<available file="${build.dir}" type="dir"/>
+	</condition>
+
+	<property name="build.shareDir" value="./build"/>
+	<condition property="build.shareCnd">
+		<equals arg1="${build.share}" arg2="true"/>
+	</condition>
+
+	<property name="res.css.sourceDir" value="${project.dir}/res/css.txsrc"/>
+	<property name="res.css.dir" value="${project.dir}/res/css"/>
+	<property name="res.js.sourceDir" value="${project.dir}/res/js.txsrc"/>
+	<property name="res.js.dir" value="${project.dir}/res/js"/>
+
+	<taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+		<classpath>
+			<fileset dir="${yui.path}">
+				<include name="*.jar"/>
+			</fileset>
+		</classpath>
+	</taskdef>
+
+	<target name="build" depends="concatenateFiles, removeSassDebugInfo, minifyFiles, erasePreviousBuild, copyPrebuild, replaceTokens, shareBuild">
+		<echo>Done.</echo>
+	</target>
+
+	<target name="removeSassDebugInfo">
+		<echo>Removing Sass Debug Info</echo>
+		<replaceregexp match=".media \-sass\-debug\-info(.|\t|\s|\n)*?\}\}" replace="" flags="g">
+			<fileset dir="${res.css.dir}">
+				<include name="*.css"/>
+			</fileset>
+		</replaceregexp>
+	</target>
+
+	<target name="concatenateFiles">
+		<echo>Concatenating Files</echo>
+		<concat destfile="${res.css.dir}/styles.css">
+			<filelist dir="${res.css.sourceDir}">
+				<file name="reset.css"/>
+				<file name="typographics.css"/>
+				<file name="layout.css"/>
+				<file name="ui.css"/>
+			</filelist>
+		</concat>
+		<concat destfile="${res.js.dir}/${project.app}.js">
+			<filelist dir="${res.js.sourceDir}">
+				<file name="utilites.js"/>
+				<file name="${project.app}.screens.js"/>
+				<file name="${project.app}.routes.js"/>
+				<file name="${project.app}.js"/>
+			</filelist>
+		</concat>
+	</target>
+
+	<target name="minifyFiles">
+		<echo>Minifying Files</echo>
+		<yuicompress munge="yes" linebreak="5000" preserveallsemicolons="yes" outputfolder="${res.css.dir}">
+			<fileset dir="${res.css.dir}">
+				<include name="*.css"/>
+			</fileset>
+		</yuicompress>
+		<yuicompress munge="yes" linebreak="5000" preserveallsemicolons="yes" outputfolder="${res.js.dir}">
+			<fileset dir="${res.js.dir}">
+				<include name="*.js"/>
+			</fileset>
+		</yuicompress>
+	</target>
+
+	<target name="erasePreviousBuild" if="build.exists">
+		<echo>Erasing Previous Build</echo>
+		<delete includeemptydirs="true">
+			<fileset dir="./${build.dir}"/>
+		</delete>
+	</target>
+
+	<target name="copyPrebuild">
+		<echo>Copying Files</echo>
+		<mkdir dir="${build.dir}"/>
+		<copy todir="${build.dir}" includeEmptyDirs="false">
+			<fileset dir="${project.dir}">
+				<include name="audio/"/>
+				<include name="images/"/>
+				<include name="flash/"/>
+				<include name="video/"/>
+				<include name="*.html"/>
+				<include name="res/"/>
+				<exclude name="**/txex.*.*"/>
+				<exclude name="**/txdebug.*.*"/>
+				<exclude name="**/txexample.*.*"/>
+				<exclude name="res/*.txsrc/"/>
+			</fileset>
+			<fileset dir="./sources/project meta images">
+				<include name="*.ico"/>
+				<include name="*.png"/>
+				<include name="*.jpg"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="replaceTokens">
+		<echo>Replacing Tokens</echo>
+		<replaceregexp match=".!-- CSS -->(.|\t|\s|\n)*?!-- \/CSS -->" replace="@CSSGOESHERE!">
+			<fileset dir="${build.dir}">
+				<include name="*.html"/>
+			</fileset>
+		</replaceregexp>
+		<replaceregexp match=".!-- JS -->(.|\t|\s|\n)*?!-- \/JS -->" replace="@JSGOESHERE!">
+			<fileset dir="${build.dir}">
+				<include name="*.html"/>
+			</fileset>
+		</replaceregexp>
+		<replace propertyFile="./build.xml">
+			<fileset dir="${build.dir}">
+				<include name="*.html"/>
+			</fileset>
+			<replacefilter>
+				<replacetoken>@CSSGOESHERE!</replacetoken>
+				<replacevalue><![CDATA[<link rel="stylesheet" type="text/css" href="res/css/styles.css">]]></replacevalue>
+			</replacefilter>
+			<replacefilter>
+				<replacetoken>@JSGOESHERE!</replacetoken>
+				<replacevalue><![CDATA[<script type="text/javascript" src="res/js/@APPJSFILEGOESHERE!.js"></script>]]></replacevalue>
+			</replacefilter>
+			<replacefilter token="@APPJSFILEGOESHERE!" value="${project.app}" />
+			<replacefilter token="@TITLEGOESHERE!" value="${project.title}" />
+			<replacefilter token="@LANGUAGEGOESHERE!" value="${project.lng}" />
+		</replace>
+	</target>
+
+	<target name="shareBuild" if="build.shareCnd">
+		<echo>Sharing Build</echo>
+		<copy todir="${build.shareDir}">
+			<fileset dir="${build.dir}"/>
+		</copy>
+	</target>
+
+</project>

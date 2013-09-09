@@ -1,0 +1,35 @@
+@import "compass"
+@import "compass/css3/user-interface"
+@import "txsass/tx.mixins"
+@import "txsass/tx.mixins.debug"
+@import "txsass/tx.parameters"
+
+
+
+
+
+
+/* Layout */
+
+
+
+.screen
+	top: 2.5em
+	background: #f00
+	+box-shadow(0 0 0 2px #0f0 inset)
+
+.navigation
+	position: fixed
+	width: 100%
+	left: 0
+	top: 0
+	text-align: center
+	background: #fff
+
+	li
+		+tx-inline-block
+		vertical-align: top
+
+	a
+		display: block
+		padding: .5em 20px

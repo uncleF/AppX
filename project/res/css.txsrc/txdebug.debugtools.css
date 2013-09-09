@@ -1,0 +1,134 @@
+/* TX.Debug Styles */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000316}}
+.debugRhythmLines {
+  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(5%, rgba(0, 102, 255, 0.25)), color-stop(5%, rgba(0, 102, 255, 0)));
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 102, 255, 0.25) 5%, rgba(0, 102, 255, 0) 5%);
+  background-image: -moz-linear-gradient(bottom, rgba(0, 102, 255, 0.25) 5%, rgba(0, 102, 255, 0) 5%);
+  background-image: -o-linear-gradient(bottom, rgba(0, 102, 255, 0.25) 5%, rgba(0, 102, 255, 0) 5%);
+  background-image: linear-gradient(bottom, rgba(0, 102, 255, 0.25) 5%, rgba(0, 102, 255, 0) 5%);
+  -webkit-background-size: 100% 1.5em;
+  -moz-background-size: 100% 1.5em;
+  -o-background-size: 100% 1.5em;
+  background-size: 100% 1.5em;
+  background-position: left top; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000319}}
+.debugResponsiveGuide {
+  background: url(../images/txdebug.responsiveGuide.jpg); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000324}}
+.debugRhythmLines .content, .debugResponsiveGuide .content {
+  background: none; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000327}}
+.debugToggle {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 20px;
+  right: 20px;
+  border: 10px solid white;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border-radius: 30px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000336}}
+  .debugToggle.on {
+    border-color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000339}}
+  .debugToggle.on:before {
+    display: block;
+    content: "D";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 5px;
+    top: 5px;
+    color: rgba(0, 0, 0, 0.75);
+    background: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000353}}
+.debugTools {
+  position: fixed;
+  width: 300px;
+  top: -20px;
+  right: -10px;
+  margin: 6em 0 0em;
+  padding: 20px 0 0;
+  color: white;
+  background: rgba(0, 0, 0, 0.85);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  z-index: 100; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000366}}
+  .debugTools.off {
+    -webkit-transform: translate(290px, 0);
+    -moz-transform: translate(290px, 0);
+    -ms-transform: translate(290px, 0);
+    -o-transform: translate(290px, 0);
+    transform: translate(290px, 0); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000369}}
+  .debugTools ul {
+    position: relative;
+    z-index: 2; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000373}}
+  .debugTools li {
+    margin: 1.5em 0 1.5em 25px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000376}}
+  .debugTools label {
+    border: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000379}}
+  .debugTools input {
+    margin: 0 0.5em 0 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000382}}
+.debugToolsToggle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: 5px;
+  top: 5px;
+  background: white;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  z-index: 1; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/txdebug\.debugtools\.sass}line{font-family:\0000395}}
+.off .debugToolsToggle {
+  width: 35px;
+  height: 70px;
+  top: 50%;
+  left: -35px;
+  margin: -35px 0 0;
+  background: rgba(0, 0, 0, 0.85);
+  -webkit-border-radius: 35px 0 0 35px;
+  -moz-border-radius: 35px 0 0 35px;
+  -ms-border-radius: 35px 0 0 35px;
+  -o-border-radius: 35px 0 0 35px;
+  border-radius: 35px 0 0 35px; }
+
+/*@ sourceMappingURL=txdebug.debugtools.css.map */
