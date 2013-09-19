@@ -1,9 +1,7 @@
 /* Layout */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000316}}
 html {
   height: 100%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000319}}
 body {
   position: relative;
   min-width: 980px;
@@ -13,7 +11,6 @@ body {
   background: white; }
 
 /* Screen */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000329}}
 .screen {
   position: absolute;
   top: 0;
@@ -21,14 +18,12 @@ body {
   left: 0;
   right: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000338}}
 .screenTransition .screen {
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000341}}
 .newScreen {
   -webkit-transform: translate(100%, 0);
   -moz-transform: translate(100%, 0);
@@ -36,7 +31,6 @@ body {
   -o-transform: translate(100%, 0);
   transform: translate(100%, 0); }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000346}}
 .reverseTransition .newScreen {
   -webkit-transform: translate(-100%, 0);
   -moz-transform: translate(-100%, 0);
@@ -44,14 +38,12 @@ body {
   -o-transform: translate(-100%, 0);
   transform: translate(-100%, 0); }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000351}}
 .screenTransition .oldScreen {
   -webkit-transform: translate(-100%, 0);
   -moz-transform: translate(-100%, 0);
   -ms-transform: translate(-100%, 0);
   -o-transform: translate(-100%, 0);
   transform: translate(-100%, 0); }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000356}}
 .screenTransition.reverseTransition .oldScreen {
   -webkit-transform: translate(100%, 0);
   -moz-transform: translate(100%, 0);
@@ -59,7 +51,6 @@ body {
   -o-transform: translate(100%, 0);
   transform: translate(100%, 0); }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000361}}
 .screenTransition .newScreen {
   -webkit-transform: translate(0, 0);
   -moz-transform: translate(0, 0);
@@ -68,25 +59,21 @@ body {
   transform: translate(0, 0); }
 
 /* Templates */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000368}}
 .template {
   display: none; }
 
 /* Large Resolutions Layout */
 /* Print Layout */
 @media print {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\0000388}}
   body {
     max-width: none;
     margin: 0 10px;
     padding: 0; } }
 /* Small Resolutions Layout */
 @media handheld, only screen and (max-width: 480px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\00003102}}
   html {
     -webkit-text-size-adjust: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\00003105}}
   body {
     min-width: 0;
     max-width: none; } }
@@ -94,7 +81,6 @@ body {
 /* Smartphones (Portrait) Layout */
 /* Tablets Layout */
 @media only screen and (min-width: 481px) and (max-width: 800px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/uncleFucka\/Eclipse\/AppX\/project\/res\/sass\.txsrc\/layout\.sass}line{font-family:\00003136}}
   body {
     min-width: 0;
     max-width: none; } }
