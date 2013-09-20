@@ -39,7 +39,8 @@ a {
   a:visited {
     color: black; }
   a:focus {
-    color: black; }
+    color: black;
+    outline: none; }
 
 label, button, .button {
   cursor: pointer; }
