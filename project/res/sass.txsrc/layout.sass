@@ -14,12 +14,11 @@
 
 
 html
-	height: 100%
+	min-height: 100%
 
 body
 	position: relative
 	+tx-set-boundaries
-	height: 100%
 	background: $background
 
 
@@ -72,6 +71,7 @@ body
 
 
 
+
 /* Large Resolutions Layout */
 
 @media only screen and (min-width: 1382px) 
@@ -95,9 +95,9 @@ body
 
 
 
-/* Small Resolutions Layout */
+/* Phones Layout */
 
-@media handheld, only screen and (max-width: 480px) 
+@media handheld, only screen and (max-width: 640px) 
 
 	html 
 		-webkit-text-size-adjust: none
@@ -111,49 +111,13 @@ body
 
 
 
-/* Smartphones (Landscape) Layout */
-
-@media only screen and (min-width : 321px) 
-
-
-
-
-
-
-/* Smartphones (Portrait) Layout */
-
-@media only screen and (max-width : 320px) 
-
-
-
-
-
-
 /* Tablets Layout */
 
-@media only screen and (min-width: 481px) and (max-width : 800px) 
+@media only screen and (min-width: 641px) and (max-width : 1024px) 
 
 	body 
 		min-width: 0
 		max-width: none
-	
-
-
-
-
-
-/* Tablets (Landscape) Layout */
-
-@media only screen and (max-width : 1024px) and (orientation : landscape) 
-
-
-
-
-
-
-/* Tablets (Portrait) Layout */
-
-@media only screen and (max-width : 768px) and (orientation : portrait) 
 
 
 

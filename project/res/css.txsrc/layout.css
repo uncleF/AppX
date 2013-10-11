@@ -1,13 +1,13 @@
 /* Layout */
 html {
-  height: 100%; }
+  min-height: 100%; }
 
 body {
   position: relative;
   min-width: 980px;
   max-width: 1400px;
+  min-height: 100%;
   margin: 0 auto;
-  height: 100%;
   background: white; }
 
 /* Screen */
@@ -69,23 +69,19 @@ body {
     max-width: none;
     margin: 0 10px;
     padding: 0; } }
-/* Small Resolutions Layout */
-@media handheld, only screen and (max-width: 480px) {
+/* Phones Layout */
+@media handheld, only screen and (max-width: 640px) {
   html {
     -webkit-text-size-adjust: none; }
 
   body {
     min-width: 0;
     max-width: none; } }
-/* Smartphones (Landscape) Layout */
-/* Smartphones (Portrait) Layout */
 /* Tablets Layout */
-@media only screen and (min-width: 481px) and (max-width: 800px) {
+@media only screen and (min-width: 641px) and (max-width: 1024px) {
   body {
     min-width: 0;
     max-width: none; } }
-/* Tablets (Landscape) Layout */
-/* Tablets (Portrait) Layout */
 /* TV Layout */
 /* Audio Layout */
 
