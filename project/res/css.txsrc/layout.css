@@ -62,26 +62,13 @@ body {
 .template {
   display: none; }
 
-/* Large Resolutions Layout */
-/* Print Layout */
-@media print {
-  body {
-    max-width: none;
-    margin: 0 10px;
-    padding: 0; } }
-/* Phones Layout */
-@media handheld, only screen and (max-width: 640px) {
+/* High DPI Layout */
+/* Large Resolution Layout */
+/* Phone Layout */
+@media handheld, only screen and (max-width: 720px) {
   html {
-    -webkit-text-size-adjust: none; }
-
-  body {
-    min-width: 0;
-    max-width: none; } }
-/* Tablets Layout */
-@media only screen and (min-width: 641px) and (max-width: 1024px) {
-  body {
-    min-width: 0;
-    max-width: none; } }
+    -webkit-text-size-adjust: none; } }
+/* Tablet Layout */
 /* TV Layout */
 /* Audio Layout */
 
