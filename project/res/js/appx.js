@@ -76,19 +76,19 @@ var AppView = Backbone.View.extend({
 			if (typeof afterScreenTransitionCall == "function") {
 				afterScreenTransitionCall();
 			}
-			$(".newScreen").removeClass("newScreen");
-			$("body").removeClass("screenTransition reverseTransition");
+			$(".screen-newScreen").removeClass("screen-newScreen");
+			$("body").removeClass("s-screenTransition s-reverseTransition");
 		},
 		"click .back": function(event) {
 			event.preventDefault();
-			$("body").addClass("reverseTransition");
+			$("body").addClass("s-reverseTransition");
 			history.back();
 		}
 	},
 	createScreen: function() {
 		var newScreen = new ScreenView();
 		if (this.screens.length > 0) {
-			newScreen.$el.addClass("newScreen");
+			newScreen.$el.addClass("screen-newScreen");
 		}
 		this.screens.push(newScreen);
 		this.$el.append(newScreen.$el);
@@ -99,9 +99,9 @@ var AppView = Backbone.View.extend({
 		if (typeof beforeScreenTransitionCall == "function") {
 			beforeScreenTransitionCall();
 		}
-		this.screens[0].$el.addClass("oldScreen");
+		this.screens[0].$el.addClass("screen-oldScreen");
 		setTimeout(function() {
-			$("body").addClass("screenTransition");
+			$("body").addClass("s-screenTransition");
 		}, 10);
 	},
 	beforeScreenTransitionCalls: {

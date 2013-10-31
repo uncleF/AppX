@@ -32,32 +32,32 @@ body
 	left: 0
 	right: 0
 
-.screenTransition
+.s-screenTransition
 
 	.screen
 		+transition(all $screen-transition)
 
-.newScreen
+.screen-newScreen
 	+transform(translate(100%, 0))
 
-.reverseTransition
+.s-reverseTransition
 
-	.newScreen
+	.screen-newScreen
 		+transform(translate(-100%, 0))
 
-.screenTransition
+.s-screenTransition
 
-	.oldScreen
+	.screen-oldScreen
 		+transform(translate(-100%, 0))
 
-	&.reverseTransition
+	&.s-reverseTransition
 
-		.oldScreen
+		.screen-oldScreen
 			+transform(translate(100%, 0))
 
-.screenTransition
+.s-screenTransition
 
-	.newScreen
+	.screen-newScreen
 		+transform(translate(0, 0))
 
 
@@ -74,7 +74,7 @@ body
 
 /* High DPI Layout */
 
-@media only screen and (min-resolution: 1.5dppx) and (max-width: 720px), only screen and (-webkit-min-device-pixel-ratio: 1.5) and (max-width: 720px), only screen and (min--moz-device-pixel-ratio: 1.5) and (max-width: 720px), only screen and (-o-min-device-pixel-ratio: 3/2) and (max-width: 720px), only screen and (min-device-pixel-ratio: 1.5) and (max-width: 720px)
+@media only screen and (min-resolution: 1.5dppx), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5)
 
 
 
@@ -94,9 +94,6 @@ body
 
 @media handheld, only screen and (max-width: 720px)
 
-	html 
-		-webkit-text-size-adjust: none
-
 @media only screen and (min-resolution: 1.5dppx) and (max-width: 720px), only screen and (-webkit-min-device-pixel-ratio: 1.5) and (max-width: 720px), only screen and (min--moz-device-pixel-ratio: 1.5) and (max-width: 720px), only screen and (-o-min-device-pixel-ratio: 3/2) and (max-width: 720px), only screen and (min-device-pixel-ratio: 1.5) and (max-width: 720px)
 
 
@@ -109,6 +106,25 @@ body
 @media only screen and (min-width: 721px) and (max-width : 1024px)
 
 @media only screen and (min-resolution: 1.5dppx) and (min-width: 721px) and (max-width : 1024px), only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 721px) and (max-width : 1024px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 721px) and (max-width : 1024px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 721px) and (max-width : 1024px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 721px) and (max-width : 1024px)
+
+
+
+
+
+
+/* Print Layout */
+
+@media print
+
+	body 
+		max-width: none
+		margin: 0 10px
+		padding: 0
+
+
+
+	.header, .footer 
+		display: none
 
 
 

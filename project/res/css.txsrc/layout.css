@@ -18,40 +18,40 @@ body {
   left: 0;
   right: 0; }
 
-.screenTransition .screen {
+.s-screenTransition .screen {
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s; }
 
-.newScreen {
+.screen-newScreen {
   -webkit-transform: translate(100%, 0);
   -moz-transform: translate(100%, 0);
   -ms-transform: translate(100%, 0);
   -o-transform: translate(100%, 0);
   transform: translate(100%, 0); }
 
-.reverseTransition .newScreen {
+.s-reverseTransition .screen-newScreen {
   -webkit-transform: translate(-100%, 0);
   -moz-transform: translate(-100%, 0);
   -ms-transform: translate(-100%, 0);
   -o-transform: translate(-100%, 0);
   transform: translate(-100%, 0); }
 
-.screenTransition .oldScreen {
+.s-screenTransition .screen-oldScreen {
   -webkit-transform: translate(-100%, 0);
   -moz-transform: translate(-100%, 0);
   -ms-transform: translate(-100%, 0);
   -o-transform: translate(-100%, 0);
   transform: translate(-100%, 0); }
-.screenTransition.reverseTransition .oldScreen {
+.s-screenTransition.s-reverseTransition .screen-oldScreen {
   -webkit-transform: translate(100%, 0);
   -moz-transform: translate(100%, 0);
   -ms-transform: translate(100%, 0);
   -o-transform: translate(100%, 0);
   transform: translate(100%, 0); }
 
-.screenTransition .newScreen {
+.s-screenTransition .screen-newScreen {
   -webkit-transform: translate(0, 0);
   -moz-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
@@ -65,10 +65,16 @@ body {
 /* High DPI Layout */
 /* Large Resolution Layout */
 /* Phone Layout */
-@media handheld, only screen and (max-width: 720px) {
-  html {
-    -webkit-text-size-adjust: none; } }
 /* Tablet Layout */
+/* Print Layout */
+@media print {
+  body {
+    max-width: none;
+    margin: 0 10px;
+    padding: 0; }
+
+  .header, .footer {
+    display: none; } }
 /* TV Layout */
 /* Audio Layout */
 
