@@ -2,7 +2,8 @@
 ## Project
 #################
 
-build/*.*
+build/
+node_modules/
 
 
 #################
