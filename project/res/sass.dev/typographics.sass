@@ -1,8 +1,8 @@
 @import "compass"
 @import "compass/css3/user-interface"
-@import "txsass/tx.mixins"
-@import "txsass/tx.mixins.debug"
-@import "txsass/tx.project"
+@import "tx/tx.mixins"
+@import "tx/tx.mixins.debug"
+@import "tx/tx.project"
 
 
 
@@ -271,7 +271,7 @@ textarea
 	+tx-form-height(10)
 	
 @-o-keyframes focusPulse 
-	From
+	0%
 		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff
 	50%
 		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 8px 1px #8ac7ff
@@ -279,7 +279,7 @@ textarea
 		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff
 
 @-moz-keyframes focusPulse 
-	From
+	0%
 		-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px  #8ac7ff
 		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff
 	50%
@@ -290,7 +290,7 @@ textarea
 		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff
 
 @-webkit-keyframes focusPulse 
-	From
+	0%
 		-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff
 		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff
 	50%
@@ -301,7 +301,7 @@ textarea
 		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff
 	
 @keyframes focusPulse 
-	From
+	0%
 		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff
 	50%
 		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 8px 1px #8ac7ff
@@ -319,7 +319,7 @@ hr
 
 
 
-@import "txsass/tx.typographics.add"
+@import "tx/tx.typographics.add"
 
 
 

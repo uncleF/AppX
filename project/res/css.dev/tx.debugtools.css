@@ -63,6 +63,7 @@
       top: 5px;
       width: 30px;
       height: 30px;
+      color: black;
       color: rgba(0, 0, 0, 0.75);
       background: white;
       font-size: 1.5em;
@@ -89,7 +90,7 @@
   -o-border-radius: 18px;
   border-radius: 18px;
   color: white;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.75);
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
@@ -143,4 +144,4 @@
   background: black;
   opacity: 0.85; }
 
-/*@ sourceMappingURL=txdebug.debugtools.css.map */
+/*@ sourceMappingURL=tx.debugtools.css.map */

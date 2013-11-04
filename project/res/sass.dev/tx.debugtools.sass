@@ -1,8 +1,8 @@
 @import "compass"
 @import "compass/css3/user-interface"
-@import "txsass/tx.mixins"
-@import "txsass/tx.mixins.debug"
-@import "txsass/tx.project"
+@import "tx/tx.mixins"
+@import "tx/tx.mixins.debug"
+@import "tx/tx.project"
 
 
 
@@ -72,6 +72,7 @@
 			top: 5px
 			width: 30px
 			height: 30px
+			color: #000
 			color: rgba(0,0,0,.75)
 			background: #fff
 			font-size: 1.5em
@@ -90,7 +91,7 @@
 	+tx-rhythm-padding(3, 0)
 	+border-radius(18px)
 	color: #fff
-	background: rgba(0,0,0,.85)
+	background: rgba(0,0,0,.75)
 	+transition(all .5s)
 
 	&.s-debugTools-off

@@ -24,7 +24,9 @@ function whichTransitionEndEvent() {
 	}
 }
 
-var transitionEndEvent = whichTransitionEndEvent();var ScreenView = Backbone.View.extend({
+var transitionEndEvent = whichTransitionEndEvent();
+
+var ScreenView = Backbone.View.extend({
 	tagName: "section",
 	className: "screen",
 	templates: {
@@ -36,7 +38,9 @@ var transitionEndEvent = whichTransitionEndEvent();var ScreenView = Backbone.Vie
 	render: function() {
 		this.$el.html(this.templates[app.get("state")]);
 	}
-});var Router = Backbone.Router.extend({
+});
+
+var Router = Backbone.Router.extend({
 	routes: {
 		"": "start"
 	},
@@ -47,7 +51,9 @@ var transitionEndEvent = whichTransitionEndEvent();var ScreenView = Backbone.Vie
 
 var router = new Router();
 
-Backbone.history.start();var App = Backbone.Model.extend({
+Backbone.history.start();
+
+var App = Backbone.Model.extend({
 	defaults: {
 		state: "start"
 	}

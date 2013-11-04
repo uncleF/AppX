@@ -9,27 +9,29 @@
 	<property name="project.lng" value="ru"/>
 	<property name="project.dir" value="./project"/>
 	<property name="project.res" value="${project.dir}/res"/>
+	<property name="project.meta" value="./meta"/>
 
-	<property name="res.css.sourceDir" value="${project.res}/css.txsrc"/>
+	<property name="res.css.devDir" value="${project.res}/css.dev"/>
 	<property name="res.css.dir" value="${project.res}/css"/>
-	<property name="res.js.sourceDir" value="${project.res}/js.txsrc"/>
+	<property name="res.css.filename" value="styles"/>
+	<property name="res.js.devDir" value="${project.res}/js.dev"/>
 	<property name="res.js.dir" value="${project.res}/js"/>
 
 	<property name="build.dir" value="./build"/>
 	<property name="build.shareDir" value="./build"/>
 
 	<target name="build" depends="checkJSFiles, concatenateJSFiles, concatenateCSSFiles, removeSassDebugInfo, minifyJSFiles, minifyCSSFiles, checkPreviousBuild, erasePreviousBuild, copyBuild, replaceTokens, shareBuild">
-		<echo>Done.</echo>
+		<echo>Build Successful</echo>
 	</target>
 
 	<target name="checkJSFiles">
 		<echo>Checking JavaScript Files with JSLint</echo>
 		<pathconvert pathsep=" " property="jsfiles">
-			<fileset dir="${res.js.sourceDir}">
+			<fileset dir="${res.js.devDir}">
 				<include name="*.js"/>
 			</fileset>
 		</pathconvert>
-		<exec dir="${res.js.sourceDir}" executable="java" failonerror="true">
+		<exec dir="${res.js.devDir}" executable="java" failonerror="true">
 			<arg line="-jar ${tools.rhino} ${tools.jslint} ${jsfiles}"/>
 		</exec>
 	</target>
@@ -37,7 +39,7 @@
 	<target name="concatenateJSFiles" depends="checkJSFiles">
 		<echo>Concatenating JavaScript Files</echo>
 		<concat destfile="${res.js.dir}/${project.app}.js">
-			<filelist dir="${res.js.sourceDir}">
+			<filelist dir="${res.js.devDir}">
 				<file name="app.utilites.js"/>
 				<file name="app.screens.js"/>
 				<file name="app.routes.js"/>
@@ -48,17 +50,16 @@
 
 	<target name="concatenateCSSFiles">
 		<echo>Concatenating CSS Files</echo>
-		<concat destfile="${res.css.dir}/styles.css">
-			<filelist dir="${res.css.sourceDir}">
+		<concat destfile="${res.css.dir}/${res.css.filename}.css">
+			<filelist dir="${res.css.devDir}">
 				<file name="reset.css"/>
 				<file name="typographics.css"/>
 			</filelist>
-			<fileset dir="${res.css.sourceDir}">
+			<fileset dir="${res.css.devDir}">
 				<include name="*.css"/>
 				<exclude name="reset.css"/>
 				<exclude name="typographics.css"/>
-				<exclude name="txdebug.*.css"/>
-				<exclude name="txdemo.*.css"/>
+				<exclude name="tx.*.css"/>
 			</fileset>
 		</concat>
 	</target>
@@ -123,18 +124,12 @@
 		<mkdir dir="${build.dir}"/>
 		<copy todir="${build.dir}" includeEmptyDirs="false">
 			<fileset dir="${project.dir}">
-				<include name="audio/"/>
-				<include name="images/"/>
-				<include name="flash/"/>
-				<include name="video/"/>
-				<include name="*.html"/>
-				<include name="res/"/>
-				<exclude name="**/txex.*.*"/>
-				<exclude name="**/txdebug.*.*"/>
-				<exclude name="**/txexample.*.*"/>
-				<exclude name="res/*.txsrc/"/>
+				<include name="**"/>
+				<exclude name="**/tx.*.*"/>
+				<exclude name="**/tx/**"/>
+				<exclude name="**/*.dev/**"/>
 			</fileset>
-			<fileset dir="./sources/project meta images" includes="">
+			<fileset dir="${project.meta}">
 				<include name="*.ico"/>
 				<include name="*.png"/>
 				<include name="*.jpg"/>
@@ -145,12 +140,12 @@
 
 	<target name="replaceTokens">
 		<echo>Replacing Tokens</echo>
-		<replaceregexp match=".!-- CSS -->(.|\t|\s|\n)*?!-- \/CSS -->" replace="@CSSGOESHERE!">
+		<replaceregexp match=".!-- @tx-css -->(.|\t|\s|\n)*?!-- \/@tx-css -->" replace="@tx-css">
 			<fileset dir="${build.dir}">
 				<include name="*.html"/>
 			</fileset>
 		</replaceregexp>
-		<replaceregexp match=".!-- JS -->(.|\t|\s|\n)*?!-- \/JS -->" replace="@JSGOESHERE!">
+		<replaceregexp match=".!-- @tx-js -->(.|\t|\s|\n)*?!-- \/@tx-js -->" replace="@tx-js">
 			<fileset dir="${build.dir}">
 				<include name="*.html"/>
 			</fileset>
@@ -160,16 +155,17 @@
 				<include name="*.html"/>
 			</fileset>
 			<replacefilter>
-				<replacetoken>@CSSGOESHERE!</replacetoken>
-				<replacevalue><![CDATA[<link rel="stylesheet" type="text/css" href="res/css/styles.min.css">]]></replacevalue>
+				<replacetoken>@tx-css</replacetoken>
+				<replacevalue><![CDATA[<link rel="stylesheet" type="text/css" href="res/css/@tx-filenameCSS.min.css">]]></replacevalue>
 			</replacefilter>
 			<replacefilter>
-				<replacetoken>@JSGOESHERE!</replacetoken>
-				<replacevalue><![CDATA[<script type="text/javascript" src="res/js/@APPJSFILEGOESHERE!.min.js"></script>]]></replacevalue>
+				<replacetoken>@tx-js</replacetoken>
+				<replacevalue><![CDATA[<script type="text/javascript" src="res/js/@tx-filenameJS.min.js"></script>]]></replacevalue>
 			</replacefilter>
-			<replacefilter token="@TITLEGOESHERE!" value="${project.title}" />
-			<replacefilter token="@LANGUAGEGOESHERE!" value="${project.lng}" />
-			<replacefilter token="@APPJSFILEGOESHERE!" value="${project.app}" />
+			<replacefilter token="@tx-title" value="${project.title}"/>
+			<replacefilter token="@tx-language" value="${project.lng}"/>
+			<replacefilter token="@tx-filenameCSS" value="${res.css.filename}" />
+			<replacefilter token="@tx-filenameJS" value="${project.app}" />
 		</replace>
 	</target>
 
