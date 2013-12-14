@@ -2,19 +2,21 @@
 	"private" : true,
 	"devDependencies" : {
 		"grunt": "~0.4.2",
-		"matchdep": "*",
+		"load-grunt-tasks": "*",
 		"grunt-htmlhint": "*",
 		"grunt-contrib-jshint": "*",
 		"grunt-contrib-csslint": "*",
 		"grunt-contrib-concat": "*",
 		"grunt-string-replace": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-csscomb": "*",
-    "grunt-cssc": "*",
+		"grunt-remove-logging": "*",
+		"grunt-contrib-uglify": "*",
+		"grunt-csscomb": "*",
+		"grunt-cssc": "*",
 		"grunt-contrib-cssmin": "*",
-    "grunt-uncss": "*",
-    "grunt-contrib-clean": "*",
-    "grunt-contrib-copy": "*",
-    "grunt-contrib-yuidoc": "*"
-  }
+		"grunt-uncss": "*",
+		"grunt-contrib-clean": "*",
+		"grunt-contrib-copy": "*",
+		"grunt-contrib-imagemin": "*",
+		"grunt-contrib-compress": "*"
+	}
 }

@@ -5,9 +5,11 @@ var
 	app						= "appx",				//JS Production Filename
 	language			= "ru",					//Project Language
 	dir						= "project",		//Project Directory
+	images				= "images",			//Project Images Directory
 	meta					= "meta",				//Meta Resources Directory
 	res						= "res",				//Resources Directory
 
+	resImages			= "images",			//Resource Images Directory
 	css						= "css",				//CSS Production Directory
 	cssDev				= "css.dev",		//CSS Development Directory
 	cssFilename		= "styles",			//CSS Production Filename
@@ -41,26 +43,30 @@ var project = {
 	init: function() {
 		this.title = title;
 		this.language = language;
-		this.dir = dir;
+		this.dir = dir + "/";
+		this.images = this.dir + images + "/";
 		this.meta = meta;
-		this.resDir = this.dir + "/" + res;
+		this.resDir = this.dir + res + "/";
 		this.res = {
+			images: {
+				dir: this.resDir + resImages + "/"
+			},
 			css: {
-				dir: this.resDir + "/" + css,
-				devDir: this.resDir + "/" + cssDev,
+				dir: this.resDir + css + "/",
+				devDir: this.resDir + cssDev + "/",
 				filename: cssFilename,
 				dev: fillAnArray(cssDevFiles, dir + "/" + res + "/" + cssDev + "/"),
 			},
 			js: {
-				dir: this.resDir + "/" + js,
-				devDir: this.resDir + "/" + jsDev,
+				dir: this.resDir + js + "/",
+				devDir: this.resDir + jsDev + "/",
 				filename: app,
 				dev: fillAnArray(jsDevFiles, dir + "/" + res + "/" + jsDev + "/")
 			}
 		};
 		this.build = {
-			dir: buildDir,
-			shareDir: shareDir
+			dir: buildDir + "/",
+			shareDir: shareDir + "/"
 		};
 		return this;
 	}
@@ -68,7 +74,7 @@ var project = {
 
 module.exports = function(grunt) {
 
-	require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+	require('load-grunt-tasks')(grunt);
 
 	grunt.initConfig({
 		
@@ -91,7 +97,10 @@ module.exports = function(grunt) {
 					"style-disabled": true,
 					"img-alt-require": true
 				},
-				src: project.dir + "/*.html"
+				cwd: project.dir,
+				src: ["*.html"],
+				expand: true,
+				flatten: true
 			}
 		},
 		jshint: {
@@ -104,7 +113,10 @@ module.exports = function(grunt) {
 					"trailing": true,
 					"sub": true
 				},
-				src: project.res.js.devDir + "/*.js"
+				cwd: project.res.js.devDir,
+				src: ["*.js"],
+				expand: true,
+				flatten: true
 			}
 		},
 		csslint: {
@@ -142,7 +154,10 @@ module.exports = function(grunt) {
 					"vendor-prefix": true,
 					"zero-units": false
 				},
-				src: [project.res.css.devDir + "/*.css", "!" + project.res.css.devDir + "/reset*.css", "!" + project.res.css.devDir + "/typographics*.css"]
+				cwd: project.res.css.devDir,
+				src: ["*.css", "!reset*.css", "!typographics*.css"],
+				expand: true,
+				flatten: true
 			}
 		},
 
@@ -152,11 +167,11 @@ module.exports = function(grunt) {
 					separator: "\n\n",
 				},
 				src: project.res.js.dev,
-				dest: project.res.js.dir + "/" + project.res.js.filename + ".js",
+				dest: project.res.js.dir + project.res.js.filename + ".js",
 			},
 			css: {
 				src: project.res.css.dev,
-				dest: project.res.css.dir + "/" + project.res.css.filename + ".css"
+				dest: project.res.css.dir + project.res.css.filename + ".css"
 			}
 		},
 
@@ -169,38 +184,48 @@ module.exports = function(grunt) {
 					}]
 				},
 				files: {
-					"./": [project.res.css.dir + "/*.css"],
+					"./": [project.res.css.dir + "*.css"],
 				}
 			},
 			build: {
 				files: {
-					"./": [project.build.dir + "/*.html"],
+					"./": [project.build.dir + "*.html"],
 				},
 				options: {
 					replacements: [{
-						pattern: /@tx-title!/gi,
+						pattern: /@tx-title/gi,
 						replacement: project.title
 					},{
-						pattern: /@tx-language!/gi,
+						pattern: /@tx-language/gi,
 						replacement: project.language
 					},{
 						pattern: /.!-- @tx-css -->(.|\t|\s|\n)*?!-- \/@tx-css -->/gi,
-						replacement: '<link rel="stylesheet" type="text/css" href="res/css/' + project.res.css.filename + '.min.css">'
+						replacement: '<link rel="stylesheet" type="text/css" href="' + project.res.css.dir.replace(project.dir, "") + project.res.css.filename + '.min.css">'
 					},{
 						pattern: /.!-- @tx-js -->(.|\t|\s|\n)*?!-- \/@tx-js -->/gi,
-						replacement: '<script type="text/javascript" src="res/js/' + project.res.js.filename + '.min.js"></script>'
+						replacement: '<script type="text/javascript" src="' + project.res.js.dir.replace(project.dir, "") + project.res.js.filename + '.min.js"></script>'
 					}]
 				}
 			}
 		},
 
-		uglify: {
-			jsMin: {
-				src: [project.res.js.dir + "/*.js", "!" + project.res.js.dir + "/*.min.js"],
+		removelogging: {
+			jsClean: {
+				cwd: project.res.js.dir,
+				src: ["*.js", "!*.min.js"],
 				dest: project.res.js.dir,
 				expand: true,
-				flatten: true,
-				ext: ".min.js"
+				flatten: true
+			}
+		},
+		uglify: {
+			jsMin: {
+				cwd: project.res.js.dir,
+				src: ["*.js", "!*.min.js"],
+				dest: project.res.js.dir,
+				ext: ".min.js",
+				expand: true,
+				flatten: true
 			}
 		},
 
@@ -210,11 +235,12 @@ module.exports = function(grunt) {
 					consolidateMediaQueries: true
 			},
 			cssOptimize: {
-				src: [project.res.css.dir + "/*.css", "!" + project.res.css.dir + "/*.min.css"],
+				cwd: project.res.css.dir,
+				src: ["*.css", "!*.min.css"],
 				dest: project.res.css.dir,
+				ext: ".min.css",
 				expand: true,
-				flatten: true,
-				ext: ".min.css"
+				flatten: true
 			}
 		},
 		uncss: {
@@ -222,21 +248,19 @@ module.exports = function(grunt) {
 				files: {
 					cssMinFiles: function() {
 						var cssMinFilesObject = {};
-						cssMinFilesObject[project.res.css.dir + "/" + project.res.css.filename + ".min.css"] = project.dir + "/*.html";
+						cssMinFilesObject[project.res.css.dir + project.res.css.filename + ".min.css"] = project.dir + "*.html";
 						return cssMinFilesObject;
 					}
 				}.cssMinFiles()
 			}
 		},
 		cssmin: {
-			options: {
-				report: "gzip"
-			},
 			cssMin: {
-				src: project.res.css.dir + "/*.min.css",
+				cwd: project.res.css.dir,
+				src: ["*.min.css"],
 				dest: project.res.css.dir,
 				expand: true,
-				flatten: true,
+				flatten: true
 			}
 		},
 
@@ -245,7 +269,8 @@ module.exports = function(grunt) {
 				sortOrder: "cssorder.json"
 			},
 			cssSort: {
-				src: [project.res.css.dir + "/*.css", "!" + project.res.css.dir + "/*.min.css"],
+				cwd: project.res.css.dir,
+				src: ["*.css", "!*.min.css"],
 				dest: project.res.css.dir,
 				expand: true,
 				flatten: true
@@ -253,39 +278,62 @@ module.exports = function(grunt) {
 		},
 
 		clean: {
-			build: [project.build.dir + "/"]
+			build: [project.build.dir]
 		},
 		copy: {
 			build: {
-				cwd: project.dir + "/",
+				cwd: project.dir,
 				src: ["**", "!**/tx.*.*", "!**/txdebug.*.*", "!**/**.dev/**", "!**/txdebug/**"],
 				dest: project.build.dir,
 				expand: true
 			},
 			meta: {
-				cwd: project.meta + "/",
+				cwd: project.meta,
 				src: ["*.ico", "*.png", "*.jpg", "*.gif"],
 				dest: project.build.dir,
-				expand: true
+				expand: true,
+				flatten: true
 			},
 			share: {
-				cwd: project.build.dir + "/",
+				cwd: project.build.dir,
 				src: ["**"],
-				dest: "<%= buildEnv.shareRoot %>" + "/" + project.build.shareDir,
+				dest: "<%= buildEnv.shareRoot %>" + project.build.shareDir,
 				expand: true
 			}
 		},
 
-		yuidoc: {
-			all: {
-				name: '<%= pkg.name %>',
-				description: '<%= pkg.description %>',
-				version: '<%= pkg.version %>',
-				url: '<%= pkg.homepage %>',
+		imagemin: {
+			images: {
+				cwd: project.images,
+				src: ["**/*.{png,jpg,gif}", "!**/tx.*.*", "!**/txdebug.*.*"],
+				dest: project.images,
+				expand: true,
+				flatten: true
+			},
+			res: {
+				cwd: project.res.images.dir,
+				src: ["**/*.{png,jpg,gif}", "!**/tx.*.*", "!**/txdebug.*.*"],
+				dest: project.res.images.dir,
+				expand: true,
+				flatten: true
+			},
+			meta: {
+				cwd: project.build.dir,
+				src: ["*.{png,jpg,gif}"],
+				dest: project.build.dir,
+				expand: true,
+				flatten: true
+			}
+		},
+		compress: {
+			gzip: {
 				options: {
-					paths: [project.res.js.dir],
-					outdir: project.dir + '/docs/'
-				}
+					mode: "gzip",
+				},
+				cwd: project.build.dir,
+				src: ["**/*.min.js", "**/*.min.css"],
+				dest: project.build.dir,
+				expand: true
 			}
 		}
 
@@ -293,12 +341,12 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("lint", ["htmlhint", "jshint", "csslint"]);
 
-	grunt.registerTask("build", ["htmlhint", "jshint", "csslint", "concat", "string-replace:sassDebug", "uglify", "cssc", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "string-replace:build"]);
+	grunt.registerTask("images", ["imagemin:images", "imagemin:res"]);
 
-	grunt.registerTask("build-share", ["htmlhint", "jshint", "csslint", "concat", "string-replace:sassDebug", "uglify", "cssc", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "string-replace:build", "copy:share"]);
+	grunt.registerTask("build", ["htmlhint", "jshint", "csslint", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
 
-	grunt.registerTask("build-ex", ["htmlhint", "jshint", "csslint", "concat", "string-replace:sassDebug", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "string-replace:build"]);
+	grunt.registerTask("build-share", ["htmlhint", "jshint", "csslint", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build", "copy:share"]);
 
-	grunt.registerTask("doc", ["yuidoc"]);
+	grunt.registerTask("build-exp", ["htmlhint", "jshint", "csslint", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
 
 };

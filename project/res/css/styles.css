@@ -1,15 +1,15 @@
 /* CSS-Reset */
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, address, blockquote, pre, a, abbr, acronym, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, form, fieldset, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, applet, object, iframe, article, aside, figure, figcaption, footer, header, hgroup, menu, nav, section, time, mark, audio, video, canvas {
+  margin: 0;
   padding: 0;
   border: none;
-  margin: 0;
   background: none;
-  outline: none;
+  font-family: inherit;
   font-weight: inherit;
   font-style: inherit;
-  font-family: inherit;
   line-height: inherit;
-  vertical-align: baseline; }
+  vertical-align: baseline;
+  outline: none; }
 
 html {
   overflow: auto;
@@ -22,8 +22,8 @@ blockquote, q {
     content: none; }
 
 table {
-  border-spacing: 0;
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  border-spacing: 0; }
 
 caption, th, td {
   font-weight: normal;
@@ -37,24 +37,24 @@ article, aside, figure, figcaption, footer, header, hgroup, nav, section {
   display: block; }
 
 input, button, select, textarea {
-  padding: 0;
-  margin: 0; }
+  margin: 0;
+  padding: 0; }
 
 /* Lists Styles Reset */
 .u-listReset, .u-descriptionListReset {
-  padding: 0;
-  margin: 0; }
+  margin: 0;
+  padding: 0; }
 
 .u-listReset {
   list-style: none outside; }
   .u-listReset > li {
-    padding: 0;
     margin: 0;
+    padding: 0;
     background: none; }
 
 .u-descriptionListReset > dt, .u-descriptionListReset > dd {
-  padding: 0;
   margin: 0;
+  padding: 0;
   font-weight: normal;
   font-style: normal; }
 
@@ -214,25 +214,25 @@ kbd {
   display: -moz-inline-box;
   display: inline-block;
   height: 24px;
+  line-height: 24px;
   padding: 0 0.5em;
-  color: #333333;
-  background: #ededed;
-  background-clip: padding-box;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
   border-radius: 3px;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
   -webkit-box-shadow: -2px -2px 2px #dadada inset;
   -moz-box-shadow: -2px -2px 2px #dadada inset;
   box-shadow: -2px -2px 2px #dadada inset;
-  font-weight: bold;
+  color: #333333;
+  background: #ededed;
   font-family: "Courier New", Courier, Freemono, "Nimbus Mono L", monospace;
+  font-weight: bold;
   letter-spacing: 0.1em;
-  line-height: 24px;
-  vertical-align: top;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  -webkit-background-clip: padding;
-  -moz-background-clip: padding; }
+  vertical-align: top; }
 
 var {
   color: #d00837;
@@ -276,8 +276,8 @@ table {
   table-layout: fixed; }
 
 td, th {
-  padding: 0.6875em 0.5em 0.75em;
-  border: 1px solid black; }
+  border: 1px solid black;
+  padding: 0.6875em 0.5em 0.75em; }
 
 th {
   font-weight: bold; }
@@ -294,8 +294,8 @@ legend {
   font-weight: bold; }
 
 input, select, button, textarea {
-  font-size: 1em;
   font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
+  font-size: 1em;
   line-height: 1.5em; }
 
 input, button, textarea {
@@ -310,8 +310,8 @@ input[disabled], input[readonly], select[disabled], select[readonly], textarea[d
   cursor: not-allowed; }
 
 .ie button {
-  overflow: visible;
-  width: auto; }
+  width: auto;
+  overflow: visible; }
 
 input, select {
   vertical-align: top; }
@@ -339,9 +339,9 @@ select {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) inset; }
   .field:focus, textarea:focus {
     outline: none;
+    -o-animation: focusPulse 1.5s infinite;
     -webkit-animation: focusPulse 1.5s infinite;
     -moz-animation: focusPulse 1.5s infinite;
-    -o-animation: focusPulse 1.5s infinite;
     animation: focusPulse 1.5s infinite; }
 
 .field {
@@ -399,11 +399,11 @@ textarea {
 hr {
   display: block;
   height: 1px;
+  margin: 1.5em 0 -1px;
   padding: 0;
   border-width: 1px 0;
   border-style: solid;
-  border-color: #c7ced6 black white;
-  margin: 1.5em 0 -1px; }
+  border-color: #c7ced6 black white; }
 
 /* Additional Decorative Styles */
 .alnLft {
@@ -446,10 +446,10 @@ hr {
 /* Headings Counter */
 .hNumber:before {
   position: relative;
-  content: counter(heading) ". ";
-  counter-increment: heading;
   display: -moz-inline-box;
-  display: inline-block; }
+  display: inline-block;
+  content: counter(heading) ". ";
+  counter-increment: heading; }
 
 /* High DPI Typographics */
 @media only screen and (min-resolution: 1.5dppx), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min-device-pixel-ratio: 1.5) {
@@ -477,8 +477,8 @@ hr {
   a, acronym, abbr, ins, del, var, input, select, textarea {
     border: none;
     color: black;
-    outline: none;
-    text-decoration: none; }
+    text-decoration: none;
+    outline: none; }
 
   h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid;
@@ -500,8 +500,8 @@ html {
 body {
   position: relative;
   min-width: 980px;
-  min-height: 100%;
   max-width: 1400px;
+  min-height: 100%;
   margin: 0 auto;
   background: white; }
 
@@ -509,9 +509,9 @@ body {
 .screen {
   position: absolute;
   top: 0;
-  right: 0;
   bottom: 0;
-  left: 0; }
+  left: 0;
+  right: 0; }
 
 .s-screenTransition .screen {
   -webkit-transition: all 0.5s;
@@ -565,8 +565,8 @@ body {
 @media print {
   body {
     max-width: none;
-    padding: 0;
-    margin: 0 10px; }
+    margin: 0 10px;
+    padding: 0; }
 
   .header, .footer {
     display: none; } }
