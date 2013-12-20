@@ -53,12 +53,12 @@
 		<concat destfile="${res.css.dir}/${res.css.filename}.css">
 			<filelist dir="${res.css.devDir}">
 				<file name="reset.css"/>
-				<file name="typographics.css"/>
+				<file name="typography.css"/>
 			</filelist>
 			<fileset dir="${res.css.devDir}">
 				<include name="*.css"/>
 				<exclude name="reset.css"/>
-				<exclude name="typographics.css"/>
+				<exclude name="typography.css"/>
 				<exclude name="tx.*.css"/>
 			</fileset>
 		</concat>
