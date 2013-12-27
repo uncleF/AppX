@@ -15,11 +15,11 @@
 
 html
 	min-height: 100%
+	+tx-scroll-bar(false)
 
 body
 	position: relative
 	+tx-set-boundaries
-	background: $background
 
 
 
@@ -32,7 +32,7 @@ body
 	left: 0
 	right: 0
 
-.s-screenTransition
+.is-screenTransition
 
 	.screen
 		+transition(all $screen-transition)
@@ -40,22 +40,22 @@ body
 .screen-newScreen
 	+transform(translate(100%, 0))
 
-.s-reverseTransition
+.is-reverseTransition
 
 	.screen-newScreen
 		+transform(translate(-100%, 0))
 
-.s-screenTransition
+.is-screenTransition
 
 	.screen-oldScreen
 		+transform(translate(-100%, 0))
 
-	&.s-reverseTransition
+	&.is-reverseTransition
 
 		.screen-oldScreen
 			+transform(translate(100%, 0))
 
-.s-screenTransition
+.is-screenTransition
 
 	.screen-newScreen
 		+transform(translate(0, 0))

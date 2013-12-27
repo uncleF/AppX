@@ -54,6 +54,7 @@
 			<filelist dir="${res.css.devDir}">
 				<file name="reset.css"/>
 				<file name="typography.css"/>
+				<file name="utilities.css"/>
 			</filelist>
 			<fileset dir="${res.css.devDir}">
 				<include name="*.css"/>
