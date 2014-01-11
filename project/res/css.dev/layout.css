@@ -1,14 +1,17 @@
 /* Layout */
 html {
   min-height: 100%;
-  overflow: auto; }
+  overflow: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
 
 body {
   position: relative;
   min-width: 980px;
   max-width: 1400px;
   min-height: 100%;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 /* Screen */
 .screen {
@@ -16,51 +19,59 @@ body {
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0; }
+  right: 0;
+}
 
-.s-screenTransition .screen {
+.is-screenTransition .screen {
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
-  transition: all 0.5s; }
+  transition: all 0.5s;
+}
 
 .screen-newScreen {
   -webkit-transform: translate(100%, 0);
   -moz-transform: translate(100%, 0);
   -ms-transform: translate(100%, 0);
   -o-transform: translate(100%, 0);
-  transform: translate(100%, 0); }
+  transform: translate(100%, 0);
+}
 
-.s-reverseTransition .screen-newScreen {
+.is-reverseTransition .screen-newScreen {
   -webkit-transform: translate(-100%, 0);
   -moz-transform: translate(-100%, 0);
   -ms-transform: translate(-100%, 0);
   -o-transform: translate(-100%, 0);
-  transform: translate(-100%, 0); }
+  transform: translate(-100%, 0);
+}
 
-.s-screenTransition .screen-oldScreen {
+.is-screenTransition .screen-oldScreen {
   -webkit-transform: translate(-100%, 0);
   -moz-transform: translate(-100%, 0);
   -ms-transform: translate(-100%, 0);
   -o-transform: translate(-100%, 0);
-  transform: translate(-100%, 0); }
-.s-screenTransition.s-reverseTransition .screen-oldScreen {
+  transform: translate(-100%, 0);
+}
+.is-screenTransition.is-reverseTransition .screen-oldScreen {
   -webkit-transform: translate(100%, 0);
   -moz-transform: translate(100%, 0);
   -ms-transform: translate(100%, 0);
   -o-transform: translate(100%, 0);
-  transform: translate(100%, 0); }
+  transform: translate(100%, 0);
+}
 
-.s-screenTransition .screen-newScreen {
+.is-screenTransition .screen-newScreen {
   -webkit-transform: translate(0, 0);
   -moz-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   -o-transform: translate(0, 0);
-  transform: translate(0, 0); }
+  transform: translate(0, 0);
+}
 
 /* Templates */
 .template {
-  display: none; }
+  display: none;
+}
 
 /* High DPI Layout */
 /* Large Resolution Layout */
@@ -71,10 +82,15 @@ body {
   body {
     max-width: none;
     margin: 0 10px;
-    padding: 0; }
+    padding: 0;
+    color: black;
+    background: white;
+  }
 
   .header, .footer {
-    display: none; } }
+    display: none;
+  }
+}
 /* TV Layout */
 /* Audio Layout */
 

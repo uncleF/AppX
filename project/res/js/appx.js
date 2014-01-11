@@ -74,7 +74,7 @@ var AppView = Backbone.View.extend({
 		$("body").prepend(this.$el);
 	},
 	events: {
-		"transitionend .oldScreen, oTransitionEnd .oldScreen, webkitTransitionEnd .oldScreen": function() {
+		"transitionend .screen-oldScreen, oTransitionEnd .screen-oldScreen, webkitTransitionEnd .screen-oldScreen": function() {
 			this.screens[0].unbind();
 			this.screens[0].remove();
 			this.screens.shift();
@@ -83,11 +83,11 @@ var AppView = Backbone.View.extend({
 				afterScreenTransitionCall();
 			}
 			$(".screen-newScreen").removeClass("screen-newScreen");
-			$("body").removeClass("s-screenTransition s-reverseTransition");
+			$("body").removeClass("is-screenTransition is-reverseTransition");
 		},
 		"click .back": function(event) {
 			event.preventDefault();
-			$("body").addClass("s-reverseTransition");
+			$("body").addClass("is-reverseTransition");
 			history.back();
 		}
 	},
@@ -107,7 +107,7 @@ var AppView = Backbone.View.extend({
 		}
 		this.screens[0].$el.addClass("screen-oldScreen");
 		setTimeout(function() {
-			$("body").addClass("s-screenTransition");
+			$("body").addClass("is-screenTransition");
 		}, 10);
 	},
 	beforeScreenTransitionCalls: {

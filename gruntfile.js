@@ -12,6 +12,7 @@ var
 	resImages			= "images",			//Resource Images Directory
 	css						= "css",				//CSS Production Directory
 	cssDev				= "css.dev",		//CSS Development Directory
+	sass					= "sass.dev",		//Sass Development Directory
 	cssFilename		= "styles",			//CSS Production Filename
 	cssDevFiles		= [							//CSS Files
 									"reset.css",
@@ -55,6 +56,7 @@ var project = {
 			css: {
 				dir: this.resDir + css + "/",
 				devDir: this.resDir + cssDev + "/",
+				sass: this.resDir + sass + "/",
 				filename: cssFilename,
 				dev: fillAnArray(cssDevFiles, dir + "/" + res + "/" + cssDev + "/"),
 			},
@@ -159,6 +161,22 @@ module.exports = function(grunt) {
 				src: ["*.css", "!reset.css", "!typography.css"],
 				expand: true,
 				flatten: true
+			}
+		},
+
+		sass: {
+			options: {
+				sourcemap: true,
+				compass: true,
+				style: "expanded"
+			},
+			generateCSS: {
+				cwd: project.res.css.sass,
+				src: ["*.sass", "!txdebug.*.sass"],
+				dest: project.res.css.devDir,
+				expand: true,
+				flatten: true,
+				ext: ".css"
 			}
 		},
 
@@ -340,14 +358,16 @@ module.exports = function(grunt) {
 
 	});
 
-	grunt.registerTask("lint", ["htmlhint", "jshint", "csslint"]);
+	grunt.registerTask("lint", ["htmlhint", "jshint", "sass", "csslint", "removelogging:jsDevClean"]);
 
 	grunt.registerTask("images", ["imagemin:images", "imagemin:res"]);
 
-	grunt.registerTask("build", ["htmlhint", "jshint", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
+	grunt.registerTask("compile", ["sass", "concat", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "cssmin", "csscomb"]);
 
-	grunt.registerTask("build-share", ["htmlhint", "jshint", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build", "copy:share"]);
+	grunt.registerTask("build", ["sass", "htmlhint", "jshint", "sass", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
 
-	grunt.registerTask("build-exp", ["htmlhint", "jshint", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
+	grunt.registerTask("build-share", ["htmlhint", "jshint", "sass", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build", "copy:share"]);
+
+	grunt.registerTask("build-exp", ["htmlhint", "jshint", "sass", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
 
 };
