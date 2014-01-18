@@ -1,44 +1,47 @@
-//Client-side Grunt Build File (gruntfile.js) for AppX Project
+//Client-side Grunt Build File for AppX Project
 
 var
-	title					= "AppX",				//Project Title
-	app						= "appx",				//JS Production Filename
-	language			= "ru",					//Project Language
-	dir						= "project",		//Project Directory
-	images				= "images",			//Project Images Directory
-	meta					= "meta",				//Meta Resources Directory
-	res						= "res",				//Resources Directory
+	title						= "AppX",				//Project Title
+	app							= "appx",				//JS Production Filename
+	language				= "ru",					//Project Language
+	dir							= "project",		//Project Directory
+	images					= "images",			//Project Images Directory
+	meta						= "meta",				//Meta Resources Directory
+	res							= "res",				//Resources Directory
 
-	resImages			= "images",			//Resource Images Directory
-	css						= "css",				//CSS Production Directory
-	cssDev				= "css.dev",		//CSS Development Directory
-	sass					= "sass.dev",		//Sass Development Directory
-	cssFilename		= "styles",			//CSS Production Filename
-	cssDevFiles		= [							//CSS Files
-									"reset.css",
-									"typography.css",
-									"utilities.css",
-									"layout.css",
-									"ui.css",
+	resImages				= "images",			//Graphic Resources Directory
+	resImagesFiles	= [							//Images to Convert to Data URI
+										"sprites.png"
 	],
-	js						= "js",					//JS Production Directory
-	jsDev					= "js.dev",			//JS Development Directory
-	jsDevFiles		= [							//JS Order
-									"app.utilites.js",
-									"app.screens.js",
-									"app.routes.js",
-									"app.js",
+	css							= "css",				//CSS Production Directory
+	cssDev					= "css.dev",		//CSS Development Directory
+	sass						= "sass.dev",		//Sass Development Directory
+	cssFilename			= "styles",			//CSS Production Filename
+	cssDevFiles			= [							//CSS Files
+										"reset.css",
+										"typography.css",
+										"utilities.css",
+										"layout.css",
+										"ui.css"
+	],
+	js							= "js",					//JS Production Directory
+	jsDev						= "js.dev",			//JS Development Directory
+	jsDevFiles			= [							//JS Order
+										"app.utilites.js",
+										"app.screens.js",
+										"app.routes.js",
+										"app.js"
 	],
 
-	buildDir			= "build",			//Build Directory
-	shareDir			= "build";			//Shared Build Directory
+	buildDir				= "build",			//Build Directory
+	shareDir				= "build";			//Shared Build Directory
 
-function fillAnArray(arr, path) {
-	var resultArr = [];
-	for (var i in arr) {
-		resultArr.push(path + "/" + arr[i]);
+function fillAnArray(ARRAY, PATH) {
+	var RESULT = [];
+	for (var ELEMENT in ARRAY) {
+		RESULT.push(PATH + ARRAY[ELEMENT]);
 	}
-	return resultArr;
+	return RESULT;
 }
 
 var project = {
@@ -51,7 +54,8 @@ var project = {
 		this.resDir = this.dir + res + "/";
 		this.res = {
 			images: {
-				dir: this.resDir + resImages + "/"
+				dir: this.resDir + resImages + "/",
+				files: fillAnArray(resImagesFiles, dir + "/" + res + "/" + resImages + "/")
 			},
 			css: {
 				dir: this.resDir + css + "/",
@@ -84,6 +88,16 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON("package.json"),
 
 		buildEnv: grunt.file.readJSON(process.env.buildJSON),
+
+		datauri: {
+			resImages: {
+				options: {
+					classPrefix: "image-"
+				},
+				src: project.res.images.files,
+				dest: project.res.css.sass + "tx/_tx.project.images.sass"
+			}
+		},
 
 		htmlhint: {
 			htmlHint: {
@@ -235,6 +249,13 @@ module.exports = function(grunt) {
 				dest: project.res.js.dir,
 				expand: true,
 				flatten: true
+			},
+			jsDevClean: {
+				cwd: project.res.js.dev,
+				src: ["*.js"],
+				dest: project.res.js.dev,
+				expand: true,
+				flatten: true
 			}
 		},
 		uglify: {
@@ -302,7 +323,7 @@ module.exports = function(grunt) {
 		copy: {
 			build: {
 				cwd: project.dir,
-				src: ["**", "!**/tx.*.*", "!**/txdebug.*.*", "!**/**.dev/**", "!**/txdebug/**"],
+				src: ["**", "!**/tx-*.*", "!**/txdebug-*.*", "!**/**.dev/**", "!**/txdebug/**"],
 				dest: project.build.dir,
 				expand: true
 			},
@@ -324,14 +345,14 @@ module.exports = function(grunt) {
 		imagemin: {
 			images: {
 				cwd: project.images,
-				src: ["**/*.{png,jpg,gif}", "!**/tx.*.*", "!**/txdebug.*.*"],
+				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
 				dest: project.images,
 				expand: true,
 				flatten: true
 			},
 			res: {
 				cwd: project.res.images.dir,
-				src: ["**/*.{png,jpg,gif}", "!**/tx.*.*", "!**/txdebug.*.*"],
+				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
 				dest: project.res.images.dir,
 				expand: true,
 				flatten: true
@@ -344,6 +365,51 @@ module.exports = function(grunt) {
 				flatten: true
 			}
 		},
+		imageoptim: {
+			images: {
+				options: {
+					jpegMini: true,
+					quitAfter: true
+				},
+				cwd: project.images,
+				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
+				dest: project.images,
+				expand: true,
+				flatten: true
+			},
+			res: {
+				options: {
+					jpegMini: true,
+					quitAfter: true
+				},
+				cwd: project.res.images.dir,
+				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
+				dest: project.res.images.dir,
+				expand: true,
+				flatten: true
+			},
+			meta: {
+				options: {
+					jpegMini: true,
+					imageAlpha: true,
+					quitAfter: true
+				},
+				cwd: project.build.dir,
+				src: ["*.{png,jpg,gif}"],
+				dest: project.build.dir,
+				expand: true,
+				flatten: true
+			}
+		},
+		svgmin: {
+			svg: {
+				cwd: project.res.images.dir,
+				src: ["**/*.svg"],
+				dest: project.res.images.dir,
+				expand: true,
+			}
+		},
+
 		compress: {
 			gzip: {
 				options: {
@@ -360,14 +426,16 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("lint", ["htmlhint", "jshint", "sass", "csslint", "removelogging:jsDevClean"]);
 
-	grunt.registerTask("images", ["imagemin:images", "imagemin:res"]);
+	grunt.registerTask("images", ["imagemin:images", "imagemin:res", "datauri", "svgmin"]);
 
-	grunt.registerTask("compile", ["sass", "concat", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "cssmin", "csscomb"]);
+	grunt.registerTask("compile", ["concat", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "cssmin", "csscomb"]);
 
-	grunt.registerTask("build", ["sass", "htmlhint", "jshint", "sass", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
+	grunt.registerTask("build", ["htmlhint", "jshint", "compile", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
 
-	grunt.registerTask("build-share", ["htmlhint", "jshint", "sass", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build", "copy:share"]);
+	grunt.registerTask("build-sass", ["sass", "build"]);
 
-	grunt.registerTask("build-exp", ["htmlhint", "jshint", "sass", "concat", "string-replace:sassDebug", "removelogging", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
+	grunt.registerTask("build-share", ["build", "copy:share"]);
+
+	grunt.registerTask("build-experimental", ["htmlhint", "jshint", "concat", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
 
 };
