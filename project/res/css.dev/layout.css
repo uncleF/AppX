@@ -23,48 +23,48 @@ body {
 }
 
 .is-screenTransition .screen {
-  -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
 
 .screen-newScreen {
-  -webkit-transform: translate(100%, 0);
   -moz-transform: translate(100%, 0);
   -ms-transform: translate(100%, 0);
   -o-transform: translate(100%, 0);
+  -webkit-transform: translate(100%, 0);
   transform: translate(100%, 0);
 }
 
 .is-reverseTransition .screen-newScreen {
-  -webkit-transform: translate(-100%, 0);
   -moz-transform: translate(-100%, 0);
   -ms-transform: translate(-100%, 0);
   -o-transform: translate(-100%, 0);
+  -webkit-transform: translate(-100%, 0);
   transform: translate(-100%, 0);
 }
 
 .is-screenTransition .screen-oldScreen {
-  -webkit-transform: translate(-100%, 0);
   -moz-transform: translate(-100%, 0);
   -ms-transform: translate(-100%, 0);
   -o-transform: translate(-100%, 0);
+  -webkit-transform: translate(-100%, 0);
   transform: translate(-100%, 0);
 }
 .is-screenTransition.is-reverseTransition .screen-oldScreen {
-  -webkit-transform: translate(100%, 0);
   -moz-transform: translate(100%, 0);
   -ms-transform: translate(100%, 0);
   -o-transform: translate(100%, 0);
+  -webkit-transform: translate(100%, 0);
   transform: translate(100%, 0);
 }
 
 .is-screenTransition .screen-newScreen {
-  -webkit-transform: translate(0, 0);
   -moz-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   -o-transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
   transform: translate(0, 0);
 }
 
@@ -94,4 +94,4 @@ body {
 /* TV Layout */
 /* Audio Layout */
 
-/*@ sourceMappingURL=layout.css.map */
+/*# sourceMappingURL=layout.css.map */

@@ -259,6 +259,9 @@ module.exports = function(grunt) {
 			}
 		},
 		uglify: {
+			options: {
+				preserveComments: false
+			},
 			jsMin: {
 				cwd: project.res.js.dir,
 				src: ["*.js", "!*.min.js"],
@@ -317,7 +320,35 @@ module.exports = function(grunt) {
 			}
 		},
 
+		htmlmin: {
+			cleanup: {
+				options: {
+					removeComments: true,
+					removeCommentsFromCDATA: true,
+					collapseBooleanAttributes: true,
+					removeRedundantAttributes: true,
+					removeEmptyAttributes: true
+				},
+				cwd: project.build.dir,
+				src: ["*.html", "!*.min.html"],
+				dest: project.build.dir,
+				expand: true
+			},
+			minify: {
+				options: {
+					collapseWhitespace: true,
+					removeAttributeQuotes: true,
+				},
+				cwd: project.build.dir,
+				src: ["*.html", "!_*.html", "!*.min.html"],
+				dest: project.build.dir,
+				ext: ".min.html",
+				expand: true
+			}
+		},
+
 		clean: {
+			res: [project.res.css.dir + "*.css", project.res.js.dir + "*.js"],
 			build: [project.build.dir]
 		},
 		copy: {
@@ -347,22 +378,19 @@ module.exports = function(grunt) {
 				cwd: project.images,
 				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
 				dest: project.images,
-				expand: true,
-				flatten: true
+				expand: true
 			},
 			res: {
 				cwd: project.res.images.dir,
 				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
 				dest: project.res.images.dir,
-				expand: true,
-				flatten: true
+				expand: true
 			},
 			meta: {
-				cwd: project.build.dir,
+				cwd: project.meta,
 				src: ["*.{png,jpg,gif}"],
-				dest: project.build.dir,
-				expand: true,
-				flatten: true
+				dest: project.meta,
+				expand: true
 			}
 		},
 		imageoptim: {
@@ -374,8 +402,7 @@ module.exports = function(grunt) {
 				cwd: project.images,
 				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
 				dest: project.images,
-				expand: true,
-				flatten: true
+				expand: true
 			},
 			res: {
 				options: {
@@ -385,8 +412,7 @@ module.exports = function(grunt) {
 				cwd: project.res.images.dir,
 				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
 				dest: project.res.images.dir,
-				expand: true,
-				flatten: true
+				expand: true
 			},
 			meta: {
 				options: {
@@ -394,11 +420,10 @@ module.exports = function(grunt) {
 					imageAlpha: true,
 					quitAfter: true
 				},
-				cwd: project.build.dir,
+				cwd: project.meta,
 				src: ["*.{png,jpg,gif}"],
-				dest: project.build.dir,
-				expand: true,
-				flatten: true
+				dest: project.meta,
+				expand: true
 			}
 		},
 		svgmin: {
@@ -426,16 +451,16 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("lint", ["htmlhint", "jshint", "sass", "csslint", "removelogging:jsDevClean"]);
 
-	grunt.registerTask("images", ["imagemin:images", "imagemin:res", "datauri", "svgmin"]);
+	grunt.registerTask("images", ["imagemin", "datauri", "svgmin"]);
 
-	grunt.registerTask("compile", ["concat", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "cssmin", "csscomb"]);
+	grunt.registerTask("compile", ["clean:res", "concat", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "cssmin", "csscomb"]);
 
-	grunt.registerTask("build", ["htmlhint", "jshint", "compile", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
+	grunt.registerTask("build", ["compile", "clean:build", "copy:build", "copy:meta", "compress", "string-replace:build", "htmlmin:cleanup"]);
 
 	grunt.registerTask("build-sass", ["sass", "build"]);
 
 	grunt.registerTask("build-share", ["build", "copy:share"]);
 
-	grunt.registerTask("build-experimental", ["htmlhint", "jshint", "concat", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build"]);
+	grunt.registerTask("build-experimental", ["clean:res", "concat", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean:build", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build", "htmlmin:cleanup"]);
 
 };
