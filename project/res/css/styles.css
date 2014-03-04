@@ -853,21 +853,21 @@ hr
 /* Layout */
 html
 {
-    overflow: auto;
-
     min-height: 100%;
-
-    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 body
 {
     position: relative;
 
+    overflow: auto;
+
     min-width: 980px;
     max-width: 1400px;
     min-height: 100%;
     margin: 0 auto;
+
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 /* Screen */
