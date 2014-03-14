@@ -177,6 +177,23 @@ module.exports = function(grunt) {
 				flatten: true
 			}
 		},
+		yslow: {
+			options: {
+				thresholds: {
+					weight: 180,
+					speed: 1000,
+					score: 80,
+					requests: 15
+				}
+			},
+			pages: {
+				files: [
+					{
+						src: "http://localhost:8000"
+					}
+				]
+			}
+		},
 
 		sass: {
 			options: {
@@ -236,7 +253,7 @@ module.exports = function(grunt) {
 						replacement: '<link rel="stylesheet" type="text/css" href="' + project.res.css.dir.replace(project.dir, "") + project.res.css.filename + '.min.css">'
 					},{
 						pattern: /.!-- @tx-js -->(.|\t|\s|\n)*?!-- \/@tx-js -->/gi,
-						replacement: '<script type="text/javascript" src="' + project.res.js.dir.replace(project.dir, "") + project.res.js.filename + '.min.js" defer></script>'
+						replacement: '<script type="text/javascript" src="' + project.res.js.dir.replace(project.dir, "") + project.res.js.filename + '.min.js"></script>'
 					}]
 				}
 			}
@@ -378,19 +395,28 @@ module.exports = function(grunt) {
 				cwd: project.images,
 				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
 				dest: project.images,
-				expand: true
+				expand: true,
+				options: {
+					cache: false
+				}
 			},
 			res: {
 				cwd: project.res.images.dir,
 				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
 				dest: project.res.images.dir,
-				expand: true
+				expand: true,
+				options: {
+					cache: false
+				}
 			},
 			meta: {
 				cwd: project.meta,
 				src: ["*.{png,jpg,gif}"],
 				dest: project.meta,
-				expand: true
+				expand: true,
+				options: {
+					cache: false
+				}
 			}
 		},
 		imageoptim: {
