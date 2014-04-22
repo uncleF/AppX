@@ -1,40 +1,25 @@
-//Client-side Grunt Build File for AppX Project
+//Gruntfile for the TemplateX Project
 
-var
-	title						= "AppX",				//Project Title
-	app							= "appx",				//JS Production Filename
-	language				= "ru",					//Project Language
-	dir							= "project",		//Project Directory
-	images					= "images",			//Project Images Directory
-	meta						= "meta",				//Meta Resources Directory
-	res							= "res",				//Resources Directory
-
-	resImages				= "images",			//Graphic Resources Directory
-	resImagesFiles	= [							//Images to Convert to Data URI
-										"sprites.png"
-	],
-	css							= "css",				//CSS Production Directory
-	cssDev					= "css.dev",		//CSS Development Directory
-	sass						= "sass.dev",		//Sass Development Directory
-	cssFilename			= "styles",			//CSS Production Filename
-	cssDevFiles			= [							//CSS Files
-										"reset.css",
-										"typography.css",
-										"utilities.css",
-										"layout.css",
-										"ui.css"
-	],
-	js							= "js",					//JS Production Directory
-	jsDev						= "js.dev",			//JS Development Directory
-	jsDevFiles			= [							//JS Order
-										"app.utilites.js",
-										"app.screens.js",
-										"app.routes.js",
-										"app.js"
-	],
-
-	buildDir				= "build",			//Build Directory
-	shareDir				= "build";			//Shared Build Directory
+var TITLE							= "AppX",				// Title
+		APP								= "appx",							// JavaScript Package Name (Used as Production JavaScript Filename)
+		LANGUAGE					= "ru",								// Language
+		DEVELOPMENT				= "dev",							// Development Directory
+		IMAGES						= "images",						// Images
+		META							= "meta",							// Meta Images
+		TEMPLATES					= "templates",				// Templates
+		CSS_TEMPLATE			= "_head.html",				// Template Containing CSS Declarations
+		JS_TEMPLATE				= "_scripts.html",		// Template Containing JavaScript Declarations
+		RESOURCES					= "res",							// Project Resources
+		IMAGE_RESOURCES		= "images",						// Image Resources
+		DATA_URI					= [],									// List of Images (Relative to the Image Resources Directory) to Convert to DataURI
+		SASS							= "sass-dev",					// Sass
+		CSS_DEV						= "css-dev",					// Generated CSS
+		CSS								= "css",							// Production CSS
+		CSS_FILENAME			= "styles",						// Production CSS Filename
+		JS_DEV						= "js-dev",						// JavaScript
+		JS								= "js",								// Production JavaScript
+		BUILD							= "build",						// Project Build
+		BUILD_COPY				= "build";						// Shared Copy of the Build
 
 function fillAnArray(ARRAY, PATH) {
 	var RESULT = [];
@@ -46,34 +31,39 @@ function fillAnArray(ARRAY, PATH) {
 
 var project = {
 	init: function() {
-		this.title = title;
-		this.language = language;
-		this.dir = dir + "/";
-		this.images = this.dir + images + "/";
-		this.meta = meta;
-		this.resDir = this.dir + res + "/";
+		this.title = TITLE;
+		this.language = LANGUAGE;
+		this.dir = DEVELOPMENT + "/";
+		this.images = this.dir + IMAGES + "/";
+		this.meta = META;
+		var TEMPLATES_DIR = this.dir + TEMPLATES + "/",
+				RESOURCES_DIR = this.dir + RESOURCES + "/";
+		this.templates = {
+			dir: TEMPLATES_DIR,
+			css: TEMPLATES_DIR + CSS_TEMPLATE,
+			js: TEMPLATES_DIR + JS_TEMPLATE,
+		};
 		this.res = {
+			dir: RESOURCES_DIR + "/",
 			images: {
-				dir: this.resDir + resImages + "/",
-				files: fillAnArray(resImagesFiles, dir + "/" + res + "/" + resImages + "/")
+				dir: RESOURCES_DIR + IMAGE_RESOURCES + "/",
+				dataURI: fillAnArray(DATA_URI, RESOURCES_DIR + IMAGE_RESOURCES + "/")
 			},
 			css: {
-				dir: this.resDir + css + "/",
-				devDir: this.resDir + cssDev + "/",
-				sass: this.resDir + sass + "/",
-				filename: cssFilename,
-				dev: fillAnArray(cssDevFiles, dir + "/" + res + "/" + cssDev + "/"),
+				dir: RESOURCES_DIR + CSS + "/",
+				devDir: RESOURCES_DIR + CSS_DEV + "/",
+				sass: RESOURCES_DIR + SASS + "/",
+				filename: CSS_FILENAME
 			},
 			js: {
-				dir: this.resDir + js + "/",
-				devDir: this.resDir + jsDev + "/",
-				filename: app,
-				dev: fillAnArray(jsDevFiles, dir + "/" + res + "/" + jsDev + "/")
+				dir: RESOURCES_DIR + JS + "/",
+				devDir: RESOURCES_DIR + JS_DEV + "/",
+				filename: APP
 			}
 		};
 		this.build = {
-			dir: buildDir + "/",
-			shareDir: shareDir + "/"
+			dir: BUILD + "/",
+			copyDir: BUILD_COPY + "/"
 		};
 		return this;
 	}
@@ -94,8 +84,8 @@ module.exports = function(grunt) {
 				options: {
 					classPrefix: "image-"
 				},
-				src: project.res.images.files,
-				dest: project.res.css.sass + "tx/_tx.project.images.sass"
+				src: project.res.images.dataURI,
+				dest: project.res.css.sass + "tx/_tx-projectImages.scss"
 			}
 		},
 
@@ -172,7 +162,7 @@ module.exports = function(grunt) {
 					"zero-units": false
 				},
 				cwd: project.res.css.devDir,
-				src: ["*.css", "!reset.css", "!typography.css"],
+				src: ["*.css"],
 				expand: true,
 				flatten: true
 			}
@@ -197,30 +187,42 @@ module.exports = function(grunt) {
 
 		sass: {
 			options: {
-				sourcemap: true,
-				compass: true,
-				style: "expanded"
+				sourceComments: "map"
 			},
 			generateCSS: {
 				cwd: project.res.css.sass,
-				src: ["*.sass", "!txdebug.*.sass"],
+				src: ["**/*.scss", "**/*.sass", "!**/_*.scss", "!**/_*.sass"],
 				dest: project.res.css.devDir,
-				expand: true,
-				flatten: true,
-				ext: ".css"
+				ext: ".css",
+				expand: true
+			}
+		},
+		autoprefixer: {
+			options: {
+				cascade: true,
+				browsers: ["> 1%", "last 2 versions", "Firefox ESR", "Opera 12.1", "Explorer >= 7"]
+			},
+			prefixCSS: {
+				cwd: project.res.css.devDir,
+				src: ["**/*.css"],
+				dest: project.res.css.devDir,
+				expand: true
 			}
 		},
 
 		concat: {
 			js: {
 				options: {
-					separator: "\n\n",
+					separator: "\n\n"
 				},
-				src: project.res.js.dev,
+				src: "<%= TASK.JS_ARRAY %>",
 				dest: project.res.js.dir + project.res.js.filename + ".js",
 			},
 			css: {
-				src: project.res.css.dev,
+				options: {
+					separator: "\n"
+				},
+				src: "<%= TASK.CSS_ARRAY %>",
 				dest: project.res.css.dir + project.res.css.filename + ".css"
 			}
 		},
@@ -229,7 +231,7 @@ module.exports = function(grunt) {
 			sassDebug: {
 				options: {
 					replacements: [{
-						pattern: /\/\*@ sourceMappingURL(.|\t|\s|\n)*?\*\/|.media \-sass\-debug\-info(.|\t|\s|\n)*?\}\}/gi,
+						pattern: /\/\*# sourceMappingURL(.|\t|\s|\n)*?\*\/|.media \-sass\-debug\-info(.|\t|\s|\n)*?\}\}/gi,
 						replacement: ""
 					}]
 				},
@@ -291,8 +293,7 @@ module.exports = function(grunt) {
 
 		cssc: {
 			options: {
-					consolidateViaSelectors: true,
-					consolidateMediaQueries: true
+					consolidateViaSelectors: true
 			},
 			cssOptimize: {
 				cwd: project.res.css.dir,
@@ -326,14 +327,36 @@ module.exports = function(grunt) {
 
 		csscomb: {
 			options: {
-				sortOrder: "cssorder.json"
+				config: "csscombConfig.json"
 			},
-			cssSort: {
+			cssSortBuild: {
 				cwd: project.res.css.dir,
 				src: ["*.css", "!*.min.css"],
 				dest: project.res.css.dir,
 				expand: true,
 				flatten: true
+			},
+			cssSortDev: {
+				cwd: project.res.css.devDir,
+				src: ["*.css"],
+				dest: project.res.css.devDir,
+				expand: true,
+				flatten: true
+			}
+		},
+
+		processhtml: {
+			options: {
+				includeBase: project.templates.dir,
+				commentMarker: "@tx-process",
+				recursive: true,
+			},
+			templates: {
+				cwd: project.templates.dir,
+				src: ["*.tmp.html", "!_*.html"],
+				dest: project.dir,
+				expand: true,
+				ext: ".html"
 			}
 		},
 
@@ -371,13 +394,13 @@ module.exports = function(grunt) {
 		copy: {
 			build: {
 				cwd: project.dir,
-				src: ["**", "!**/tx-*.*", "!**/txdebug-*.*", "!**/**.dev/**", "!**/txdebug/**"],
+				src: ["**", "!**/tx-*.*", "!**/templates/**", "!**/**-dev/**", "!**/tx/**"],
 				dest: project.build.dir,
 				expand: true
 			},
 			meta: {
 				cwd: project.meta,
-				src: ["*.ico", "*.png", "*.jpg", "*.gif"],
+				src: ["**/*.{ico,png,jpg,gif,txt}"],
 				dest: project.build.dir,
 				expand: true,
 				flatten: true
@@ -385,7 +408,7 @@ module.exports = function(grunt) {
 			share: {
 				cwd: project.build.dir,
 				src: ["**"],
-				dest: "<%= buildEnv.shareRoot %>" + project.build.shareDir,
+				dest: "<%= buildEnv.shareRoot %>" + project.build.copyDir,
 				expand: true
 			}
 		},
@@ -393,7 +416,7 @@ module.exports = function(grunt) {
 		imagemin: {
 			images: {
 				cwd: project.images,
-				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
+				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!tx/*.*"],
 				dest: project.images,
 				expand: true,
 				options: {
@@ -402,7 +425,7 @@ module.exports = function(grunt) {
 			},
 			res: {
 				cwd: project.res.images.dir,
-				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
+				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!tx/*.*"],
 				dest: project.res.images.dir,
 				expand: true,
 				options: {
@@ -426,7 +449,7 @@ module.exports = function(grunt) {
 					quitAfter: true
 				},
 				cwd: project.images,
-				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
+				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!tx/*.*"],
 				dest: project.images,
 				expand: true
 			},
@@ -436,7 +459,7 @@ module.exports = function(grunt) {
 					quitAfter: true
 				},
 				cwd: project.res.images.dir,
-				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!**/txdebug-*.*"],
+				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!tx/*.*"],
 				dest: project.res.images.dir,
 				expand: true
 			},
@@ -467,26 +490,127 @@ module.exports = function(grunt) {
 					mode: "gzip",
 				},
 				cwd: project.build.dir,
-				src: ["**/*.min.js", "**/*.min.css"],
+				src: ["**/*.min.js", "**/*.min.css",],
 				dest: project.build.dir,
 				expand: true
+			},
+			build: {
+				options: {
+					mode: "zip",
+					archive: project.title + ".build.zip"
+				},
+				cwd: project.build.dir,
+				src: ["**"],
+				dest: ".",
+				expand: true
 			}
+		},
+
+		watch: {
+			htmlTemplates: {
+				files: [project.templates.dir + "*.html"],
+				tasks: ["processhtml"]
+			},
+			sassStyles: {
+				files: [project.res.css.sass + "**/*.scss", project.res.css.sass + "**/*.sass", "!" + project.res.css.sass + "**/_*.scss", "!" + project.res.css.sass + "**/_*.sass"],
+				tasks: ["newer:sass", "newer:autoprefixer"]
+			},
+			sassPartials: {
+				files: [project.res.css.sass + "**/_*.scss", project.res.css.sass + "**/_*.sass"],
+				tasks: ["sass", "newer:autoprefixer"]
+			}
+		},
+		concurrent: {
+			options: {
+				logConcurrentOutput: true
+			},
+			projectWatch: ["watch:htmlTemplates", "watch:sassStyles", "watch:sassPartials"]
 		}
 
 	});
 
-	grunt.registerTask("lint", ["htmlhint", "jshint", "sass", "csslint", "removelogging:jsDevClean"]);
+	grunt.registerTask("process-css", "Concatenating of the .css files", function() {
+		var CSS_DIR_REGEX = new RegExp("<link(.)*href=\"" + project.res.css.devDir.replace(project.dir, ""), "g"),
+				CSS_IE_DIR_REGEX = new RegExp("<!--(.)*href=\"" + project.res.css.devDir.replace(project.dir, ""), "g"),
+				CSS = grunt.file.read(project.templates.css)
+					.replace(/(.|\t|\s|\n)*?<!-- @tx-css -->/, "")
+					.replace(/<!-- \/@tx-css -->(.|\t|\s|\n)*/, "")
+					.replace(/^\t(.)*tx\/tx-debug(.)*/gm, "")
+					.replace(/[\t]/g, "")
+					.replace(/<!--(.|\t|\s|\n)*/, "")
+					.replace(CSS_DIR_REGEX, "")
+					.replace(/[\n]/g, "")
+					.replace(/">$/, ""),
+				CSS_ARRAY = CSS.split("\">"),
+				CSS_EXPECTED = CSS_ARRAY.length,
+				CSS_ACTUAL = grunt.file.expand([project.res.css.devDir + "*.css"]).length;
+		if (CSS_EXPECTED === CSS_ACTUAL || (CSS_ARRAY[0] === "" && CSS_ACTUAL === 0)) {
+			if (CSS_ACTUAL === 0) {
+				grunt.log.writeln("No .css files to process.");
+			} else {
+				var PROCESS_TASKS = [];
+				PROCESS_TASKS.push("concat:css");
+				grunt.config.set("TASK.CSS_ARRAY", fillAnArray(CSS_ARRAY, project.res.css.devDir));
+				PROCESS_TASKS = PROCESS_TASKS.concat(["string-replace:sassDebug", "cssc", "cssmin", "csscomb"]);
+				grunt.task.run(PROCESS_TASKS);
+			}
+		} else {
+			var ERROR_MESSAGE = "";
+			if (CSS_EXPECTED > CSS_ACTUAL) {
+				ERROR_MESSAGE += "There's got to be more .css files.";
+			} else if (CSS_EXPECTED < CSS_ACTUAL) {
+				ERROR_MESSAGE += "Not all of the .css files has been referenced.";
+			}
+			grunt.fail.warn(ERROR_MESSAGE);
+		}
+	});
 
-	grunt.registerTask("images", ["imagemin", "datauri", "svgmin"]);
+	grunt.registerTask("process-js", "Concatenating of the .js files", function() {
+		var JS_DIR_REGEX = new RegExp("<script(.)*src=\"" + project.res.js.devDir.replace(project.dir, ""), "g"),
+				JS = grunt.file.read(project.templates.js)
+					.replace(/(.|\t|\s|\n)*?<!-- @tx-js -->/, "")
+					.replace(/<!-- \/@tx-js -->(.|\t|\s|\n)*/, "")
+					.replace(/^\t(.)*tx\/tx-debug(.)*/gm, "")
+					.replace(/[\t]/g, "")
+					.replace(/<!--(.|\t|\s|\n)*/, "")
+					.replace(JS_DIR_REGEX, "")
+					.replace(/[\n]/g, "")
+					.replace(/"><\/script>$/, ""),
+				JS_ARRAY = JS.split("\"></script>"),
+				JS_EXPECTED = JS_ARRAY.length,
+				JS_ACTUAL = grunt.file.expand([project.res.js.devDir + "*.js"]).length;
+		if (JS_EXPECTED === JS_ACTUAL || JS_ARRAY[0] === "" && JS_ACTUAL === 0) {
+			if (JS_ACTUAL === 0) {
+				grunt.log.writeln("No .js files to process.");
+			} else {
+				grunt.config.set("TASK.JS_ARRAY", fillAnArray(JS_ARRAY, project.res.js.devDir));
+				grunt.task.run(["concat:js", "removelogging:jsClean", "uglify"]);
+			}
+		} else {
+			if (JS_EXPECTED > JS_ACTUAL) {
+				grunt.fail.warn("There's got to be more .js files.");
+			} else if (JS_EXPECTED < JS_ACTUAL) {
+				grunt.fail.warn("Not all of the .js files has been referenced.");
+			}
+		}
+	});
 
-	grunt.registerTask("compile", ["clean:res", "concat", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "cssmin", "csscomb"]);
+	grunt.registerTask("lint", ["htmlhint", "jshint", "csslint"]);
 
-	grunt.registerTask("build", ["compile", "clean:build", "copy:build", "copy:meta", "compress", "string-replace:build", "htmlmin:cleanup"]);
+	grunt.registerTask("test", ["yslow"]);
 
-	grunt.registerTask("build-sass", ["sass", "build"]);
+	grunt.registerTask("images-datauri", ["datauri"]);
+
+	grunt.registerTask("images", ["imagemin", "images-datauri", "svgmin"]);
+
+	grunt.registerTask("watch-project", ["concurrent"]);
+
+	grunt.registerTask("compile", ["clean:res", "processhtml", "sass", "autoprefixer", "process-css", "process-js"]);
+
+	grunt.registerTask("build", ["compile", "clean:build", "copy:build", "copy:meta", "compress:gzip", "string-replace:build", "htmlmin:cleanup", "compress:build"]);
 
 	grunt.registerTask("build-share", ["build", "copy:share"]);
 
-	grunt.registerTask("build-experimental", ["clean:res", "concat", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean:build", "copy:build", "copy:meta", "imagemin:meta", "compress", "string-replace:build", "htmlmin:cleanup"]);
+	grunt.registerTask("build-experimental", ["clean:res", "concat:js", "concat:css", "concat:cssIE", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean:build", "copy:build", "copy:meta", "compress:gzip", "string-replace:build", "htmlmin:cleanup"]);
 
 };

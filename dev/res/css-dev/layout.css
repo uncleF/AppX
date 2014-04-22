@@ -1,0 +1,93 @@
+html {
+	min-height: 100%;
+}
+
+body {
+	position: relative;
+	overflow-x: auto;
+	overflow-y: scroll;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	min-width: 980px;
+	min-height: 100%;
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
+/* Screen */
+.screen {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.is-screenTransition .screen {
+	-webkit-transition: all .5s;
+	transition: all .5s;
+}
+
+.screen-newScreen {
+	-webkit-transform: translate(100%, 0);
+	-ms-transform: translate(100%, 0);
+	transform: translate(100%, 0);
+}
+
+.is-reverseTransition .screen-newScreen {
+	-webkit-transform: translate(-100%, 0);
+	-ms-transform: translate(-100%, 0);
+	transform: translate(-100%, 0);
+}
+
+.is-screenTransition .screen-oldScreen {
+	-webkit-transform: translate(-100%, 0);
+	-ms-transform: translate(-100%, 0);
+	transform: translate(-100%, 0);
+}
+.is-screenTransition.is-reverseTransition .screen-oldScreen {
+	-webkit-transform: translate(100%, 0);
+	-ms-transform: translate(100%, 0);
+	transform: translate(100%, 0);
+}
+
+.is-screenTransition .screen-newScreen {
+	-webkit-transform: translate(0, 0);
+	-ms-transform: translate(0, 0);
+	transform: translate(0, 0);
+}
+
+/* Templates */
+.template {
+	display: none;
+}
+
+/* High DPI Layout */
+@media only screen and (min-resolution: 1.5dppx), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
+}
+
+/* Large Resolution Layout */
+@media only screen and (min-width: 1382px) {
+}
+
+/* Phone Layout */
+@media handheld, only screen and (max-width: 720px) {
+}
+
+@media only screen and (max-width: 720px) and (min-resolution: 1.5dppx), only screen and (max-width: 720px) and (-webkit-min-device-pixel-ratio: 1.5), only screen and (max-width: 720px) and (min--moz-device-pixel-ratio: 1.5), only screen and (max-width: 720px) and (-o-min-device-pixel-ratio: 3/2), only screen and (max-width: 720px) and (min-device-pixel-ratio: 1.5) {
+}
+
+/* Tablet Layout */
+@media only screen and (min-width: 721px) and (max-width: 1024px) {
+}
+
+@media only screen and (min-width: 721px) and (max-width: 1024px) and (min-resolution: 1.5dppx), only screen and (min-width: 721px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-width: 721px) and (max-width: 1024px) and (min--moz-device-pixel-ratio: 1.5), only screen and (min-width: 721px) and (max-width: 1024px) and (-o-min-device-pixel-ratio: 3/2), only screen and (min-width: 721px) and (max-width: 1024px) and (min-device-pixel-ratio: 1.5) {
+}
+
+/* TV Layout */
+@media projection, tv {
+}
+
+/* Audio Layout */
+@media aural {
+}
+/*# sourceMappingURL=layout.css.map */
