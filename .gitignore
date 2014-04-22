@@ -2,8 +2,12 @@
 ## Project
 #################
 
-build/
-node_modules/
+build
+design
+meta
+sources
+node_modules
+/*.zip
 
 
 #################
