@@ -199,7 +199,6 @@ module.exports = function(grunt) {
 		},
 		autoprefixer: {
 			options: {
-				cascade: true,
 				browsers: ["> 1%", "last 2 versions", "Firefox ESR", "Opera 12.1", "Explorer >= 7"]
 			},
 			prefixCSS: {
@@ -603,9 +602,11 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("images", ["imagemin", "images-datauri", "svgmin"]);
 
+	grunt.registerTask("generate-css", ["sass", "autoprefixer"]);
+
 	grunt.registerTask("watch-project", ["concurrent"]);
 
-	grunt.registerTask("compile", ["clean:res", "processhtml", "sass", "autoprefixer", "process-css", "process-js"]);
+	grunt.registerTask("compile", ["clean:res", "processhtml", "generate-css", "process-css", "process-js"]);
 
 	grunt.registerTask("build", ["compile", "clean:build", "copy:build", "copy:meta", "compress:gzip", "string-replace:build", "htmlmin:cleanup", "compress:build"]);
 
