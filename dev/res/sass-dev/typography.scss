@@ -240,7 +240,7 @@ table {
 }
 
 td, th {
-	@include tx-table-borders(1, .5);
+	@include tx-table-borders(1px, .5);
 }
 
 th {
