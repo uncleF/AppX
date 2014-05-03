@@ -1,6 +1,6 @@
-//Gruntfile for the TemplateX Project
+//Gruntfile for the AppX Project
 
-var TITLE							= "AppX",				// Title
+var TITLE							= "AppX",							// Title
 		APP								= "appx",							// JavaScript Package Name (Used as Production JavaScript Filename)
 		LANGUAGE					= "ru",								// Language
 		DEVELOPMENT				= "dev",							// Development Directory
