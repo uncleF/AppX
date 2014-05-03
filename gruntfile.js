@@ -263,7 +263,7 @@ module.exports = function(grunt) {
 		removelogging: {
 			jsClean: {
 				cwd: project.res.js.dir,
-				src: ["*.js", "!*.min.js"],
+				src: ["*.js"],
 				dest: project.res.js.dir,
 				expand: true,
 				flatten: true
@@ -282,43 +282,9 @@ module.exports = function(grunt) {
 			},
 			jsMin: {
 				cwd: project.res.js.dir,
-				src: ["*.js", "!*.min.js"],
+				src: ["*.js"],
 				dest: project.res.js.dir,
 				ext: ".min.js",
-				expand: true,
-				flatten: true
-			}
-		},
-
-		cssc: {
-			options: {
-					consolidateViaSelectors: true
-			},
-			cssOptimize: {
-				cwd: project.res.css.dir,
-				src: ["*.css", "!*.min.css"],
-				dest: project.res.css.dir,
-				ext: ".min.css",
-				expand: true,
-				flatten: true
-			}
-		},
-		uncss: {
-			cssOptimize: {
-				files: {
-					cssMinFiles: function() {
-						var cssMinFilesObject = {};
-						cssMinFilesObject[project.res.css.dir + project.res.css.filename + ".min.css"] = project.dir + "*.html";
-						return cssMinFilesObject;
-					}
-				}.cssMinFiles()
-			}
-		},
-		cssmin: {
-			cssMin: {
-				cwd: project.res.css.dir,
-				src: ["*.min.css"],
-				dest: project.res.css.dir,
 				expand: true,
 				flatten: true
 			}
@@ -330,7 +296,7 @@ module.exports = function(grunt) {
 			},
 			cssSortBuild: {
 				cwd: project.res.css.dir,
-				src: ["*.css", "!*.min.css"],
+				src: ["*.css"],
 				dest: project.res.css.dir,
 				expand: true,
 				flatten: true
@@ -339,6 +305,39 @@ module.exports = function(grunt) {
 				cwd: project.res.css.devDir,
 				src: ["*.css"],
 				dest: project.res.css.devDir,
+				expand: true,
+				flatten: true
+			}
+		},
+		cssc: {
+			options: {
+					consolidateViaSelectors: true
+			},
+			cssOptimize: {
+				cwd: project.res.css.dir,
+				src: ["*.css"],
+				dest: project.res.css.dir,
+				ext: ".min.css",
+				expand: true,
+				flatten: true
+			}
+		},
+		uncss: {
+			cssOptimize: {
+				files: {
+					cssMinFiles: function() {
+						var cssMinFilesObject = {};
+						cssMinFilesObject[project.res.css.dir + project.res.css.filename + "min.css"] = project.dir + "*.html";
+						return cssMinFilesObject;
+					}
+				}.cssMinFiles()
+			}
+		},
+		cssmin: {
+			cssMin: {
+				cwd: project.res.css.dir,
+				src: ["*.min.css"],
+				dest: project.res.css.dir,
 				expand: true,
 				flatten: true
 			}
@@ -545,7 +544,7 @@ module.exports = function(grunt) {
 					.replace(/[\t]/g, "")
 					.replace(/<!--(.|\t|\s|\n)*/, "")
 					.replace(CSS_DIR_REGEX, "")
-					.replace(/[\n]/g, "")
+					.replace(/\r?\n|\r/g, "")
 					.replace(/">$/, ""),
 				CSS_ARRAY = CSS.split("\">"),
 				CSS_EXPECTED = CSS_ARRAY.length,
@@ -557,7 +556,7 @@ module.exports = function(grunt) {
 				var PROCESS_TASKS = [];
 				PROCESS_TASKS.push("concat:css");
 				grunt.config.set("TASK.CSS_ARRAY", fillAnArray(CSS_ARRAY, project.res.css.devDir));
-				PROCESS_TASKS = PROCESS_TASKS.concat(["string-replace:sassDebug", "cssc", "cssmin", "csscomb"]);
+				PROCESS_TASKS = PROCESS_TASKS.concat(["string-replace:sassDebug", "csscomb", "cssc", "cssmin"]);
 				grunt.task.run(PROCESS_TASKS);
 			}
 		} else {
@@ -580,7 +579,7 @@ module.exports = function(grunt) {
 					.replace(/[\t]/g, "")
 					.replace(/<!--(.|\t|\s|\n)*/, "")
 					.replace(JS_DIR_REGEX, "")
-					.replace(/[\n]/g, "")
+					.replace(/\r?\n|\r/g, "")
 					.replace(/"><\/script>$/, ""),
 				JS_ARRAY = JS.split("\"></script>"),
 				JS_EXPECTED = JS_ARRAY.length,
@@ -619,6 +618,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("build-share", ["build", "copy:share"]);
 
-	grunt.registerTask("build-experimental", ["clean:res", "concat:js", "concat:css", "concat:cssIE", "string-replace:sassDebug", "removelogging:jsClean", "uglify", "cssc", "uncss:cssOptimize", "cssmin", "csscomb", "clean:build", "copy:build", "copy:meta", "compress:gzip", "string-replace:build", "htmlmin:cleanup"]);
+	grunt.registerTask("build-uncss", ["uncss"]);
 
 };
