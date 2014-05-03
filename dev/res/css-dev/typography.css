@@ -189,7 +189,6 @@ acronym, abbr {
 }
 
 kbd {
-	display: -moz-inline-box;
 	display: inline-block;
 	height: 24px;
 	padding: 0 .5em;
@@ -470,7 +469,6 @@ hr {
 	position: relative;
 	content: counter(heading) ". ";
 	counter-increment: heading;
-	display: -moz-inline-box;
 	display: inline-block;
 }
 
