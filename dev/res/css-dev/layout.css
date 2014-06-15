@@ -6,7 +6,7 @@ body {
 	position: relative;
 	overflow-x: auto;
 	overflow-y: scroll;
-	-ms-overflow-style: -ms-autohiding-scrollbar;
+	-ms-overflow-style: -ms-autohiding-scrollbar; 
 	min-width: 980px;
 	min-height: 100%;
 	max-width: 1400px;
@@ -17,7 +17,7 @@ body {
 .screen {
 	position: absolute;
 	top: 0;
-	right: 0;
+	right: 0; 
 	bottom: 0;
 	left: 0;
 }
