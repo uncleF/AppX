@@ -298,9 +298,9 @@ module.exports = function(grunt) {
 				expand: true
 			},
 			jsDevClean: {
-				cwd: project.res.js.dev,
+				cwd: project.res.js.devDir,
 				src: ["*.js"],
-				dest: project.res.js.dev,
+				dest: project.res.js.devDir,
 				expand: true
 			}
 		},
