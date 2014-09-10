@@ -2,7 +2,7 @@
 
 var TITLE							= "AppX",										// Title
 		APP								= "appx",										// JavaScript Package Name (Used as Production JavaScript Filename)
-		APP_PAGE					= "app.html",								//
+		APP_PAGE					= "app.html",								// Base Application Page
 		LANGUAGE					= "ru",											// Language
 		URL								= "http://localhost:8000",	// URL
 		DEVELOPMENT				= "dev",										// Development Directory
@@ -10,7 +10,7 @@ var TITLE							= "AppX",										// Title
 		META							= "meta",										// Meta Images
 		TEMPLATES					= "templates",							// Templates
 		CSS_TEMPLATE			= "_head.html",							// Template Containing CSS Declarations
-		JS_TEMPLATE				= "_scripts.html",					// Template Containing JavaScript Declarations
+		JS_TEMPLATE				= "_scriptApp.html",				// Template Containing JavaScript Declarations
 		CRITICAL_PAGE			= "index.html",							// Page That Should Contain Critical Inline CSS Styles
 		CRITICAL_WIDTH		= 1200,											// Horizontal "Fold"
 		CRITICAL_HEIGHT		= 900,											// Vertical "Fold"
@@ -24,8 +24,7 @@ var TITLE							= "AppX",										// Title
 		CSS_CRITICAL			= "critical",								// Critical CSS Filename
 		JS_DEV						= "js-dev",									// JavaScript
 		JS								= "js",											// Production JavaScript
-		BUILD							= "build",									// Project Build
-		BUILD_COPY				= "build";									// Shared Copy of the Build
+		BUILD							= "build";									// Project Build
 
 function fillAnArray(ARRAY, PATH) {
 	var RESULT = [];
@@ -88,35 +87,31 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		
-		pkg: grunt.file.readJSON("package.json"),
-
-		buildEnv: grunt.file.readJSON(process.env.buildJSON),
-
 		datauri: {
+			options: {
+				classPrefix: "image-"
+			},
 			resImages: {
-				options: {
-					classPrefix: "image-"
-				},
 				src: project.res.images.dataURI,
 				dest: project.res.css.sass + "tx/_tx-projectImages.scss"
 			}
 		},
 
 		htmlhint: {
+			options: {
+				"tagname-lowercase": true,
+				"attr-lowercase": true,
+				"attr-value-double-quotes": true,
+				"doctype-first": true,
+				"tag-pair": true,
+				"spec-char-escape": true,
+				"id-unique": true,
+				"src-not-empty": true,
+				"id-class-value": true,
+				"style-disabled": true,
+				"img-alt-require": true
+			},
 			htmlHint: {
-				options: {
-					"tagname-lowercase": true,
-					"attr-lowercase": true,
-					"attr-value-double-quotes": true,
-					"doctype-first": true,
-					"tag-pair": true,
-					"spec-char-escape": true,
-					"id-unique": true,
-					"src-not-empty": true,
-					"id-class-value": true,
-					"style-disabled": true,
-					"img-alt-require": true
-				},
 				cwd: project.dir,
 				src: ["*.html"],
 				expand: true,
@@ -124,15 +119,15 @@ module.exports = function(grunt) {
 			}
 		},
 		jshint: {
+			options: {
+				"evil": true,
+				"regexdash": true,
+				"browser": true,
+				"wsh": true,
+				"trailing": true,
+				"sub": true
+			},
 			jsHint: {
-				options: {
-					"evil": true,
-					"regexdash": true,
-					"browser": true,
-					"wsh": true,
-					"trailing": true,
-					"sub": true
-				},
 				cwd: project.res.js.devDir,
 				src: ["*.js"],
 				expand: true,
@@ -140,40 +135,40 @@ module.exports = function(grunt) {
 			}
 		},
 		csslint: {
+			options: {
+				"adjoining-classes": false,
+				"box-model": false,
+				"box-sizing": false,
+				"compatible-vendor-prefixes": "warning",
+				"display-property-grouping": true,
+				"duplicate-background-images": false,
+				"duplicate-properties": true,
+				"empty-rules": true,
+				"errors": true,
+				"fallback-colors": false,
+				"floats": "warning",
+				"font-faces": "warning",
+				"font-sizes": "warning",
+				"gradients": "warning",
+				"ids": "warning",
+				"import": "warning",
+				"important": "warning",
+				"known-properties": true,
+				"outline-none": "warning",
+				"overqualified-elements": "warning",
+				"qualified-headings": "warning",
+				"regex-selectors": "warning",
+				"rules-count": "warning",
+				"shorthand": "warning",
+				"star-property-hack": "warning",
+				"text-indent": "warning",
+				"underscore-property-hack": "warning",
+				"unique-headings": "warning",
+				"universal-selector": "warning",
+				"vendor-prefix": true,
+				"zero-units": false
+			},
 			cssLint: {
-				options: {
-					"adjoining-classes": false,
-					"box-model": false,
-					"box-sizing": false,
-					"compatible-vendor-prefixes": "warning",
-					"display-property-grouping": true,
-					"duplicate-background-images": false,
-					"duplicate-properties": true,
-					"empty-rules": true,
-					"errors": true,
-					"fallback-colors": false,
-					"floats": "warning",
-					"font-faces": "warning",
-					"font-sizes": "warning",
-					"gradients": "warning",
-					"ids": "warning",
-					"import": "warning",
-					"important": "warning",
-					"known-properties": true,
-					"outline-none": "warning",
-					"overqualified-elements": "warning",
-					"qualified-headings": "warning",
-					"regex-selectors": "warning",
-					"rules-count": "warning",
-					"shorthand": "warning",
-					"star-property-hack": "warning",
-					"text-indent": "warning",
-					"underscore-property-hack": "warning",
-					"unique-headings": "warning",
-					"universal-selector": "warning",
-					"vendor-prefix": true,
-					"zero-units": false
-				},
 				cwd: project.res.css.devDir,
 				src: ["*.css"],
 				expand: true,
@@ -230,7 +225,7 @@ module.exports = function(grunt) {
 					separator: "\n\n"
 				},
 				src: "<%= TASK.JS_ARRAY %>",
-				dest: project.res.js.dir + project.res.js.filename + ".js",
+				dest: project.res.js.dir + project.res.js.filename + ".js"
 			},
 			css: {
 				src: "<%= TASK.CSS_ARRAY %>",
@@ -300,15 +295,13 @@ module.exports = function(grunt) {
 				cwd: project.res.js.dir,
 				src: ["*.js"],
 				dest: project.res.js.dir,
-				expand: true,
-				flatten: true
+				expand: true
 			},
 			jsDevClean: {
 				cwd: project.res.js.dev,
 				src: ["*.js"],
 				dest: project.res.js.dev,
-				expand: true,
-				flatten: true
+				expand: true
 			}
 		},
 		uglify: {
@@ -320,8 +313,7 @@ module.exports = function(grunt) {
 				src: ["*.js"],
 				dest: project.res.js.dir,
 				ext: ".min.js",
-				expand: true,
-				flatten: true
+				expand: true
 			}
 		},
 
@@ -333,15 +325,13 @@ module.exports = function(grunt) {
 				cwd: project.res.css.dir,
 				src: ["*.css"],
 				dest: project.res.css.dir,
-				expand: true,
-				flatten: true
+				expand: true
 			},
 			cssSortDev: {
 				cwd: project.res.css.devDir,
 				src: ["*.css"],
 				dest: project.res.css.devDir,
-				expand: true,
-				flatten: true
+				expand: true
 			}
 		},
 		cssc: {
@@ -353,8 +343,7 @@ module.exports = function(grunt) {
 				src: ["*.css"],
 				dest: project.res.css.dir,
 				ext: ".min.css",
-				expand: true,
-				flatten: true
+				expand: true
 			}
 		},
 		uncss: {
@@ -377,16 +366,14 @@ module.exports = function(grunt) {
 				cwd: project.res.css.dir,
 				src: ["*.min.css"],
 				dest: project.res.css.dir,
-				expand: true,
-				flatten: true
+				expand: true
 			},
 			cssMinCritical: {
 				cwd: project.res.css.dir,
 				src: [project.res.css.critical + ".css"],
 				dest: project.res.css.dir,
 				ext: ".min.css",
-				expand: true,
-				flatten: true
+				expand: true
 			}
 		},
 
@@ -394,14 +381,14 @@ module.exports = function(grunt) {
 			options: {
 				includeBase: project.templates.dir,
 				commentMarker: "@tx-process",
-				recursive: true,
+				recursive: true
 			},
 			templates: {
 				cwd: project.templates.dir,
 				src: ["*.tmp.html", "!_*.html"],
 				dest: project.dir,
-				expand: true,
-				ext: ".html"
+				ext: ".html",
+				expand: true
 			}
 		},
 
@@ -447,8 +434,7 @@ module.exports = function(grunt) {
 				cwd: project.meta,
 				src: ["**/*.{ico,png,jpg,gif,txt}"],
 				dest: project.build.dir,
-				expand: true,
-				flatten: true
+				expand: true
 			}
 		},
 
@@ -464,31 +450,16 @@ module.exports = function(grunt) {
 
 		imagemin: {
 			images: {
-				cwd: project.images,
+				cwd: project.dir,
 				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!tx/*.*"],
-				dest: project.images,
-				expand: true,
-				options: {
-					cache: false
-				}
-			},
-			res: {
-				cwd: project.res.images.dir,
-				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!tx/*.*"],
-				dest: project.res.images.dir,
-				expand: true,
-				options: {
-					cache: false
-				}
+				dest: project.dir,
+				expand: true
 			},
 			meta: {
-				cwd: project.meta,
+				cwd: project.build.dir,
 				src: ["*.{png,jpg,gif}"],
-				dest: project.meta,
-				expand: true,
-				options: {
-					cache: false
-				}
+				dest: project.build.dir,
+				expand: true
 			}
 		},
 		imageoptim: {
@@ -497,19 +468,9 @@ module.exports = function(grunt) {
 					jpegMini: true,
 					quitAfter: true
 				},
-				cwd: project.images,
+				cwd: project.dir,
 				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!tx/*.*"],
-				dest: project.images,
-				expand: true
-			},
-			res: {
-				options: {
-					jpegMini: true,
-					quitAfter: true
-				},
-				cwd: project.res.images.dir,
-				src: ["**/*.{png,jpg,gif}", "!**/tx-*.*", "!tx/*.*"],
-				dest: project.res.images.dir,
+				dest: project.dir,
 				expand: true
 			},
 			meta: {
@@ -518,18 +479,18 @@ module.exports = function(grunt) {
 					imageAlpha: true,
 					quitAfter: true
 				},
-				cwd: project.meta,
+				cwd: project.build.dir,
 				src: ["*.{png,jpg,gif}"],
-				dest: project.meta,
+				dest: project.build.dir,
 				expand: true
 			}
 		},
 		svgmin: {
 			svg: {
-				cwd: project.res.images.dir,
+				cwd: project.dir,
 				src: ["**/*.svg"],
-				dest: project.res.images.dir,
-				expand: true,
+				dest: project.dir,
+				expand: true
 			}
 		},
 
@@ -655,7 +616,7 @@ module.exports = function(grunt) {
 				grunt.log.writeln("No .js-files to process.");
 			} else {
 				grunt.config.set("TASK.JS_ARRAY", fillAnArray(JS_ARRAY, project.res.js.devDir));
-				grunt.task.run(["concat:js", "removelogging:jsClean", "uglify"]);
+				grunt.task.run(["concat:js", "removelogging", "uglify"]);
 			}
 		} else {
 			if (JS_EXPECTED > JS_ACTUAL) {
@@ -691,6 +652,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("critical", ["penthouse", "cssmin:cssMinCritical", "critical-cssInline"]);
 
-	grunt.registerTask("build", ["compile", "clean:build", "copy:build", "copy:meta", "compress:cssGzip:", "compress:jsGzip:", "string-replace:build", "critical", "htmlmin:cleanup", "compress:build"]);
+	grunt.registerTask("build", ["compile", "clean:build", "copy:build", "copy:meta", "compress:cssGzip:", "compress:jsGzip:", "string-replace:build", "critical", "htmlmin:cleanup", "imagemin:meta", "compress:build"]);
 
 };
