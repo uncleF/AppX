@@ -301,6 +301,9 @@ input[type="reset"], input[type="submit"], button {
 	overflow: visible;
 	width: auto;
 	cursor: pointer;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 input[disabled], input[readonly], select[disabled], select[readonly], textarea[disabled], textarea[readonly] {
@@ -327,9 +330,13 @@ input[type="search"] {
 	-moz-box-sizing: content-box;
 	box-sizing: content-box; 
 	-webkit-appearance: textfield;
+	-moz-appearance: textfield;
+	appearance: textfield;
 }
 input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
 	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 select {
