@@ -317,7 +317,6 @@ input, select {
 }
 
 input[type="radio"], input[type="checkbox"] {
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	vertical-align: top;
 }
@@ -327,7 +326,6 @@ input[type="file"] {
 	line-height: normal;
 }
 input[type="search"] {
-	-moz-box-sizing: content-box;
 	box-sizing: content-box; 
 	-webkit-appearance: textfield;
 	-moz-appearance: textfield;
@@ -399,7 +397,6 @@ textarea {
 
 hr {
 	display: block;
-	-moz-box-sizing: content-box;
 	box-sizing: content-box; 
 	height: 1px;
 	padding: 0;
@@ -481,13 +478,6 @@ hr {
 	}
 }
 
-@media only screen and (max-width: 720px) and (min-resolution: 1.5dppx), only screen and (max-width: 720px) and (-webkit-min-device-pixel-ratio: 1.5), only screen and (max-width: 720px) and (min--moz-device-pixel-ratio: 1.5), only screen and (max-width: 720px) and (-o-min-device-pixel-ratio: 3/2), only screen and (max-width: 720px) and (min-device-pixel-ratio: 1.5) {
-}
-
 /* Tablet Typography */
-@media only screen and (min-width: 721px) and (max-width: 1024px) {
-}
 
-@media only screen and (min-width: 721px) and (max-width: 1024px) and (min-resolution: 1.5dppx), only screen and (min-width: 721px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-width: 721px) and (max-width: 1024px) and (min--moz-device-pixel-ratio: 1.5), only screen and (min-width: 721px) and (max-width: 1024px) and (-o-min-device-pixel-ratio: 3/2), only screen and (min-width: 721px) and (max-width: 1024px) and (min-device-pixel-ratio: 1.5) {
-}
 /*# sourceMappingURL=typography.css.map */
