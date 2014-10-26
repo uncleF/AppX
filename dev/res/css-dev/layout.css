@@ -1,7 +1,9 @@
+/* line 11, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 html {
 	min-height: 100%;
 }
 
+/* line 15, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 body {
 	position: relative;
 	overflow-x: auto;
@@ -14,6 +16,7 @@ body {
 }
 
 /* Screen */
+/* line 25, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 .screen {
 	position: absolute;
 	top: 0;
@@ -22,34 +25,40 @@ body {
 	left: 0;
 }
 
+/* line 35, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 .is-screenTransition .screen {
 	-webkit-transition: all .5s;
 	transition: all .5s;
 }
 
+/* line 41, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 .screen-newScreen {
 	-webkit-transform: translate(100%, 0);
 	-ms-transform: translate(100%, 0);
 	transform: translate(100%, 0);
 }
 
+/* line 47, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 .is-reverseTransition .screen-newScreen {
 	-webkit-transform: translate(-100%, 0);
 	-ms-transform: translate(-100%, 0);
 	transform: translate(-100%, 0);
 }
 
+/* line 55, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 .is-screenTransition .screen-oldScreen {
 	-webkit-transform: translate(-100%, 0);
 	-ms-transform: translate(-100%, 0);
 	transform: translate(-100%, 0);
 }
+/* line 61, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 .is-screenTransition.is-reverseTransition .screen-oldScreen {
 	-webkit-transform: translate(100%, 0);
 	-ms-transform: translate(100%, 0);
 	transform: translate(100%, 0);
 }
 
+/* line 71, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 .is-screenTransition .screen-newScreen {
 	-webkit-transform: translate(0, 0);
 	-ms-transform: translate(0, 0);
@@ -57,6 +66,7 @@ body {
 }
 
 /* Templates */
+/* line 81, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 .template {
 	display: none;
 }
@@ -67,5 +77,4 @@ body {
 /* Tablet Layout */
 /* TV Layout */
 /* Audio Layout */
-
 /*# sourceMappingURL=layout.css.map */
