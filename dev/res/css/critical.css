@@ -10,23 +10,14 @@ html, body {
 	vertical-align: baseline;
 }
 
-
-
 html {
 	-webkit-overflow-scrolling: touch;
 }
 
-
-
 html {
 	font-size: 100%;
 	line-height: 1.5em;
-
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
 }
-
-
 
 body {
 	counter-reset: heading;
@@ -35,21 +26,15 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
 }
 
-
-
 ::-webkit-selection {
 	color: white;
 	background: blue;
 }
 
-
-
 ::-moz-selection {
 	color: white;
 	background: blue;
 }
-
-
 
 ::-moz-selection {
 	color: white;
@@ -61,23 +46,15 @@ body {
 	background: blue;
 }
 
-
-
-@media only screen and (min-resolution: 1.25dppx), only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min--moz-device-pixel-ratio: 1.25), only screen and (-o-min-device-pixel-ratio: 5/4), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 120dpi) {
-	
-
+@media only screen and (min-resolution: 1.5dppx), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-resolution: 150dpi) {
 	html {
 		text-rendering: optimizelegibility;
 	}
 }
 
-
-
 html {
 	min-height: 100%;
 }
-
-
 
 body {
 	position: relative;

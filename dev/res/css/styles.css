@@ -1,4 +1,4 @@
-/* line 5, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/reset.scss */
+/* CSS Baseline */
 
 html, body {
 	padding: 0;
@@ -12,23 +12,16 @@ html, body {
 	vertical-align: baseline;
 }
 
-/* line 17, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/reset.scss */
-
 html {
 	-webkit-overflow-scrolling: touch;
 }
 
-/* line 11, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
+/* Typography & Rhythm */
 
 html {
 	font-size: 100%;
 	line-height: 1.5em;
-
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
 }
-
-/* line 16, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
 
 body {
 	counter-reset: heading;
@@ -37,21 +30,15 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
 }
 
-/* line 25, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/tx/tx */
-
 ::-webkit-selection {
 	color: white;
 	background: blue;
 }
 
-/* line 25, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/tx/tx */
-
 ::-moz-selection {
 	color: white;
 	background: blue;
 }
-
-/* line 25, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/tx/tx */
 
 ::-moz-selection {
 	color: white;
@@ -63,54 +50,42 @@ body {
 	background: blue;
 }
 
-/* line 276, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
-
 input::-moz-focus-inner, button::-moz-focus-inner {
 	padding: 0;
 	border: 0;
 }
 
-/* line 364, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
-
 @-webkit-keyframes focusPulse {
-	/* line 370, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
 	0% {
-		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff;
+		box-shadow: 0 0 4px 1px #488dc6;
 	}
 
-	/* line 373, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
 	50% {
-		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 8px 1px #8ac7ff;
+		box-shadow: 0 0 8px 1px #488dc6;
 	}
 
-	/* line 376, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
 	100% {
-		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff;
+		box-shadow: 0 0 4px 1px #488dc6;
 	}
 }
 
 @keyframes focusPulse {
-	/* line 370, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
 	0% {
-		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff;
+		box-shadow: 0 0 4px 1px #488dc6;
 	}
 
-	/* line 373, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
 	50% {
-		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 8px 1px #8ac7ff;
+		box-shadow: 0 0 8px 1px #488dc6;
 	}
 
-	/* line 376, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
 	100% {
-		box-shadow: 0 1px 2px rgba(0, 0, 0, .25) inset, 0 0 4px 1px #8ac7ff;
+		box-shadow: 0 0 4px 1px #488dc6;
 	}
 }
 
 /* High DPI Typography */
 
-@media only screen and (min-resolution: 1.25dppx), only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min--moz-device-pixel-ratio: 1.25), only screen and (-o-min-device-pixel-ratio: 5/4), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 120dpi) {
-	/* line 400, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
-
+@media only screen and (min-resolution: 1.5dppx), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-resolution: 150dpi) {
 	html {
 		text-rendering: optimizelegibility;
 	}
@@ -119,16 +94,13 @@ input::-moz-focus-inner, button::-moz-focus-inner {
 /* Phone Typography */
 
 @media handheld, only screen and (max-width: 720px) {
-	/* line 412, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/typography.scss */
 }
 
-/* line 11, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
+/* Layout Base */
 
 html {
 	min-height: 100%;
 }
-
-/* line 15, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
 
 body {
 	position: relative;
@@ -141,7 +113,7 @@ body {
 	margin: 0 auto;
 }
 
-/* line 81, /Users/uncleFucka/Projects/AppX/dev/res/sass-dev/layout.scss */
+/* Templates */
 
 .template {
 	display: none;
