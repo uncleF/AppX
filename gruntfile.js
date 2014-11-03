@@ -4,7 +4,6 @@ var TITLE							= "AppX",										// Title
 		APP								= "appx",										// JavaScript Package Name (Used as Production JavaScript Filename)
 		APP_PAGE					= "app.html",								// Base Application Page
 		LANGUAGE					= "ru",											// Language
-		URL								= "http://localhost:8000",	// URL
 		DEVELOPMENT				= "dev",										// Development Directory
 		IMAGES						= "images",									// Images
 		META							= "meta",										// Meta Images
@@ -41,7 +40,6 @@ module.exports = function(grunt) {
 			this.title = TITLE;
 			this.app = APP_PAGE;
 			this.language = LANGUAGE;
-			this.url = URL;
 			this.dir = DEVELOPMENT + "/";
 			this.images = this.dir + IMAGES + "/";
 			this.meta = META;
@@ -112,7 +110,7 @@ module.exports = function(grunt) {
 				"img-alt-require": true
 			},
 			htmlHint: {
-				cwd: project.dir,
+				cwd: project.build.dir,
 				src: ["*.html"],
 				expand: true
 			}
@@ -168,10 +166,26 @@ module.exports = function(grunt) {
 			},
 			cssLint: {
 				cwd: project.res.css.devDir,
-				src: ["*.min.css", "!*-IE.min.css"],
+				src: ["*.css"],
 				expand: true
 			}
 		},
+		colorguard: {
+			files: {
+				src: project.res.css.devDir + "*.css"
+			}
+		},
+		arialinter: {
+			options: {
+				level: "A"
+			},
+			ariaLinter: {
+				cwd: project.build.dir,
+				src: ["*.html"],
+				expand: true
+			}
+		},
+
 		analyzecss: {
 			options: {
 				outputMetrics: "error",
@@ -212,23 +226,6 @@ module.exports = function(grunt) {
 			},
 			ananlyzeCSS: {
 				sources: [project.res.css.dir + project.res.css.filename + ".min.css"]
-			}
-		},
-		yslow: {
-			options: {
-				thresholds: {
-					weight: 180,
-					speed: 1000,
-					score: 80,
-					requests: 15
-				}
-			},
-			pages: {
-				files: [
-					{
-						src: project.url
-					}
-				]
 			}
 		},
 
@@ -293,7 +290,7 @@ module.exports = function(grunt) {
 					}]
 				},
 				files: {
-					"./": [project.res.css.dir + "*.css"],
+					"./": [project.res.css.dir + "*.css"]
 				}
 			},
 			commentsSecond: {
@@ -307,7 +304,7 @@ module.exports = function(grunt) {
 					}]
 				},
 				files: {
-					"./": [project.res.css.dir + "*.css"],
+					"./": [project.res.css.dir + "*.css"]
 				}
 			},
 			build: {
@@ -327,7 +324,7 @@ module.exports = function(grunt) {
 					}]
 				},
 				files: {
-					"./": [project.build.dir + "*.html"],
+					"./": [project.build.dir + "*.html"]
 				}
 			},
 			critical: {
@@ -341,7 +338,7 @@ module.exports = function(grunt) {
 					}]
 				},
 				files: {
-					"./": [project.res.css.dir + project.res.css.critical + ".css"],
+					"./": [project.res.css.dir + project.res.css.critical + ".css"]
 				}
 			}
 		},
@@ -373,6 +370,21 @@ module.exports = function(grunt) {
 			}
 		},
 
+		uncss: {
+			cssOptimize: {
+				options: {
+					ignore: [/(.)*-is-(.)*/, /(.)*-has-(.)*/, /(.)*-are-(.)*/],
+					stylesheets: [project.res.css.dir.replace(project.dir, "") + project.res.css.filename + ".css"]
+				},
+				files: {
+					cssMinFiles: function() {
+						var cssMinFilesObject = {};
+						cssMinFilesObject[project.res.css.dir + project.res.css.filename + ".css"] = project.dir + "*.html";
+						return cssMinFilesObject;
+					}
+				}.cssMinFiles()
+			}
+		},
 		csscomb: {
 			options: {
 				config: "csscombConfig.json"
@@ -399,19 +411,13 @@ module.exports = function(grunt) {
 				expand: true
 			}
 		},
-		uncss: {
-			cssOptimize: {
-				options: {
-					ignore: [/(.)*-is-(.)*/, /(.)*-has-(.)*/, /(.)*-are-(.)*/],
-					stylesheets: [project.res.css.dir.replace(project.dir, "") + project.res.css.filename + ".css"]
-				},
-				files: {
-					cssMinFiles: function() {
-						var cssMinFilesObject = {};
-						cssMinFilesObject[project.res.css.dir + project.res.css.filename + ".css"] = project.dir + "*.html";
-						return cssMinFilesObject;
-					}
-				}.cssMinFiles()
+		penthouse: {
+			cssCritical: {
+				url: project.build.dir + project.build.critical.page,
+				width: project.build.critical.width,
+				height: project.build.critical.height,
+				outfile: project.res.css.dir + project.res.css.critical + ".css",
+				css: project.res.css.dir + project.res.css.filename + ".css"
 			}
 		},
 		cssmin: {
@@ -438,13 +444,12 @@ module.exports = function(grunt) {
 			},
 			templates: {
 				cwd: project.templates.dir,
-				src: ["*.tmp.html", "!_*.html"],
+				src: ["*.html", "!_*.html"],
 				dest: project.dir,
 				ext: ".html",
 				expand: true
 			}
 		},
-
 		htmlmin: {
 			cleanup: {
 				options: {
@@ -461,35 +466,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		clean: {
-			res: [project.res.css.dir, project.res.js.dir + "*.js"],
-			build: [project.build.dir]
-		},
-		copy: {
-			build: {
-				cwd: project.dir,
-				src: ["**/*.*", "!**/tx-*.*", "!**/templates/**", "!**/**-dev/**", "!**/tx/**"],
-				dest: project.build.dir,
-				expand: true
-			},
-			meta: {
-				cwd: project.meta,
-				src: ["**/*.{ico,png,jpg,gif,txt}"],
-				dest: project.build.dir,
-				expand: true
-			}
-		},
-
-		penthouse: {
-			cssCritical: {
-				url: project.build.dir + project.build.critical.page,
-				width: project.build.critical.width,
-				height: project.build.critical.height,
-				outfile: project.res.css.dir + project.res.css.critical + ".css",
-				css: project.res.css.dir + project.res.css.filename + ".css"
-			}
-		},
-
 		imagemin: {
 			images: {
 				cwd: project.dir,
@@ -501,6 +477,14 @@ module.exports = function(grunt) {
 				cwd: project.build.dir,
 				src: ["*.{png,jpg,gif}"],
 				dest: project.build.dir,
+				expand: true
+			}
+		},
+		svgmin: {
+			svg: {
+				cwd: project.dir,
+				src: ["**/*.svg"],
+				dest: project.dir,
 				expand: true
 			}
 		},
@@ -527,19 +511,29 @@ module.exports = function(grunt) {
 				expand: true
 			}
 		},
-		svgmin: {
-			svg: {
+
+		clean: {
+			res: [project.res.css.dir, project.res.js.dir + "*.js"],
+			build: [project.build.dir]
+		},
+		copy: {
+			build: {
 				cwd: project.dir,
-				src: ["**/*.svg"],
-				dest: project.dir,
+				src: ["**/*.*", "!**/tx-*.*", "!**/templates/**", "!**/**-dev/**", "!**/tx/**"],
+				dest: project.build.dir,
+				expand: true
+			},
+			meta: {
+				cwd: project.meta,
+				src: ["**/*.{ico,png,jpg,gif,txt}"],
+				dest: project.build.dir,
 				expand: true
 			}
 		},
-
 		compress: {
 			cssGzip: {
 				options: {
-					mode: "gzip",
+					mode: "gzip"
 				},
 				cwd: project.build.dir,
 				src: ["**/*.min.css", "!**/" + project.res.css.critical + ".min.css"],
@@ -549,7 +543,7 @@ module.exports = function(grunt) {
 			},
 			jsGzip: {
 				options: {
-					mode: "gzip",
+					mode: "gzip"
 				},
 				cwd: project.build.dir,
 				src: ["**/*.min.js"],
@@ -678,9 +672,9 @@ module.exports = function(grunt) {
 		grunt.file.write(PAGE_PATH, PAGE);
 	});
 
-	grunt.registerTask("lint", ["htmlhint", "jshint", "csslint", "analyzecss"]);
+	grunt.registerTask("quality", ["htmlhint", "jshint", "csslint", "colorguard", "arialinter"]);
 
-	grunt.registerTask("test", ["yslow"]);
+	grunt.registerTask("performance", ["analyzecss"]);
 
 	grunt.registerTask("images-datauri", ["datauri"]);
 
