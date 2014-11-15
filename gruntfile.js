@@ -1,6 +1,6 @@
 //Gruntfile for the AppX Project
 
-var TITLE							= "AppX Project",						// Title
+var TITLE							= "AppX",										// Title
 		APP								= "appx",										// JavaScript Package Name (Also used as Production JavaScript Filename)
 		LANGUAGE					= "ru",											// Language
 		BUILD_DIR					= "build",									// Project Build
@@ -232,7 +232,7 @@ module.exports = function(grunt) {
 				options: {
 					replacements: [{
 						pattern: /@tx-title/gi,
-						replacement: project.title
+						replacement: project.title + " App"
 					},{
 						pattern: /@tx-language/gi,
 						replacement: project.language
