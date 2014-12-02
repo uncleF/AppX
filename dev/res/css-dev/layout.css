@@ -1,13 +1,15 @@
 /* Layout Base */
 html {
 	min-height: 100%;
+
+	-webkit-overflow-scrolling: touch;
 }
 
 body {
-	position: relative;
+	position: relative; 
 	overflow-x: auto;
 	overflow-y: scroll;
-	-ms-overflow-style: -ms-autohiding-scrollbar; 
+	-ms-overflow-style: -ms-autohiding-scrollbar;
 	min-width: 980px;
 	min-height: 100%;
 	max-width: 1400px;
@@ -22,24 +24,21 @@ body {
 	bottom: 0;
 	left: 0;
 }
-
-.is-screenTransition .screen {
-	-webkit-transition: all .5s;
-	transition: all .5s;
-}
-
 .screen-newScreen {
 	-webkit-transform: translate(100%, 0);
 	-ms-transform: translate(100%, 0);
 	transform: translate(100%, 0);
 }
 
-.is-reverseTransition .screen-newScreen {
-	-webkit-transform: translate(-100%, 0);
-	-ms-transform: translate(-100%, 0);
-	transform: translate(-100%, 0);
+.is-screenTransition .screen {
+	-webkit-transition: .5s;
+	transition: .5s;
 }
-
+.is-screenTransition .screen-newScreen {
+	-webkit-transform: translate(0, 0);
+	-ms-transform: translate(0, 0);
+	transform: translate(0, 0);
+}
 .is-screenTransition .screen-oldScreen {
 	-webkit-transform: translate(-100%, 0);
 	-ms-transform: translate(-100%, 0);
@@ -51,10 +50,10 @@ body {
 	transform: translate(100%, 0);
 }
 
-.is-screenTransition .screen-newScreen {
-	-webkit-transform: translate(0, 0);
-	-ms-transform: translate(0, 0);
-	transform: translate(0, 0);
+.is-reverseTransition .screen-newScreen {
+	-webkit-transform: translate(-100%, 0);
+	-ms-transform: translate(-100%, 0);
+	transform: translate(-100%, 0);
 }
 
 /* Templates */

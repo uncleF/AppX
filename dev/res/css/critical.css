@@ -1,45 +1,27 @@
-html, body {
-	padding: 0;
-	border: none;
-	margin: 0;
-	background: none;
-	font-weight: inherit;
-	font-style: inherit;
-	font-family: inherit;
-	line-height: inherit;
-	vertical-align: baseline;
-}
-
-html {
-	-webkit-overflow-scrolling: touch;
-}
-
-
 html {
 	font-size: 100%;
 	line-height: 1.5em;
 }
 
 body {
-	counter-reset: heading;
 	color: #000000;
 	background: #ffffff;
 	font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
 }
 
 ::-webkit-selection {
-	color: white;
-	background: blue;
+	color: #ffffff;
+	background: #0000ff;
 }
 
 ::-moz-selection {
-	color: white;
-	background: blue;
+	color: #ffffff;
+	background: #0000ff;
 }
 
 ::selection {
-	color: white;
-	background: blue;
+	color: #ffffff;
+	background: #0000ff;
 }
 
 
@@ -52,8 +34,27 @@ body {
 
 
 
+@media print {
+	@page {
+		margin: 0 .5cm;
+	}
+
+	body {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+		color: #000000;
+		background: #ffffff;
+		font-size: 16pt;
+	}
+}
+
+
 html {
 	min-height: 100%;
+
+	-webkit-overflow-scrolling: touch;
 }
 
 body {

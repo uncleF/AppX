@@ -1,19 +1,34 @@
-function whichDevice() {
-	var USER_AGENT_STRING = navigator.userAgent.toLowerCase();
-	var MOBILE_LIST = new Array("iphone os 5", "ipad; cpu os 5", "iphone", "ipad", "android 2", "android", "blackberry", "palmos");
-	for (var DEVICE in MOBILE_LIST) {
-		if (USER_AGENT_STRING.indexOf(MOBILE_LIST[DEVICE])>=0) {
-			return MOBILE_LIST[DEVICE];
-		}
+/* global Modernizr:false */
+
+function checkRAF() {
+	return typeof(window.requestAnimationFrame) === "function" ? true : false;
+}
+
+function translate(DISTANCE) {
+	var CSS;
+	if (Modernizr.csstransforms) {
+		CSS = {
+			"-webkit-transform": "translateY(" + DISTANCE + ") translateZ(0)",
+			"-moz-transform": "translateY(" + DISTANCE + ") translateZ(0)",
+			"-ms-transform": "translateY(" + DISTANCE + ") translateZ(0)",
+			"-o-transform": "translateY(" + DISTANCE + ")",
+			"transform": "translateY(" + DISTANCE + ") translateZ(0)"
+		};
+	} else {
+		CSS = {
+			"margin-top": DISTANCE
+		};
 	}
+	return CSS;
 }
 
 function whichTransitionEndEvent() {
 	var TRANSITION;
-	var ELEMENT = document.createElement('fakeelement');
+	var ELEMENT = document.createElement("element");
 	var TRANSITIONS = {
 		"transition": "transitionend",
-		"OTransition": "oTransitionEnd",
+		"oTransition": "oTransitionEnd",
+		"MSTransitionEnd": "MSTransitionEnd",
 		"MozTransition": "transitionend",
 		"WebkitTransition": "webkitTransitionEnd"
 	};
@@ -24,4 +39,12 @@ function whichTransitionEndEvent() {
 	}
 }
 
-var transitionEndEvent = whichTransitionEndEvent();
+function whichDevice() {
+	var USER_AGENT_STRING = navigator.userAgent.toLowerCase();
+	var MOBILE_LIST = new Array("iphone os 5", "ipad; cpu os 5", "iphone", "ipad", "android 2", "android", "blackberry", "palmos");
+	for (var DEVICE in MOBILE_LIST) {
+		if (USER_AGENT_STRING.indexOf(MOBILE_LIST[DEVICE])>=0) {
+			return MOBILE_LIST[DEVICE];
+		}
+	}
+}
