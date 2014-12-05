@@ -122,6 +122,14 @@ module.exports = function(grunt) {
 				expand: true
 			}
 		},
+		csscss: {
+			options: {
+				verbose: true
+			},
+			csscssTest: {
+				src: project.res.css.devDir + "*.css"
+			}
+		},
 		colorguard: {
 			files: {
 				src: project.res.css.devDir + "*.css"
@@ -616,7 +624,7 @@ module.exports = function(grunt) {
 		grunt.file.write(PAGE_PATH, PAGE);
 	});
 
-	grunt.registerTask("quality", ["htmlhint", "jshint", "jsinspect", "csslint", "colorguard", "arialinter"]);
+	grunt.registerTask("quality", ["htmlhint", "jshint", "jsinspect", "csslint", "csscss", "colorguard", "arialinter"]);
 
 	grunt.registerTask("performance", ["analyzecss"]);
 
