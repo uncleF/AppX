@@ -21,11 +21,6 @@ body {
 	background: #0000ff;
 }
 
-::-moz-selection {
-	color: #ffffff;
-	background: #0000ff;
-}
-
 ::selection {
 	color: #ffffff;
 	background: #0000ff;
@@ -42,11 +37,6 @@ input::-moz-focus-inner, button::-moz-focus-inner {
 	html {
 		text-rendering: optimizelegibility;
 	}
-}
-
-/* Phone Typography */
-
-@media handheld, only screen and (max-width: 720px) {
 }
 
 /* Print Typography */
