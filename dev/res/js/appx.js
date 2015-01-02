@@ -1,3 +1,6 @@
+/* global $:false */
+/* global Backbone:false */
+/* global ScreenView */
 var App = Backbone.Model.extend({ defaults: { state: "start" } });
 var app = new App();
 var AppView = Backbone.View.extend({
@@ -56,6 +59,10 @@ var appView;
 $(document).ready(function () {
 		appView = new AppView();
 });
+/* global $:false */
+/* global _:false */
+/* global Backbone:false */
+/* global app:false */
 var ScreenView = Backbone.View.extend({
 		tagName: "section",
 		className: "screen",
@@ -67,6 +74,7 @@ var ScreenView = Backbone.View.extend({
 				this.$el.html(this.templates[app.get("state")]);
 		}
 });
+/* global Backbone:false */
 var Router = Backbone.Router.extend({
 		routes: { "": "start" },
 		start: function () {

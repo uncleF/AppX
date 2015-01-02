@@ -28,7 +28,7 @@ function whichTransitionEndEvent() {
 	var TRANSITIONS = {
 		"transition": "transitionend",
 		"oTransition": "oTransitionEnd",
-		"MSTransitionEnd": "MSTransitionEnd",
+		"MSTransition": "MSTransitionEnd",
 		"MozTransition": "transitionend",
 		"WebkitTransition": "webkitTransitionEnd"
 	};

@@ -1,3 +1,5 @@
+/* global Backbone:false */
+
 var Router = Backbone.Router.extend({
 	routes: {
 		"": "start"

@@ -41,8 +41,8 @@ body {
 .is-screenTransition {
 
 	.screen {
-		transition: $screen-transition;
-	
+		transition: $transitionUIScreen;
+
 		&-newScreen {
 			transform: translate(0, 0);
 		}

@@ -1,3 +1,7 @@
+/* global $:false */
+/* global Backbone:false */
+/* global ScreenView */
+
 var App = Backbone.Model.extend({
 	defaults: {
 		state: "start"
@@ -24,7 +28,7 @@ var AppView = Backbone.View.extend({
 			this.screens[0].remove();
 			this.screens.shift();
 			var afterScreenTransitionCall = this.afterScreenTransitionCalls[this.model.get("state") + "AfterCall"];
-			if (typeof afterScreenTransitionCall == "function") {
+			if (typeof afterScreenTransitionCall === "function") {
 				afterScreenTransitionCall();
 			}
 			$(".screen-newScreen").removeClass("screen-newScreen");
@@ -47,7 +51,7 @@ var AppView = Backbone.View.extend({
 	changeScreens: function() {
 		this.createScreen();
 		var beforeScreenTransitionCall = this.beforeScreenTransitionCalls[this.model.get("state") + "BeforeCall"];
-		if (typeof beforeScreenTransitionCall == "function") {
+		if (typeof beforeScreenTransitionCall === "function") {
 			beforeScreenTransitionCall();
 		}
 		this.screens[0].$el.addClass("screen-oldScreen");
@@ -66,5 +70,7 @@ var AppView = Backbone.View.extend({
 var appView;
 
 $(document).ready(function() {
+
 	appView = new AppView();
+
 });
