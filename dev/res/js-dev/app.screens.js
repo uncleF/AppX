@@ -7,7 +7,7 @@ var ScreenView = Backbone.View.extend({
 	tagName: "section",
 	className: "screen",
 	templates: {
-		"start": _.template($("#start").html()),
+		"start": _.template($("#start").html())
 	},
 	initialize: function() {
 		this.render();
