@@ -5,7 +5,7 @@ html {
 }
 
 body {
-	position: relative; 
+	position: relative;
 	overflow-x: auto;
 	overflow-y: scroll;
 	-ms-overflow-style: -ms-autohiding-scrollbar;
@@ -13,6 +13,7 @@ body {
 	min-height: 100%;
 	max-width: 1400px;
 	margin: 0 auto;
+	background: #ffffff;
 }
 
 /* Screen */
