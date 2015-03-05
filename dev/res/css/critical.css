@@ -8,23 +8,8 @@ html {
 }
 
 body {
-	color: #000000;
+	color: #333333;
 	font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
-}
-
-::-webkit-selection {
-	color: #ffffff;
-	background: #003b9e;
-}
-
-::-moz-selection {
-	color: #ffffff;
-	background: #003b9e;
-}
-
-::selection {
-	color: #ffffff;
-	background: #003b9e;
 }
 
 
@@ -52,4 +37,21 @@ body {
 	max-width: 1400px;
 	margin: 0 auto;
 	background: #ffffff;
+}
+
+
+
+::-webkit-selection {
+	color: #ffffff;
+	background: #337ab7;
+}
+
+::-moz-selection {
+	color: #ffffff;
+	background: #337ab7;
+}
+
+::selection {
+	color: #ffffff;
+	background: #337ab7;
 }
