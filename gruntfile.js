@@ -582,7 +582,7 @@ module.exports = function(grunt) {
 				var PROCESS_TASKS = [];
 				PROCESS_TASKS.push("concat:css");
 				grunt.config.set("TASK.CSS_ARRAY", fillAnArray(CSS_ARRAY, project.res.css.devDir));
-				PROCESS_TASKS = PROCESS_TASKS.concat(["uncss", "string-replace:cssComments", "csscomb", "cssc", "cssmin:cssMin"]);
+				PROCESS_TASKS = PROCESS_TASKS.concat(["uncss", "csscomb", "string-replace:cssComments", "cssc", "cssmin:cssMin"]);
 				grunt.task.run(PROCESS_TASKS);
 			}
 		} else {
