@@ -2,22 +2,13 @@ html {
 	font-size: 100%;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
-	line-height: 1.5em;
-
 	text-size-adjust: 100%;
+	line-height: 1.5em;
 }
 
 body {
 	color: #333333;
 	font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
-}
-
-
-
-@media only screen and (min-resolution: 1.5dppx), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-resolution: 150dpi) {
-	html {
-		text-rendering: optimizelegibility;
-	}
 }
 
 

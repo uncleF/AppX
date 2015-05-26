@@ -3,9 +3,8 @@ html {
 	font-size: 100%;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
+	text-size-adjust: 100%; 
 	line-height: 1.5em;
-
-	text-size-adjust: 100%;
 }
 
 body {
@@ -20,15 +19,25 @@ article, aside, figure, figcaption, footer, header, hgroup, nav, section {
 a {
 	color: #337ab7;
 	text-decoration: underline;
+	-moz-text-decoration-color: rgba(51, 122, 183, .5);
+	text-decoration-color: rgba(51, 122, 183, .5);
+	-webkit-transition: .25s;
+	transition: .25s;
 }
 a:visited {
 	color: #6f5499;
+	-moz-text-decoration-color: rgba(111, 84, 153, .5);
+	text-decoration-color: rgba(111, 84, 153, .5);
 }
 a:hover {
 	color: #23527c;
+	-moz-text-decoration-color: rgba(35, 82, 124, .5);
+	text-decoration-color: rgba(35, 82, 124, .5);
 }
 a:active {
 	color: #23527c;
+	-moz-text-decoration-color: rgba(35, 82, 124, .5);
+	text-decoration-color: rgba(35, 82, 124, .5);
 }
 a:focus {
 	outline: 1px dotted #cccccc;
@@ -39,16 +48,13 @@ label, button, .button {
 }
 
 label {
-	border-bottom: 1px dotted #cccccc; 
+	border-bottom: 1px dotted #cccccc;
 	cursor: pointer;
-}
-label:focus {
-	border: none;
-	outline: 1px dotted #cccccc;
 }
 
 h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
+	text-rendering: auto;
 	page-break-after: avoid;
 	orphans: 3;
 	widows: 3;
@@ -110,8 +116,8 @@ pre, code, samp, var {
 }
 
 pre {
-	overflow: hidden; 
-	padding: 0 1.5em;
+	overflow: hidden;
+	padding: 0 1.5em; 
 	white-space: pre;
 	white-space: pre-wrap;
 	white-space: pre-line;
@@ -174,7 +180,7 @@ acronym, abbr, ins, mark, del {
 }
 
 acronym, abbr, ins, mark {
-	border-bottom: 1px dotted #337ab7; 
+	border-bottom: 1px dotted #337ab7;
 	color: #337ab7;
 }
 
@@ -184,7 +190,7 @@ acronym, abbr {
 }
 
 del {
-	border-bottom: 1px dotted #cccccc; 
+	border-bottom: 1px dotted #cccccc;
 	color: #cccccc;
 }
 
@@ -192,9 +198,9 @@ kbd {
 	display: inline-block;
 	height: 1.5em;
 	padding: 0 .5em;
+	border-radius: 3px;
 	background: #cccccc;
 	background-clip: padding-box;
-	border-radius: 3px; 
 	font-weight: bold;
 	font-family: "Courier New", Courier, Freemono, "Nimbus Mono L", monospace;
 	letter-spacing: .1em;
@@ -241,7 +247,7 @@ u {
 
 img {
 	max-width: 100%;
-	border: none; 
+	border: 0;
 	vertical-align: top;
 }
 
@@ -253,7 +259,7 @@ caption {
 
 table {
 	width: 100%;
-	border-spacing: 0; 
+	border-spacing: 0;
 	border-collapse: collapse;
 }
 
@@ -270,7 +276,7 @@ th {
 fieldset {
 	display: block;
 	padding: 0;
-	border: none; 
+	border: 0;
 	margin: 0;
 }
 
@@ -290,12 +296,6 @@ hr {
 }
 
 /* High DPI Typography */
-@media only screen and (min-resolution: 1.5dppx), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-resolution: 150dpi) {
-	html {
-		text-rendering: optimizelegibility;
-	}
-}
-
 /* Phone Typography */
 @media handheld, only screen and (max-width: 720px) {
 	/* Typography & Rhythm */

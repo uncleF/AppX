@@ -20,7 +20,7 @@ body {
 .screen {
 	position: absolute;
 	top: 0;
-	right: 0; 
+	right: 0;
 	bottom: 0;
 	left: 0;
 }
@@ -44,6 +44,7 @@ body {
 	-ms-transform: translate(-100%, 0);
 	transform: translate(-100%, 0);
 }
+
 .is-screenTransition.is-reverseTransition .screen-oldScreen {
 	-webkit-transform: translate(100%, 0);
 	-ms-transform: translate(100%, 0);

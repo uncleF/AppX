@@ -1,8 +1,4 @@
-@import "tx/tx";
-@import "tx/tx-projectImages";
-
-@import "project";
-@import "project-global";
+@import "project/project";
 
 
 
@@ -13,15 +9,15 @@
 /* Layout Base */
 
 html {
-	min-height: 100%;
-	-webkit-overflow-scrolling: touch;
+  min-height: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
-	@include tx-set-boundaries($min-width);
-	@include tx-scroll-bar(true);
-	position: relative;
-	background: $background;
+  @include tx-set-boundaries($min-width);
+  @include tx-scroll-bar(true);
+  position: relative;
+  background: $background;
 }
 
 
@@ -29,48 +25,48 @@ body {
 /* Screen */
 
 .screen {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
-	&-newScreen {
-		transform: translate(100%, 0);
-	}
+  &-newScreen {
+    transform: translate(100%, 0);
+  }
 
 }
 
 .is-screenTransition {
 
-	.screen {
-		transition: $UITransitionScreen;
+  .screen {
+    transition: $UITransitionScreen;
 
-		&-newScreen {
-			transform: translate(0, 0);
-		}
+    &-newScreen {
+      transform: translate(0, 0);
+    }
 
-		&-oldScreen {
-			transform: translate(-100%, 0);
-		}
+    &-oldScreen {
+      transform: translate(-100%, 0);
+    }
 
-	}
+  }
 
-	&.is-reverseTransition {
+  &.is-reverseTransition {
 
-		.screen-oldScreen {
-			transform: translate(100%, 0);
-		}
+    .screen-oldScreen {
+      transform: translate(100%, 0);
+    }
 
-	}
+  }
 
 }
 
 .is-reverseTransition {
 
-	.screen-newScreen {
-		transform: translate(-100%, 0);
-	}
+  .screen-newScreen {
+    transform: translate(-100%, 0);
+  }
 
 }
 
@@ -79,7 +75,7 @@ body {
 /* Templates */
 
 .template {
-	display: none
+  display: none;
 }
 
 
@@ -100,11 +96,11 @@ body {
 
 @media handheld, only screen and (max-width: 720px) {
 
-	@import "phone/layout-phone";
+  @import "phone/layout-phone";
 
 }
 
-@media only screen and (max-width: 720px) and (min-resolution: 1.5dppx),	only screen and (max-width: 720px) and (-webkit-min-device-pixel-ratio: 1.5),	only screen and (max-width: 720px) and (min--moz-device-pixel-ratio: 1.5),	only screen and (max-width: 720px) and (-o-min-device-pixel-ratio: 3 / 2),	only screen and (max-width: 720px) and (min-device-pixel-ratio: 1.5), only screen and (max-width: 720px) and (min-resolution: 150dpi) {}
+@media only screen and (max-width: 720px) and (min-resolution: 1.5dppx),  only screen and (max-width: 720px) and (-webkit-min-device-pixel-ratio: 1.5), only screen and (max-width: 720px) and (min--moz-device-pixel-ratio: 1.5),  only screen and (max-width: 720px) and (-o-min-device-pixel-ratio: 3 / 2),  only screen and (max-width: 720px) and (min-device-pixel-ratio: 1.5), only screen and (max-width: 720px) and (min-resolution: 150dpi) {}
 
 
 
