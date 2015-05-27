@@ -1,69 +1,66 @@
 /* Typography & Rhythm */
 
 html {
-	font-size: 100%;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-	text-size-adjust: 100%;
-	line-height: 1.5em;
+  font-size: 100%;
+  line-height: 1.5em;
 }
 
 body {
-	color: #333333;
-	font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
+  color: #333333;
+  font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
 }
 
 /* Phone Typography */
 
 @media handheld, only screen and (max-width: 720px) {
-	/* Typography & Rhythm */
+  /* Typography & Rhythm */
 }
 
 /* Layout Base */
 
 html {
-	-webkit-overflow-scrolling: touch;
-	min-height: 100%;
+  -webkit-overflow-scrolling: touch;
+  min-height: 100%;
 }
 
 body {
-	position: relative;
-	overflow-x: auto;
-	overflow-y: scroll;
-	-ms-overflow-style: -ms-autohiding-scrollbar;
-	min-width: 980px;
-	min-height: 100%;
-	max-width: 1400px;
-	margin: 0 auto;
-	background: #ffffff;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: scroll;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  min-width: 980px;
+  min-height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #ffffff;
 }
 
 /* Templates */
 
 .template {
-	display: none;
+  display: none;
 }
 
 /* Selection */
 
 ::-webkit-selection {
-	color: #ffffff;
-	background: #337ab7;
+  color: #ffffff;
+  background: #337ab7;
 }
 
 ::-moz-selection {
-	color: #ffffff;
-	background: #337ab7;
+  color: #ffffff;
+  background: #337ab7;
 }
 
 ::selection {
-	color: #ffffff;
-	background: #337ab7;
+  color: #ffffff;
+  background: #337ab7;
 }
 
 /* Forms */
 
 input::-moz-focus-inner, button::-moz-focus-inner {
-	padding: 0;
-	border: 0;
+  padding: 0;
+  border: 0;
 }

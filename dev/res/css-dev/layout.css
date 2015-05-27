@@ -1,65 +1,65 @@
 /* Layout Base */
 html {
-	-webkit-overflow-scrolling: touch; 
-	min-height: 100%;
+  -webkit-overflow-scrolling: touch; 
+  min-height: 100%;
 }
 
 body {
-	position: relative;
-	overflow-x: auto;
-	overflow-y: scroll;
-	-ms-overflow-style: -ms-autohiding-scrollbar;
-	min-width: 980px;
-	min-height: 100%;
-	max-width: 1400px;
-	margin: 0 auto;
-	background: #ffffff;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: scroll;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  min-width: 980px;
+  min-height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #ffffff;
 }
 
 /* Screen */
 .screen {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 .screen-newScreen {
-	-webkit-transform: translate(100%, 0);
-	-ms-transform: translate(100%, 0);
-	transform: translate(100%, 0);
+  -webkit-transform: translate(100%, 0);
+  -ms-transform: translate(100%, 0);
+  transform: translate(100%, 0);
 }
 
 .is-screenTransition .screen {
-	-webkit-transition: .5s;
-	transition: .5s;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 .is-screenTransition .screen-newScreen {
-	-webkit-transform: translate(0, 0);
-	-ms-transform: translate(0, 0);
-	transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
 }
 .is-screenTransition .screen-oldScreen {
-	-webkit-transform: translate(-100%, 0);
-	-ms-transform: translate(-100%, 0);
-	transform: translate(-100%, 0);
+  -webkit-transform: translate(-100%, 0);
+  -ms-transform: translate(-100%, 0);
+  transform: translate(-100%, 0);
 }
 
 .is-screenTransition.is-reverseTransition .screen-oldScreen {
-	-webkit-transform: translate(100%, 0);
-	-ms-transform: translate(100%, 0);
-	transform: translate(100%, 0);
+  -webkit-transform: translate(100%, 0);
+  -ms-transform: translate(100%, 0);
+  transform: translate(100%, 0);
 }
 
 .is-reverseTransition .screen-newScreen {
-	-webkit-transform: translate(-100%, 0);
-	-ms-transform: translate(-100%, 0);
-	transform: translate(-100%, 0);
+  -webkit-transform: translate(-100%, 0);
+  -ms-transform: translate(-100%, 0);
+  transform: translate(-100%, 0);
 }
 
 /* Templates */
 .template {
-	display: none;
+  display: none;
 }
 
 /* High DPI Layout */
