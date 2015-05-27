@@ -1,29 +1,29 @@
 //Gruntfile for the AppX Project
 
-var TITLE             = 'AppX',              // Title
-    APP               = 'appx',              // JavaScript Package Name (Also used as Production JavaScript Filename)
-    LANGUAGE          = 'ru',                // Language
-    BUILD_DIR         = 'build',             // Project Build
-    META_DIR          = 'meta',              // Meta Content
-    DEVELOPMENT_DIR   = 'dev',               // Project Development
-    IMAGES_DIR        = 'images',            // Images
-    RESOURCES_DIR     = 'res',               // Resources (CSS, JavaScript, Fonts etc.)
-    APP_PAGE          = 'app.html',          // Application
-    CRITICAL_PAGE     = 'critical.html',     // Page Containing Critical Elements
-    CRITICAL_WIDTH    = 1200,                // Horizontal Fold
-    CRITICAL_HEIGHT   = 900,                 // Vertical Fold
-    TEMPLATES_DIR     = 'templates',         // Templates
-    CSS_TEMPLATE      = '_head.html',        // Template Containing CSS Declarations
-    JS_TEMPLATE       = '_scriptsApp.html',  // Template Containing JavaScript Declarations
-    CSS_IMAGES_DIR    = 'images',            // CSS Images
-    DATA_URI          = [],                  // Array of Images (Relative to the Image Resources Directory) to Convert to DataURI
-    CSS_DIR           = 'css',               // Production CSS
-    SASS_DIR          = 'sass-dev',          // Sass
-    CSS_DEV_DIR       = 'css-dev',           // Generated CSS
-    CSS_FILENAME      = 'styles',            // Production CSS Filename
-    CSS_CRITICAL      = 'critical',          // Critical CSS Filename
-    JS_DIR            = 'js',                // Production JavaScript
-    JS_DEV_DIR        = 'js-dev';            // JavaScript
+var TITLE             = 'AppX';              // Title
+var APP               = 'appx';              // JavaScript Package Name (Also used as Production JavaScript Filename)
+var LANGUAGE          = 'ru';                // Language
+var BUILD_DIR         = 'build';             // Project Build
+var META_DIR          = 'meta';              // Meta Content
+var DEVELOPMENT_DIR   = 'dev';               // Project Development
+var IMAGES_DIR        = 'images';            // Images
+var RESOURCES_DIR     = 'res';               // Resources (CSS, JavaScript, Fonts etc.)
+var APP_PAGE          = 'app.html';          // Application
+var CRITICAL_PAGE     = 'critical.html';     // Page Containing Critical Elements
+var CRITICAL_WIDTH    = 10000;               // Horizontal Fold
+var CRITICAL_HEIGHT   = 10000;               // Vertical Fold
+var TEMPLATES_DIR     = 'templates';         // Templates
+var CSS_TEMPLATE      = '_head.html';        // Template Containing CSS Declarations
+var JS_TEMPLATE       = '_scriptsApp.html';  // Template Containing JavaScript Declarations
+var CSS_IMAGES_DIR    = 'images';            // CSS Images
+var DATA_URI          = [];                  // Array of Images (Relative to the CSS Images Directory) to Convert to DataURI
+var CSS_DIR           = 'css';               // Production CSS
+var SASS_DIR          = 'sass-dev';          // Sass
+var CSS_DEV_DIR       = 'css-dev';           // Generated CSS
+var CSS_FILENAME      = 'styles';            // Production CSS Filename
+var CSS_CRITICAL      = 'critical';          // Critical CSS Filename
+var JS_DIR            = 'js';                // Production JavaScript
+var JS_DEV_DIR        = 'js-dev';            // JavaScript
 
 function fillAnArray(array, path) {
   var result = [];
@@ -90,8 +90,18 @@ module.exports = function(grunt) {
         'htmlhintrc': '.htmlhintrc'
       },
       htmlHint: {
-        cwd: project.build.dir,
+        cwd: project.dir,
         src: ['*.html'],
+        expand: true
+      }
+    },
+    jscs: {
+      options: {
+        config: '.jscsrc'
+      },
+      jscs: {
+        cwd: project.res.js.devDir,
+        src: ['*.js', '!*.min.js'],
         expand: true
       }
     },
@@ -101,14 +111,14 @@ module.exports = function(grunt) {
       },
       jsHint: {
         cwd: project.res.js.devDir,
-        src: ['*.js'],
+        src: ['*.js', '!*.min.js'],
         expand: true
       }
     },
     jsinspect: {
       jsInspect: {
         cwd: project.res.js.devDir,
-        src: ['*.js'],
+        src: ['*.js', '!*.min.js'],
         expand: true
       }
     },
@@ -173,7 +183,9 @@ module.exports = function(grunt) {
         thresholds: grunt.file.readJSON('.analyzecssrc')
       },
       ananlyzeCSS: {
-        sources: [project.res.css.dir + project.res.css.filename + '.min.css']
+        cwd: project.res.css.dir,
+        src: [project.res.css.filename + '.min.css'],
+        expand: true
       }
     },
 
@@ -184,8 +196,15 @@ module.exports = function(grunt) {
       },
       generateCSS: {
         cwd: project.res.css.sass,
-        src: ['**/*.scss', '**/*.sass', '!**/_*.scss', '!**/_*.sass'],
+        src: ['*.scss', '*.sass'],
         dest: project.res.css.devDir,
+        ext: '.css',
+        expand: true
+      },
+      generateDebugCSS: {
+        cwd: project.res.css.sass + 'project/tx/',
+        src: ['*.scss', '*.sass'],
+        dest: project.res.css.devDir + '/tx',
         ext: '.css',
         expand: true
       }
@@ -307,12 +326,12 @@ module.exports = function(grunt) {
     fixmyjs: {
       options: {
         config: '.jshintrc',
-        indentpref: 'tabs'
       },
       fixMyJS: {
         cwd: project.res.js.dir,
-        src: ['*.min.js'],
+        src: ['*.js'],
         dest: project.res.js.dir,
+        ext: '.min.js',
         expand: true
       }
     },
@@ -434,7 +453,7 @@ module.exports = function(grunt) {
       },
       resImages: {
         src: project.res.images.dataURI,
-        dest: project.res.css.sass + 'tx/_tx-projectImages.scss'
+        dest: project.res.css.sass + 'project/tx/_tx-projectImages.scss'
       }
     },
     imagemin: {
