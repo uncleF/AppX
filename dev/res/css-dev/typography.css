@@ -294,7 +294,7 @@ hr {
 
 /* High DPI Typography */
 /* Phone Typography */
-@media handheld, only screen and (max-width: 720px) {
+@media handheld, only screen and (max-width: 719px) {
   /* Typography & Rhythm */
   table, tr, th, td {
     display: block;
