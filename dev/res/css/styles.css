@@ -10,6 +10,20 @@ body {
   font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
 }
 
+h1 {
+  font-weight: bold;
+  text-rendering: auto;
+  page-break-after: avoid;
+  orphans: 3;
+  widows: 3;
+}
+
+h1 {
+  margin: .75em 0 1.5em;
+  font-size: 2em;
+  line-height: 1.5em;
+}
+
 /* Phone Typography */
 
 @media handheld, only screen and (max-width: 719px) {

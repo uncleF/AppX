@@ -24,6 +24,14 @@ body {
 
 /* Screen */
 
+%screenRight {
+  transform: translate(100%, 0);
+}
+
+%screenLeft {
+  transform: translate(-100%, 0);
+}
+
 .screen {
   position: absolute;
   top: 0;
@@ -32,7 +40,7 @@ body {
   left: 0;
 
   &-newScreen {
-    transform: translate(100%, 0);
+    @extend %screenRight;
   }
 
 }
@@ -47,7 +55,7 @@ body {
     }
 
     &-oldScreen {
-      transform: translate(-100%, 0);
+      @extend %screenLeft;
     }
 
   }
@@ -55,7 +63,7 @@ body {
   &.is-reverseTransition {
 
     .screen-oldScreen {
-      transform: translate(100%, 0);
+      @extend %screenRight;
     }
 
   }
@@ -65,7 +73,7 @@ body {
 .is-reverseTransition {
 
   .screen-newScreen {
-    transform: translate(-100%, 0);
+    @extend %screenLeft;
   }
 
 }

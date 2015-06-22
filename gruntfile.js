@@ -131,7 +131,7 @@ module.exports = function(grunt) {
     },
     csslint: {
       options: {
-        'csslintrc': '.csslintrc'
+        csslintrc: '.csslintrc'
       },
       cssLint: {
         cwd: project.res.css.devDir,
@@ -141,6 +141,7 @@ module.exports = function(grunt) {
     },
     csscss: {
       options: {
+        shorthand: false,
         verbose: true
       },
       csscssTest: {
@@ -358,7 +359,7 @@ module.exports = function(grunt) {
     uncss: {
       cssOptimize: {
         options: {
-          ignore: [/.*-is-.*/, /.*-has-.*/, /.*-are-.*/, /js-.*/],
+          ignore: [/.*-is-.*/, /.*-has-.*/, /.*-are-.*/, /mdz-.*/, /js-.*/],
           stylesheets: [project.res.css.dir.replace(project.dir, '') + project.res.css.filename + '.css'],
           timeout: 1000
         },
@@ -664,7 +665,7 @@ module.exports = function(grunt) {
     grunt.file.write(pagePath, page);
   });
 
-  grunt.registerTask('quality', ['htmlhint', 'jshint', 'jsinspect', 'scsslint', 'csslint', 'csscss', 'colorguard', 'arialinter']);
+  grunt.registerTask('quality', ['htmlhint', 'jscs', 'jshint', 'jsinspect', 'scsslint', 'csslint', 'csscss', 'colorguard', 'arialinter']);
 
   grunt.registerTask('test', ['backstop']);
 

@@ -1,6 +1,10 @@
+
+/* jshint browser:true, jquery:true */
 /* global $:false */
 /* global Backbone:false */
 /* global ScreenView */
+
+'use strict';
 
 var App = Backbone.Model.extend({
   defaults: {
