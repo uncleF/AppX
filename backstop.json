@@ -1,32 +1,28 @@
 {
-	"viewports" : [
-		{
-			"name": "Phone",
-			"viewport": {
-				"width": 320,
-				"height": 480
-			}
-		},{
-			"name": "Tablet Vertical Orientation",
-			"viewport": {
-				"width": 768,
-				"height": 1024
-		 	}
-		},{
-			"name": "Tablet Horizontal Orientation",
-			"viewport": {
-				"width": 1024,
-				"height": 768
-			}
-		}
-	],
-	"grabConfigs": [
-		{
-			"testName": "AppX Index Page",
-			"url": "../../build/index.html",
-			"hideSelectors": [],
-			"removeSelectors": [],
-			"selectors": ["body"]
-		}
-	]
+  "viewports" : [
+    {
+      "name": "phone",
+      "width": 320,
+      "height": 480
+    },{
+      "name": "desktop_min",
+      "width": 980,
+      "height": 768
+    }
+  ],
+  "scenarios": [
+    {
+      "label": "Style Guide",
+      "url": "../../build/styleGuide.html",
+      "selectors": ["body"],
+      "hideSelectors": [],
+      "removeSelectors": []
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "../../tests/bitmaps_reference/",
+    "bitmaps_test": "../../tests/bitmaps_test/",
+    "compare_data": "../../tests/bitmaps_test/compare.json"
+  },
+  "engine": "phantomjs"
 }

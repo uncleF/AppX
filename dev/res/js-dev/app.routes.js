@@ -1,7 +1,7 @@
 /* jshint browser:true, jquery:true */
 /* exported router */
-/* global Backbone:false */
-/* global app:false */
+/* global Backbone */
+/* global app */
 
 'use strict';
 

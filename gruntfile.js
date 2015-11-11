@@ -9,9 +9,10 @@ var DEVELOPMENT_DIR   = 'dev';               // Project Development
 var IMAGES_DIR        = 'images';            // Images
 var RESOURCES_DIR     = 'res';               // Resources (CSS, JavaScript, Fonts etc.)
 var APP_PAGE          = 'app.html';          // Application
-var CRITICAL_PAGE     = 'critical.html';     // Page Containing Critical Elements
-var CRITICAL_WIDTH    = 10000;               // Horizontal Fold
-var CRITICAL_HEIGHT   = 10000;               // Vertical Fold
+var CRITICAL_DESK_W   = 1280;                // Horizontal Fold on the Desktop
+var CRITICAL_DESK_H   = 800;                 // Vertical Fold on the Desktop
+var CRITICAL_PHONE_W  = 320;                 // Horizontal Fold on the Phone
+var CRITICAL_PHONE_H  = 640;                 // Vertical Fold on the Phone
 var TEMPLATES_DIR     = 'templates';         // Templates
 var CSS_TEMPLATE      = '_head.html';        // Template Containing CSS Declarations
 var JS_TEMPLATE       = '_scriptsApp.html';  // Template Containing JavaScript Declarations
@@ -21,7 +22,6 @@ var CSS_DIR           = 'css';               // Production CSS
 var SASS_DIR          = 'sass-dev';          // Sass
 var CSS_DEV_DIR       = 'css-dev';           // Generated CSS
 var CSS_FILENAME      = 'styles';            // Production CSS Filename
-var CSS_CRITICAL      = 'critical';          // Critical CSS Filename
 var JS_DIR            = 'js';                // Production JavaScript
 var JS_DEV_DIR        = 'js-dev';            // JavaScript
 
@@ -38,6 +38,7 @@ module.exports = function(grunt) {
   var project = {
     init: function() {
       this.title = TITLE;
+      this.short = APP;
       this.app = APP_PAGE;
       this.language = LANGUAGE;
       this.dir = DEVELOPMENT_DIR + '/';
@@ -60,8 +61,7 @@ module.exports = function(grunt) {
           dir: resourcesDirCompiled + CSS_DIR + '/',
           devDir: resourcesDirCompiled + CSS_DEV_DIR + '/',
           sass: resourcesDirCompiled + SASS_DIR + '/',
-          filename: CSS_FILENAME,
-          critical: CSS_CRITICAL
+          filename: CSS_FILENAME
         },
         js: {
           dir: resourcesDirCompiled + JS_DIR + '/',
@@ -72,9 +72,10 @@ module.exports = function(grunt) {
       this.build = {
         dir: BUILD_DIR + '/',
         critical: {
-          page: CRITICAL_PAGE,
-          width: CRITICAL_WIDTH,
-          height: CRITICAL_HEIGHT
+          widthDesktop: CRITICAL_DESK_W,
+          heightDesktop: CRITICAL_DESK_H,
+          widthPhone: CRITICAL_PHONE_W,
+          heightPhone: CRITICAL_PHONE_H
         }
       };
       return this;
@@ -164,19 +165,6 @@ module.exports = function(grunt) {
       }
     },
 
-    backstop: {
-      test: {
-        options: {
-          backstop_path: './node_modules/backstopjs',
-          test_path: './tests',
-          setup: false,
-          configure: false,
-          create_references: false,
-          run_tests: true
-        }
-      }
-    },
-
     analyzecss: {
       options: {
         outputMetrics: 'error',
@@ -242,33 +230,39 @@ module.exports = function(grunt) {
       cssComments: {
         options: {
           replacements: [{
-            pattern: /\/\* line \d*, .* \*\/(\r?\n|\r)*/g,
+            pattern: /\/\* line \d*, .* \*\/(?:\r?\n|\r)*/g,
             replacement: ''
           }, {
-            pattern: /\/\*# sourceMappingURL(.|\t|\s|\r?\n|\r)*?\*\//gi,
+            pattern: /\/\*# sourceMappingURL(?:.|\t|\s|\r?\n|\r)*?\*\//gi,
             replacement: ''
           }, {
-            pattern: /.media \-sass\-debug\-info(.|\t|\s|\r?\n|\r)*?\}\}/gi,
+            pattern: /.media \-sass\-debug\-info(?:.|\t|\s|\r?\n|\r)*?\}\}/gi,
             replacement: ''
           }, {
-            pattern: /\/\*\*\* uncss>.*\*\*\*\/(\r?\n|\r)*/g,
+            pattern: /\/\*\*\* uncss>.*\*\*\*\/(?:\r?\n|\r)*/g,
             replacement: ''
           }, {
-            pattern: /\*\s(.)*\*\/(\r?\n|\r)*$/g,
+            pattern: /\*\s(?:.)*\*\/(?:\r?\n|\r)*$/g,
             replacement: ''
           }, {
-            pattern: /\*\s(.)*\*\/(\r?\n\t*|\r\t*)*\//g,
+            pattern: /\*\s(?:.)*\*\/(?:\r?\n\t*|\r\t*)*\//g,
             replacement: ''
           }, {
-            pattern: /(\r?\n|\r)*\/$/g,
+            pattern: /(?:\r?\n|\r)*\/$/g,
             replacement: ''
           }, {
-            pattern: /\/\*(.)*(\r?\n|\r){4}/g,
+            pattern: /\/\*(?:.)*(?:\r?\n|\r){4}/g,
             replacement: ''
+          }, {
+            pattern: /\{(?:\r?\n|\r)\s*\/\*/g,
+            replacement: '{\n\n  /*'
+          }, {
+            pattern: /\}(?:\r?\n|\r)\}/g,
+            replacement: '}\n\n}'
           }]
         },
         files: {
-          './': [project.res.css.dir + '*.css']
+          './': [project.res.css.dir + '*.css', '!' + project.res.css.dir + '*.min.css']
         }
       },
       build: {
@@ -277,6 +271,9 @@ module.exports = function(grunt) {
             pattern: /@tx-title/gi,
             replacement: project.title + ' App'
           },{
+            pattern: /@tx-short/gi,
+            replacement: project.short
+          },{
             pattern: /@tx-language/gi,
             replacement: project.language
           },{
@@ -284,28 +281,40 @@ module.exports = function(grunt) {
             replacement: project.app
           },{
             pattern: /.!-- @tx-css -->(.|\t|\s|\r?\n|\r)*?!-- \/@tx-css -->/gi,
-            replacement: '<link rel=\'stylesheet\' type=\'text/css\' href=\'' + project.res.css.dir.replace(project.dir, '') + project.res.css.filename + '.min.css\'>'
+            replacement: '<link rel="stylesheet" type="text/css" href="' + project.res.css.dir.replace(project.dir, '') + project.res.css.filename + '.min.css">'
           },{
             pattern: /.!-- @tx-js -->(.|\t|\s|\r?\n|\r)*?!-- \/@tx-js -->/gi,
-            replacement: '<script type=\'text/javascript\' src=\'' + project.res.js.dir.replace(project.dir, '') + project.res.js.filename + '.min.js\'></script>'
+            replacement: '<script type="text/javascript" src="' + project.res.js.dir.replace(project.dir, '') + project.res.js.filename + '.min.js"></script>'
+          }, {
+            pattern: /(?:\<span data-dev-note=".*?"\>)(.*)(?:\<\/span\>)/gi,
+            replacement: '$1'
+          }, {
+            pattern: /\sdata-dev-note=".*?"/gi,
+            replacement: ''
           }]
         },
         files: {
-          './': [project.build.dir + '*.{html,webapp}']
+          './': [project.build.dir + '*.{html,webapp,json}']
         }
       },
       critical: {
         options: {
           replacements: [{
-            pattern: /(\r?\n|\r)$/g,
-            replacement: ''
+            pattern: /<style type="text\/css">(?:\r?\n|\r)/g,
+            replacement: '<style type="text/css">'
           },{
-            pattern: /(\r?\n|\r){5}/g,
-            replacement: '\n\n'
+            pattern: /(?:\r?\n|\r)<\/style>(?:\r?\n|\r)<script>(?:\r?\n|\r)/g,
+            replacement: '</style>\n    <script>'
+          }, {
+            pattern: /(?:\r?\n|\r)<\/script>(?:\r?\n|\r)<noscript>(?:\r?\n|\r)/g,
+            replacement: '</script>\n    <noscript>'
+          }, {
+            pattern: /(?:\r?\n|\r)<\/noscript>/g,
+            replacement: '</noscript>'
           }]
         },
         files: {
-          './': [project.res.css.dir + project.res.css.critical + '.css']
+          './': [project.build.dir + project.app]
         }
       }
     },
@@ -399,13 +408,24 @@ module.exports = function(grunt) {
         expand: true
       }
     },
-    penthouse: {
+    critical: {
       cssCritical: {
-        url: project.dir + project.build.critical.page,
-        width: project.build.critical.width,
-        height: project.build.critical.height,
-        outfile: project.res.css.dir + project.res.css.critical + '.css',
-        css: project.res.css.dir + project.res.css.filename + '.css'
+        options: {
+          css: [project.res.css.dir + project.res.css.filename + '.css'],
+          dimensions: [{
+            width: project.build.critical.widthDesktop,
+            height: project.build.critical.heightDesktop,
+          }, {
+            width: project.build.critical.widthPhone,
+            height: project.build.critical.heightPhone,
+          }],
+          minify: true,
+          extract: true
+        },
+        cwd: project.build.dir,
+        src: [project.app],
+        expand: true,
+        dest: project.build.dir
       }
     },
     cssmin: {
@@ -472,6 +492,11 @@ module.exports = function(grunt) {
       }
     },
     svgmin: {
+      options: {
+        plugins: [
+          { removeViewBox: false }
+        ]
+      },
       svg: {
         cwd: project.dir,
         src: ['**/*.svg', '!**/fonts/**/*.svg'],
@@ -517,7 +542,7 @@ module.exports = function(grunt) {
       },
       meta: {
         cwd: project.meta,
-        src: ['**/*.{ico,png,jpg,gif,txt,webapp}'],
+        src: ['**/*.{ico,png,jpg,gif,txt,webapp,json}'],
         dest: project.build.dir,
         expand: true
       }
@@ -528,7 +553,7 @@ module.exports = function(grunt) {
           mode: 'gzip'
         },
         cwd: project.build.dir,
-        src: ['**/*.min.css', '!**/' + project.res.css.critical + '.min.css'],
+        src: ['**/*.min.css'],
         dest: project.build.dir,
         ext: '.min.css.gz',
         expand: true
@@ -633,8 +658,8 @@ module.exports = function(grunt) {
         .replace(jsDirRegEx, '')
         .replace(/\r?\n|\r/g, '')
         .replace(/\s/g, '')
-        .replace(/"><\/script>$/, '');
-    var jsArray = js.split('"></script>');
+        .replace(/"defer><\/script>$/, '');
+    var jsArray = js.split('"defer></script>');
     var jsExpected = jsArray.length;
     var jsActual = grunt.file.expand([project.res.js.devDir + '*.js']).length;
     if (jsExpected === jsActual || jsArray[0] === '' && jsActual === 0) {
@@ -653,21 +678,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('critical-cssInline', 'Injecting critical CSS', function() {
-    var criticalCssRegEx = new RegExp('<(.)*' + project.res.css.filename + '.min.css(.)*>', 'g');
-    var criticalCssNoScript = '<noscript><link rel="stylesheet" type="text/css" href="' + project.res.css.dir.replace(project.dir, '') + project.res.css.filename + '.min.css' + '"></noscript>';
-    var criticalCssCritical = '<style type="text/css">' + grunt.file.read(project.res.css.dir + project.res.css.critical + '.min.css') + '</style>';
-    criticalCssCritical = criticalCssCritical.replace(/\.\.\//g, project.res.dir.replace(project.dir, ''));
-    var criticalCss = criticalCssCritical + '\n    ' + criticalCssNoScript;
-    var cssLoad = '<script type="text/javascript" async>function loadcss(a){function e(){for(var d,f=0,g=c.length,f=0;g>f;f++)c[f].href&&c[f].href.indexOf(a)>-1&&(d=!0);d?b.media="all":setTimeout(e)}var b=window.document.createElement("link"),c=window.document.styleSheets,d=window.document.getElementsByTagName("style")[0];return b.rel="stylesheet",b.type="text/css",b.href=a,b.media="only x",d.parentNode.insertBefore(b,d.nextSibling),e(),b}loadcss(\'' + project.res.css.dir.replace(project.dir, '') + project.res.css.filename + '.min.css\');</script>';
-    var pagePath = project.build.dir + project.app;
-    var page = grunt.file.read(pagePath).replace(criticalCssRegEx, criticalCss).replace('<!-- @tx-critical -->', cssLoad);
-    grunt.file.write(pagePath, page);
-  });
-
   grunt.registerTask('quality', ['htmlhint', 'jscs', 'jshint', 'jsinspect', 'scsslint', 'csslint', 'csscss', 'colorguard', 'arialinter']);
-
-  grunt.registerTask('test', ['backstop']);
 
   grunt.registerTask('performance', ['analyzecss']);
 
@@ -683,9 +694,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('compile', ['clean:res', 'processhtml', 'generate-css', 'process-css', 'process-js', 'images']);
 
-  grunt.registerTask('critical', ['penthouse', 'string-replace:critical', 'cssmin:cssMinCritical', 'critical-cssInline']);
+  grunt.registerTask('compile-critical', ['critical', 'string-replace:critical']);
 
-  grunt.registerTask('build', ['compile', 'clean:build', 'clean:reports', 'copy:build', 'copy:meta', 'compress:cssGzip:', 'compress:jsGzip:', 'string-replace:build', 'critical', 'htmlmin:cleanup', 'imagemin:meta']);
+  grunt.registerTask('build', ['compile', 'clean:build', 'clean:reports', 'copy:build', 'copy:meta', 'compress:cssGzip', 'compress:jsGzip', 'string-replace:build', 'compile-critical', 'htmlmin:cleanup', 'imagemin:meta']);
 
   grunt.registerTask('compress-build', ['compress:build']);
 

@@ -11,7 +11,7 @@ body {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   min-width: 980px;
   min-height: 100%;
-  max-width: 1400px;
+  max-width: 1920px;
   margin: 0 auto;
   background: #ffffff;
 }
@@ -54,8 +54,10 @@ body {
 
 /* High DPI Layout */
 /* Large Resolution Layout */
-/* Phone Layout */
 /* Tablet Layout */
+/* Phone Layout */
+/* Standalone Layout */
+/* Fullscreen Layout */
 /* TV Layout */
 /* Audio Layout */
 /*# sourceMappingURL=layout.css.map */

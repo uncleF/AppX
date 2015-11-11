@@ -1,8 +1,7 @@
 /* Baseline Styles, Typography & Rhythm */
-
 html {
   font-size: 16px;
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; 
   -ms-text-size-adjust: 100%;
   line-height: 24px;
   line-height: 1.5rem;
@@ -13,12 +12,16 @@ body {
   font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
   -webkit-font-feature-settings: "liga";
   -moz-font-feature-settings: "liga";
-  font-feature-settings: "liga";
+  font-feature-settings: "liga"; 
   -epub-hyphens: manual;
   -webkit-hyphens: manual;
   -moz-hyphens: manual;
   -ms-hyphens: manual;
   hyphens: manual;
+}
+
+article, aside, canvas, figure, figcaption, footer, header, hgroup, nav, main, progress, section, summary {
+  display: block;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -27,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
   page-break-after: avoid;
   break-after: avoid;
   orphans: 3;
-  widows: 3;
+  widows: 3; 
 
   -webkit-break-after: avoid;
   -moz-break-after: avoid;
@@ -69,11 +72,11 @@ h6 {
   line-height: 1.5rem;
 }
 
-p, dl, ul, ol, li, pre, address, table {
+p, dl, ul, ol, li, pre, address, audio, video, table {
   margin: 1.5rem 0;
 }
 
-pre, code, var {
+pre, code, samp, var, tt {
   font-family: "Courier New", Courier, Freemono, "Nimbus Mono L", monospace;
 }
 
@@ -95,11 +98,11 @@ ol {
   list-style-type: decimal;
 }
 
-li > ul {
+li > ul, li > ol {
   margin: 1.5rem 0 1.5rem 1.5em;
 }
 
-blockquote, em, cite {
+blockquote, em, cite, q, i {
   font-style: italic;
 }
 
@@ -107,13 +110,13 @@ var, strong, b, dfn, acronym, abbr, kbd, th {
   font-weight: bold;
 }
 
-pre, code, var {
+pre, code, samp, var {
   color: #d9534f;
 }
 
 pre {
   overflow: hidden;
-  padding: 0 1.5em;
+  padding: 0 1.5em; 
   white-space: pre;
   white-space: pre-wrap;
   white-space: pre-line;
@@ -128,11 +131,11 @@ var {
   font-style: normal;
 }
 
-blockquote {
+blockquote, q {
   quotes: none;
 }
 
-blockquote:before, blockquote:after {
+blockquote:before, q:before, blockquote:after, q:after {
   content: none;
 }
 
@@ -145,12 +148,12 @@ acronym, abbr, ins {
   cursor: help;
 }
 
-acronym, abbr, ins {
+acronym, abbr, ins, mark {
   border-bottom: 1px dotted #337ab7;
   color: #337ab7;
 }
 
-del {
+del, strike, s {
   text-decoration: line-through;
 }
 
@@ -183,7 +186,7 @@ kbd {
 }
 
 sup, sub {
-  position: relative;
+  position: relative; 
   font-size: .75rem;
   line-height: 0;
 }
@@ -204,6 +207,17 @@ big {
 small {
   font-size: .75rem;
   line-height: 0;
+}
+
+u {
+  text-decoration: underline;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  border: 0;
+  vertical-align: top;
 }
 
 caption {
@@ -241,182 +255,27 @@ legend {
   font-weight: bold;
 }
 
+hr {
+  display: block;
+  height: 0;
+  padding: 0;
+  border-top: 1px solid #333333; 
+  margin: 1.5rem 0;
+}
+
+/* HDPI Baseline */
+/* Large Resolution Baseline */
+/* Tablet Baseline */
 /* Phone Baseline */
-
 @media handheld, only screen and (max-width: 45em) {
-
   /* Typography & Rhythm */
-
   table, tr, th, td {
     display: block;
   }
-
 }
 
-/* Lists Reset */
-
-.u-listReset {
-  padding: 0;
-  margin: 0;
-}
-
-.u-listReset {
-  list-style: none outside;
-}
-
-.u-listReset > li {
-  padding: 0;
-  margin: 0;
-}
-
-/* Layout Base */
-
-html {
-  -webkit-overflow-scrolling: touch;
-  min-height: 100%;
-}
-
-body {
-  position: relative;
-  overflow-x: auto;
-  overflow-y: scroll;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  min-width: 980px;
-  min-height: 100%;
-  max-width: 1920px;
-  margin: 0 auto;
-  background: #ffffff;
-}
-
-/* Templates */
-
-.template {
-  display: none;
-}
-
-/* Selection */
-
-::-moz-selection {
-  color: #ffffff;
-  background: #337ab7;
-}
-
-::selection {
-  color: #ffffff;
-  background: #337ab7;
-}
-
-/* Links */
-
-a {
-  color: #337ab7;
-  text-decoration: underline;
-  -webkit-text-decoration-color: rgba(51, 122, 183, .5);
-  -moz-text-decoration-color: rgba(51, 122, 183, .5);
-  text-decoration-color: rgba(51, 122, 183, .5);
-  -webkit-transition: .15s;
-  transition: .15s;
-}
-
-a:visited {
-  color: #6f5499;
-  -webkit-text-decoration-color: rgba(111, 84, 153, .5);
-  -moz-text-decoration-color: rgba(111, 84, 153, .5);
-  text-decoration-color: rgba(111, 84, 153, .5);
-}
-
-a:hover {
-  color: #23527c;
-  -webkit-text-decoration-color: rgba(35, 82, 124, .5);
-  -moz-text-decoration-color: rgba(35, 82, 124, .5);
-  text-decoration-color: rgba(35, 82, 124, .5);
-}
-
-a:active {
-  color: #d9534f;
-  -webkit-text-decoration-color: rgba(217, 83, 79, .5);
-  -moz-text-decoration-color: rgba(217, 83, 79, .5);
-  text-decoration-color: rgba(217, 83, 79, .5);
-}
-
-a:focus {
-  outline: 1px dotted #cccccc;
-}
-
-/* Forms */
-
-label {
-  border-bottom: 1px dotted #cccccc;
-  cursor: pointer;
-}
-
-input, select, textarea {
-  margin: 0;
-  font-size: 1rem;
-  font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
-}
-
-input, textarea {
-  box-sizing: content-box;
-}
-
-input {
-  border: 0;
-}
-
-input::-moz-focus-inner, button::-moz-focus-inner {
-  padding: 0;
-  border: 0;
-}
-
-select {
-  text-transform: none;
-}
-
-input, select {
-  vertical-align: top;
-}
-
-select, textarea, .field {
-  border: 1px solid #cccccc;
-}
-
-input[type="radio"], input[type="checkbox"] {
-  box-sizing: border-box;
-  vertical-align: middle;
-}
-
-input[type="search"], input[type="number"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-select {
-  height: 2.25rem;
-  vertical-align: top;
-}
-
-select[multiple] {
-  height: 7.5rem;
-}
-
-.button {
-  height: 2.25rem;
-  padding: 0 15px;
-  cursor: pointer;
-}
-
-textarea {
-  display: block;
-  overflow: auto;
-  height: 13.375rem;
-  padding: .75rem 15px;
-}
-
-/* Custom Forms */
-
-.field {
-  height: 2.125rem;
-  padding: 0 15px;
-}
+/* Standalone Baseline */
+/* Fullscreen Baseline */
+/* TV Baseline */
+/* Audio Baseline */
+/*# sourceMappingURL=baseline.css.map */

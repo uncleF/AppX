@@ -1,9 +1,8 @@
 /* jshint browser:true, jquery:true */
 /* exported ScreenView */
-/* global $:false */
-/* global _:false */
-/* global Backbone:false */
-/* global app:false */
+/* global _ */
+/* global Backbone */
+/* global app */
 
 'use strict';
 

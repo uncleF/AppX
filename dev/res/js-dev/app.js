@@ -1,7 +1,5 @@
-
 /* jshint browser:true, jquery:true */
-/* global $:false */
-/* global Backbone:false */
+/* global Backbone */
 /* global ScreenView */
 
 'use strict';

@@ -1,0 +1,10 @@
+{
+	"name": "@tx-title",
+  "short_name": "@tx-short",
+	"lang": "@tx-language",
+	"icons": [],
+  "splash_screens": [],
+	"scope": "/",
+  "start_url": "/@tx-launch",
+  "display": "any"
+}
