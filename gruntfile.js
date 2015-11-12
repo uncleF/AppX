@@ -185,7 +185,7 @@ module.exports = function(grunt) {
       },
       generateCSS: {
         cwd: project.res.css.sass,
-        src: ['*.scss', '*.sass'],
+        src: ['**/*.{scss,sass}', '!**/tx/*.{scss,sass}'],
         dest: project.res.css.devDir,
         ext: '.css',
         expand: true
@@ -270,19 +270,19 @@ module.exports = function(grunt) {
           replacements: [{
             pattern: /@tx-title/gi,
             replacement: project.title + ' App'
-          },{
+          }, {
             pattern: /@tx-short/gi,
             replacement: project.short
-          },{
+          }, {
             pattern: /@tx-language/gi,
             replacement: project.language
-          },{
+          }, {
             pattern: /@tx-launch/gi,
             replacement: project.app
-          },{
+          }, {
             pattern: /.!-- @tx-css -->(.|\t|\s|\r?\n|\r)*?!-- \/@tx-css -->/gi,
             replacement: '<link rel="stylesheet" type="text/css" href="' + project.res.css.dir.replace(project.dir, '') + project.res.css.filename + '.min.css">'
-          },{
+          }, {
             pattern: /.!-- @tx-js -->(.|\t|\s|\r?\n|\r)*?!-- \/@tx-js -->/gi,
             replacement: '<script type="text/javascript" src="' + project.res.js.dir.replace(project.dir, '') + project.res.js.filename + '.min.js"></script>'
           }, {
@@ -302,7 +302,7 @@ module.exports = function(grunt) {
           replacements: [{
             pattern: /<style type="text\/css">(?:\r?\n|\r)/g,
             replacement: '<style type="text/css">'
-          },{
+          }, {
             pattern: /(?:\r?\n|\r)<\/style>(?:\r?\n|\r)<script>(?:\r?\n|\r)/g,
             replacement: '</style>\n    <script>'
           }, {
