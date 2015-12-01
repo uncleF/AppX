@@ -2,8 +2,87 @@
 	"name": "@tx-title",
   "short_name": "@tx-short",
 	"lang": "@tx-language",
-	"icons": [],
-  "splash_screens": [],
+	"icons": [
+    {
+      "src": "icon-60.png",
+      "sizes": "60x60",
+      "type": "image/png",
+      "density": "1"
+    }, {
+      "src": "icon-60@2x.png",
+      "sizes": "60x60",
+      "type": "image/png",
+      "density": "2"
+    }, {
+      "src": "icon-60@3x.png",
+      "sizes": "60x60",
+      "type": "image/png",
+      "density": "3"
+    }, {
+      "src": "icon-70.png",
+      "sizes": "70x70",
+      "type": "image/png",
+      "density": "1"
+    }, {
+      "src": "icon-70@2x.png",
+      "sizes": "70x70",
+      "type": "image/png",
+      "density": "2"
+    }, {
+      "src": "icon-70@3x.png",
+      "sizes": "70x60",
+      "type": "image/png",
+      "density": "3"
+    }
+  ],
+  "splash_screens": [
+    {
+      "src": "screen-320-480.jpg",
+      "sizes": "320x480",
+      "type": "image/jpeg",
+      "density": "1"
+    }, {
+      "src": "screen-320-480@2x.jpg",
+      "sizes": "320x480",
+      "type": "image/jpeg",
+      "density": "2"
+    }, {
+      "src": "screen-320-568@2x.jpg",
+      "sizes": "320x568",
+      "type": "image/jpeg",
+      "density": "2"
+    }, {
+      "src": "screen-375-667@2x.jpg",
+      "sizes": "375x667",
+      "type": "image/jpeg",
+      "density": "2"
+    }, {
+      "src": "screen-414-736@3x.jpg",
+      "sizes": "414x736",
+      "type": "image/jpeg",
+      "density": "3"
+    }, {
+      "src": "screen-768-1024.jpg",
+      "sizes": "1024x768",
+      "type": "image/jpeg",
+      "density": "1"
+    }, {
+      "src": "screen-768-1024@2x.jpg",
+      "sizes": "1024x768",
+      "type": "image/jpeg",
+      "density": "2"
+    }, {
+      "src": "screen-1024-768.jpg",
+      "sizes": "1024x768",
+      "type": "image/jpeg",
+      "density": "1"
+    }, {
+      "src": "screen-1024-768@2x.jpg",
+      "sizes": "1024x768",
+      "type": "image/jpeg",
+      "density": "2"
+    }
+  ],
 	"scope": "/",
   "start_url": "/@tx-launch",
   "display": "any"
