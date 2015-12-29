@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 
-<html lang="@tx-language">
+<html class="mdz-no-js" lang="@tx-language">
 
   <head>
     <title>@tx-title</title>
+    <meta name="title" content="@tx-title">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="title" content="@tx-title">
-    <link rel="manifest" href="/manifest.json">
-    <link type="text/plain" rel="author" href="/humans.txt">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta http-equiv="cleartype" content="on">
-    <!-- @tx-css -->
-    <link rel="stylesheet" type="text/css" href="res/css-dev/baseline.css">
-    <link rel="stylesheet" type="text/css" href="res/css-dev/utilities.css">
-    <link rel="stylesheet" type="text/css" href="res/css-dev/layout.css">
-    <link rel="stylesheet" type="text/css" href="res/css-dev/ui.css">
-    <link rel="stylesheet" type="text/css" href="res/css-dev/tx/tx-debug.css">
-    <!-- /@tx-css -->
+    <link rel="manifest" href="/manifest.json">
+    <link type="text/plain" rel="author" href="/humans.txt">
+    <link rel="stylesheet" type="text/css" href="res/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="res/css/tx/tx-debug.css">
     <script type="text/javascript" src="res/js/Modernizr/modernizr.min.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!--[if IE]> <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"> <![endif]-->
+    <link rel="mask-icon" type="image/svg+xml" href="maskIcon.svg" color="#fd746c">
+    <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="icons-60@2x.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="icons-60@3x.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="icon-76.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="icon-76@2x.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="228x228" href="icon-76@3x.png">
+    <link rel="apple-touch-icon" type="image/png" href="icon-60.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 320px)" type="image/jpeg" href="screen-320-480.jpg">
+    <link rel="apple-touch-startup-image" media="(device-width: 640px) and (device-height: 960px) and (-webkit-device-pixel-ratio: 2)" type="image/jpeg" href="screen-320-480@2x.jpg">
+    <link rel="apple-touch-startup-image" media="(device-width: 640px) and (device-height: 960px) and (-webkit-device-pixel-ratio: 2)" type="image/jpeg" href="screen-320-480@2x.jpg">
+    <link rel="apple-touch-startup-image" media="(device-width: 640px) and (device-height: 1136px) and (-webkit-device-pixel-ratio: 2)" type="image/jpeg" href="screen-320-568@2x.jpg">
+    <link rel="apple-touch-startup-image" media="(device-width: 750px) and (device-height: 1334px) and (-webkit-device-pixel-ratio: 2)" type="image/jpeg" href="screen-375-667@2x.jpg">
+    <link rel="apple-touch-startup-image" media="(device-width: 1242px) and (device-height: 2208px) and (-webkit-device-pixel-ratio: 3)" type="image/jpeg" href="screen-414-736@3x.jpg">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (orientation: portrait)" type="image/jpeg" href="screen-768-1024.jpg">
+    <link rel="apple-touch-startup-image" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" type="image/jpeg" href="screen-768-1024.jpg@2x">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (orientation: landscape)" type="image/jpeg" href="screen-1024-768.jpg">
+    <link rel="apple-touch-startup-image" media="(device-width: 1536px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" type="image/jpeg" href="screen-1024-768@2x.jpg">
     <meta name="msapplication-TileColor" content="#fd746c">
     <meta name="msapplication-TileImage" content="msTileIcon.png">
     <meta name="theme-color" content="#fd746c">
@@ -31,14 +44,8 @@
 
   <body>
     <h1>AppX</h1>
-    <script type="text/javascript" src="res/js/jQuery/jquery.min.js" defer></script>
-    <script type="text/javascript" src="res/js/UnderscoreJS/underscore.min.js" defer></script>
-    <script type="text/javascript" src="res/js/BackboneJS/backbone.min.js" defer></script>
-    <script type="text/javascript" src="res/js/FontFaceObserver/fontfaceobserver.min.js" defer></script>
-    <!-- @tx-js -->
-    <script type="text/javascript" src="res/js-dev/rAF.min.js" defer></script>
+    <script type="text/javascript" src="res/js/appx.js" defer></script>
     <script type="text/javascript" src="res/js-dev/tx/tx-debug.js" defer></script>
-    <!-- /@tx-js -->
   </body>
 
 </html>

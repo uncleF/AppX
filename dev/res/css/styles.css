@@ -11,7 +11,7 @@ html {
 
 body {
   color: #333333;
-  font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
+  font-family: "Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
   -webkit-font-feature-settings: "liga";
   -moz-font-feature-settings: "liga";
   font-feature-settings: "liga";
@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   margin: 1.5rem 0 3rem;
   font-size: 2rem;
-  line-height: 4.5rem;
+  line-height: 3rem;
 }
 
 h2 {
@@ -75,7 +75,7 @@ p, dl, ul, ol, li, pre, address, table {
 }
 
 pre, code, var {
-  font-family: "Courier New", Courier, Freemono, "Nimbus Mono L", monospace;
+  font-family: Consolas, Monaco, "Andale Mono", "Courier New", Courier, Freemono, "Nimbus Mono L", monospace;
 }
 
 dt {
@@ -115,13 +115,7 @@ pre, code, var {
 pre {
   overflow: hidden;
   padding: 0 1.5em;
-  white-space: pre;
   white-space: pre-wrap;
-  white-space: pre-line;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -hp-pre-wrap;
   word-wrap: break-word;
 }
 
@@ -177,7 +171,7 @@ kbd {
   background: #cccccc;
   background-clip: padding-box;
   font-weight: bold;
-  font-family: "Courier New", Courier, Freemono, "Nimbus Mono L", monospace;
+  font-family: Consolas, Monaco, "Andale Mono", "Courier New", Courier, Freemono, "Nimbus Mono L", monospace;
   letter-spacing: .1em;
   line-height: 1.5rem;
   vertical-align: top;
@@ -256,18 +250,13 @@ legend {
 
 /* Lists Reset */
 
-.u-listReset {
+.u-listReset, .u-listReset > li {
   padding: 0;
   margin: 0;
 }
 
 .u-listReset {
-  list-style: none outside;
-}
-
-.u-listReset > li {
-  padding: 0;
-  margin: 0;
+  list-style: none;
 }
 
 /* Layout Base */
@@ -282,9 +271,10 @@ body {
   overflow-x: auto;
   overflow-y: scroll;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  min-width: 980px;
+  min-width: 920px;
   min-height: 100%;
   max-width: 1920px;
+  padding: 0 30px;
   margin: 0 auto;
   background: #ffffff;
 }
@@ -307,6 +297,20 @@ body {
   background: #337ab7;
 }
 
+/* Focus */
+
+a:focus, input:focus, select:focus, textarea:focus {
+  outline: 1px dotted #cccccc;
+}
+
+/* Fast Touch */
+
+a, label, select, .button {
+  touch-action: manipulation;
+
+  -ms-touch-action: manipulation;
+}
+
 /* Links */
 
 a {
@@ -315,8 +319,8 @@ a {
   -webkit-text-decoration-color: rgba(51, 122, 183, .5);
   -moz-text-decoration-color: rgba(51, 122, 183, .5);
   text-decoration-color: rgba(51, 122, 183, .5);
-  -webkit-transition: .15s;
-  transition: .15s;
+  -webkit-transition: color .15s, text-decoration-color .15s;
+  transition: color .15s, text-decoration-color .15s;
 }
 
 a:visited {
@@ -340,21 +344,19 @@ a:active {
   text-decoration-color: rgba(217, 83, 79, .5);
 }
 
-a:focus {
-  outline: 1px dotted #cccccc;
-}
-
 /* Forms */
 
 label {
-  border-bottom: 1px dotted #cccccc;
   cursor: pointer;
 }
 
 input, select, textarea {
   margin: 0;
+  font-family: "Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
+}
+
+input, select {
   font-size: 1rem;
-  font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
 }
 
 input, textarea {
@@ -412,7 +414,9 @@ textarea {
   display: block;
   overflow: auto;
   height: 13.375rem;
-  padding: .75rem 15px;
+  padding: .375rem 15px;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 /* Custom Forms */
@@ -421,3 +425,70 @@ textarea {
   height: 2.125rem;
   padding: 0 15px;
 }
+
+/* TX Rhythm Lines */
+
+.page-is-showingRhythmLines {
+  position: relative;
+  top: -1px;
+  padding: 1px 30px 0;
+}
+
+.page-is-showingRhythmLines .debugToolsRhythm {
+  display: block;
+}
+
+/* TX Developer Note */
+
+[data-dev-note] {
+  position: relative;
+  padding: 0 2px;
+  border-radius: 2px;
+  color: #ffffff;
+  background: #d9534f;
+  box-decoration-break: clone;
+}
+
+[data-dev-note]:hover {
+  background: rgba(217, 83, 79, .5);
+}
+
+[data-dev-note]:hover:after {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  content: "Dev Note:\a" attr(data-dev-note);
+  display: block;
+  width: 195px;
+  padding: 5px;
+  border-radius: 2px;
+  margin: 0 0 5px -100px;
+  color: #ffffff;
+  background: #d9534f;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+/* TX Debuging Console */
+
+.page-is-showingConsole .debugConsole {
+  display: block;
+}
+
+/* TX Debuging Controls */
+
+.page-is-showingDebugTools .debugTools {
+  transform: translate(0, 0);
+}
+
+.page-is-showingDebugTools .debugToolsToggle {
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  background: #ffffff;
+  opacity: 1;
+}
+
