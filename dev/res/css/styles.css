@@ -351,11 +351,11 @@ label {
 
 input, select, textarea {
   margin: 0;
-  font-family: "Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
+  font-family: inherit;
 }
 
 input, select {
-  font-size: 1rem;
+  font-size: inherit;
 }
 
 input, textarea {
@@ -394,6 +394,21 @@ input[type="search"], input[type="number"] {
   appearance: none;
 }
 
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #cccccc;
+  opacity: 1;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #cccccc;
+  opacity: 1;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #cccccc;
+  opacity: 1;
+}
+
 select {
   height: 2.25rem;
   vertical-align: top;
@@ -414,8 +429,7 @@ textarea {
   overflow: auto;
   height: 13.375rem;
   padding: .375rem 15px;
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: inherit;
 }
 
 /* Custom Forms */
