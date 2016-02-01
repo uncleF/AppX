@@ -582,6 +582,7 @@ module.exports = function(grunt) {
     clean: {
       res: [project.res.css.dir, project.res.js.dir + '*.js'],
       reports: [project.res.js.dir + '*.txt'],
+      images: [project.res.css.sass + 'project/tx/'],
       build: [project.build.dir]
     },
     copy: {
@@ -767,7 +768,8 @@ module.exports = function(grunt) {
   grunt.registerTask('images', [
     'imagemin:images',
     'svgmin:images',
-    'images-datauri'
+    'images-datauri',
+    'clean:images'
   ]);
 
   grunt.registerTask('process-html', [

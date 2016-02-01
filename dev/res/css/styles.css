@@ -175,7 +175,7 @@ kbd {
   font-weight: bold;
   font-family: Consolas, Monaco, "Andale Mono", "Courier New", Courier, Freemono, "Nimbus Mono L", monospace;
   letter-spacing: .1em;
-  line-height: 1.5rem;
+  line-height: 1.5;
   vertical-align: top;
 }
 
