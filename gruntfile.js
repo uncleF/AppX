@@ -727,6 +727,14 @@ module.exports = function(grunt) {
     grunt.file.write(pagePath, html);
   });
 
+  grunt.registerTask('reminder', 'Reminder', function() {
+    var list = grunt.file.readJSON('.reminderrc').reminders;
+    grunt.log.writeln('\nDon\'t Forget to Check:'['magenta']);
+    list.forEach(function(value) {
+      grunt.log.writeln('✔'['green'] + ' ' + value);
+    });
+  });
+
   grunt.registerTask('compileTasks', 'compiling', function() {
     if (project.res.images.sprites.length > 0) {
         grunt.task.run([
@@ -830,7 +838,8 @@ module.exports = function(grunt) {
     'compress:cssGzip',
     'compress:jsGzip',
     'compile-critical',
-    'cleanempty:build'
+    'cleanempty:build',
+    'reminder'
   ]);
 
   grunt.registerTask('compress-build', [
