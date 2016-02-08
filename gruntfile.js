@@ -772,6 +772,11 @@ module.exports = function(grunt) {
     'analyzecss'
   ]);
 
+  grunt.registerTask('test', [
+    'quality',
+    'performance'
+  ]);
+
   grunt.registerTask('images-datauri', [
     'datauri'
   ]);
