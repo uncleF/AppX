@@ -14,16 +14,17 @@
     }
   });
 
+  var app = new App();
+
   var TodoRouter = Backbone.Router.extend({
+    model: app,
     routes: {
       '': 'start'
     },
     start() {
-      app.set('state', 'start');
+      this.model.set('state', 'start');
     }
   });
-
-  var app = new App();
 
   app.TodoRouter = new TodoRouter();
   Backbone.history.start();
@@ -31,8 +32,9 @@
   app.AppView = Backbone.View.extend({
     el: '#app',
     events: {},
+    model: app,
     initialize() {
-      app.on('change:state', this.changeScreens, this);
+      this.model.on('change:state', this.changeScreens, this);
     },
     createScreen() {}
   });

@@ -19,6 +19,7 @@
     "grunt-arialinter": "*",
     "grunt-autoprefixer": "*",
     "grunt-browserify": "*",
+    "grunt-cleanempty": "*",
     "grunt-colorguard": "*",
     "grunt-concurrent": "*",
     "grunt-contrib-clean": "*",
@@ -51,7 +52,13 @@
     "grunt-uncss": "*",
     "load-grunt-tasks": "*"
   },
-  "scripts": {},
+  "scripts": {
+    "preinstall": "npm cache clean",
+    "server": "server -d dev",
+    "build": "grunt build",
+    "start": "grunt watch",
+    "test": "grunt test"
+  },
   "author": "uncle.funkay@gmail.com",
   "license": "ISC",
   "directories": {

@@ -585,6 +585,14 @@ module.exports = function(grunt) {
       images: [project.res.css.sass + 'project/tx/'],
       build: [project.build.dir]
     },
+    cleanempty: {
+      options: {
+        noJunk: true
+      },
+      build: {
+        src: [project.build.dir + '**/*']
+      }
+    },
     copy: {
       build: {
         cwd: project.dir,
