@@ -829,7 +829,8 @@ module.exports = function(grunt) {
     'prettify',
     'compress:cssGzip',
     'compress:jsGzip',
-    'compile-critical'
+    'compile-critical',
+    'cleanempty:build'
   ]);
 
   grunt.registerTask('compress-build', [
