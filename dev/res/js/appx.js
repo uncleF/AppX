@@ -49,9 +49,10 @@
           events: {},
           model: app,
           initialize: function initialize() {
-            this.model.on('change:state', this.changeScreens, this);
+            this.model.on('change:state', this.render);
           },
-          createScreen: function createScreen() {
+          render: function render() {
+            return this;
           }
         });
         new app.AppView();
