@@ -21,8 +21,8 @@
   ],
   "paths": {
     "bitmaps_reference": "../../tests/bitmaps_reference/",
-    "bitmaps_test": "../../tests/bitmaps_test/",
-    "compare_data": "../../tests/bitmaps_test/compare.json"
+    "bitmaps_test": "../../tests/bitmaps_test/"
   },
-  "engine": "phantomjs"
+  "engine": "phantomjs",
+  "report": ["CLI"]
 }
