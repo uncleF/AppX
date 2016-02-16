@@ -31,6 +31,14 @@
       "name": "AppX: JavaScript",
       "path": "dev/res/js-dev"
     }, {
+      "folder_exclude_patterns":
+      [
+        "backstop"
+      ],
+      "follow_symlinks": true,
+      "name": "AppX: Tests",
+      "path": "tests"
+    }, {
       "file_exclude_patterns":
       [
         "*.jpg",
