@@ -37,6 +37,7 @@ module.exports = function(grunt) {
     init: function() {
       var developmentDirCompiled = DEVELOPMENT_DIR + '/';
       var resourcesDirCompiled = developmentDirCompiled + RESOURCES_DIR + '/';
+      var spriteFolders = SPRITES.map(sprite => { return '!' + sprite.split('.')[0] + '/*.*'; });
       var config = {
         name: PROJECT,
         short: APP,
@@ -70,6 +71,7 @@ module.exports = function(grunt) {
         },
         build: {
           dir: BUILD_DIR + '/',
+          sprites: spriteFolders,
           critical: {
             widthDesktop: CRITICAL_DESK_W,
             heightDesktop: CRITICAL_DESK_H,
@@ -631,7 +633,7 @@ module.exports = function(grunt) {
     copy: {
       build: {
         cwd: project.dir,
-        src: ['**/*.*', '!**/templates/**', '!**/sass/**', '!**/*.map', '!**/**-dev/**', '!**/tx-*.*', '!**/tx/**'],
+        src: ['**/*.*', '!**/templates/**', '!**/sass/**', '!**/*.map', '!**/**-dev/**', '!**/tx-*.*', '!**/tx/**'].concat(project.build.sprites),
         dest: project.build.dir,
         expand: true
       },
@@ -643,24 +645,15 @@ module.exports = function(grunt) {
       }
     },
     compress: {
-      cssGzip: {
+      res: {
         options: {
           mode: 'gzip'
         },
         cwd: project.build.dir,
-        src: ['**/*.min.css'],
+        src: ['**/*.min.css', '**/*.min.js'],
         dest: project.build.dir,
-        ext: '.min.css.gz',
-        expand: true
-      },
-      jsGzip: {
-        options: {
-          mode: 'gzip'
-        },
-        cwd: project.build.dir,
-        src: ['**/*.min.js'],
-        dest: project.build.dir,
-        ext: '.min.js.gz',
+        ext: '.gz',
+        extDot: 'last',
         expand: true
       },
       build: {
@@ -722,9 +715,9 @@ module.exports = function(grunt) {
     concurrent: {
       options: {
         logConcurrentOutput: true,
-        limit: 2
+        limit: 6
       },
-      projectWatch: ['watch', 'connect:dev']
+      projectWatch: ['watch:html', 'watch:images', 'watch:sass', 'watch:javascript', 'watch:livereload', 'connect:dev']
     }
 
   });
@@ -875,6 +868,10 @@ module.exports = function(grunt) {
     'concurrent'
   ]);
 
+  grunt.registerTask('server', [
+    'connect:build'
+  ]);
+
   grunt.registerTask('compile', [
     'compileTasks'
   ]);
@@ -896,8 +893,7 @@ module.exports = function(grunt) {
     'string-replace:build',
     'htmlmin',
     'prettify',
-    'compress:cssGzip',
-    'compress:jsGzip',
+    'compress:res',
     'compile-critical',
     'cleanempty:build',
     'reminder'
