@@ -2034,7 +2034,7 @@
   3: [
     function (require, module, exports) {
       /*!
- * jQuery JavaScript Library v2.2.0
+ * jQuery JavaScript Library v2.2.1
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -2044,7 +2044,7 @@
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-01-08T20:02Z
+ * Date: 2016-02-22T19:11Z
  */
       (function (global, factory) {
         if (typeof module === 'object' && typeof module.exports === 'object') {
@@ -2080,7 +2080,7 @@
         var toString = class2type.toString;
         var hasOwn = class2type.hasOwnProperty;
         var support = {};
-        var version = '2.2.0',
+        var version = '2.2.1',
           // Define a local copy of jQuery
           jQuery = function (selector, context) {
             // The jQuery object is actually just the init constructor 'enhanced'
@@ -5343,7 +5343,7 @@
           if (fn === false) {
             fn = returnFalse;
           } else if (!fn) {
-            return this;
+            return elem;
           }
           if (one === 1) {
             origFn = fn;
@@ -5824,11 +5824,9 @@
           rnoInnerhtml = /<script|<style|<link/i,
           // checked="checked" or checked
           rchecked = /checked\s*(?:[^=]|=\s*.checked.)/i, rscriptTypeMasked = /^true\/(.*)/, rcleanScript = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g;
+        // Manipulating tables requires a tbody
         function manipulationTarget(elem, content) {
-          if (jQuery.nodeName(elem, 'table') && jQuery.nodeName(content.nodeType !== 11 ? content : content.firstChild, 'tr')) {
-            return elem.getElementsByTagName('tbody')[0] || elem;
-          }
-          return elem;
+          return jQuery.nodeName(elem, 'table') && jQuery.nodeName(content.nodeType !== 11 ? content : content.firstChild, 'tr') ? elem.getElementsByTagName('tbody')[0] || elem.appendChild(elem.ownerDocument.createElement('tbody')) : elem;
         }
         // Replace/restore the type attribute of script elements for safe DOM manipulation
         function disableScript(elem) {
@@ -6202,7 +6200,7 @@
           // IE throws on elements created in popups
           // FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
           var view = elem.ownerDocument.defaultView;
-          if (!view.opener) {
+          if (!view || !view.opener) {
             view = window;
           }
           return view.getComputedStyle(elem);
@@ -6307,13 +6305,16 @@
         function curCSS(elem, name, computed) {
           var width, minWidth, maxWidth, ret, style = elem.style;
           computed = computed || getStyles(elem);
+          ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined;
+          // Support: Opera 12.1x only
+          // Fall back to style even without computed
+          // computed is undefined for elems on document fragments
+          if ((ret === '' || ret === undefined) && !jQuery.contains(elem.ownerDocument, elem)) {
+            ret = jQuery.style(elem, name);
+          }
           // Support: IE9
           // getPropertyValue is only needed for .css('filter') (#12537)
           if (computed) {
-            ret = computed.getPropertyValue(name) || computed[name];
-            if (ret === '' && !jQuery.contains(elem.ownerDocument, elem)) {
-              ret = jQuery.style(elem, name);
-            }
             // A tribute to the "awesome hack by Dean Edwards"
             // Android Browser returns percentage for some values,
             // but width seems to be reliably pixels.
@@ -7819,7 +7820,7 @@
                     // But now, this "simulate" function is used only for events
                     // for which stopPropagation() is noop, so there is no need for that anymore.
                     //
-                    // For the compat branch though, guard for "click" and "submit"
+                    // For the 1.x branch though, guard for "click" and "submit"
                     // events is still used, but was moved to jQuery.event.stopPropagation function
                     // because `originalEvent` should point to the original event for the constancy
                     // with other events and for more focused logic
@@ -9153,9 +9154,8 @@
                 parentOffset = offsetParent.offset();
               }
               // Add offsetParent borders
-              // Subtract offsetParent scroll positions
-              parentOffset.top += jQuery.css(offsetParent[0], 'borderTopWidth', true) - offsetParent.scrollTop();
-              parentOffset.left += jQuery.css(offsetParent[0], 'borderLeftWidth', true) - offsetParent.scrollLeft();
+              parentOffset.top += jQuery.css(offsetParent[0], 'borderTopWidth', true);
+              parentOffset.left += jQuery.css(offsetParent[0], 'borderLeftWidth', true);
             }
             // Subtract parent offsets and element margins
             return {
