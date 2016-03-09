@@ -1,4 +1,4 @@
-/* Baseline Styles, Typography & Rhythm */
+/* Typography & Vertical Rhythm */
 
 html {
   font-size: 16px;
@@ -238,54 +238,6 @@ legend {
   font-weight: bold;
 }
 
-/* Phone Baseline */
-
-@media handheld, only screen and (max-width: 45em) {
-
-  /* Typography & Rhythm */
-
-  table, tr, th, td {
-    display: block;
-  }
-
-}
-
-/* Lists Reset */
-
-.u-listReset, .u-listReset > li {
-  padding: 0;
-  margin: 0;
-}
-
-.u-listReset {
-  list-style: none;
-}
-
-/* Layout Base */
-
-html {
-  -webkit-overflow-scrolling: touch;
-  min-height: 100%;
-}
-
-body {
-  position: relative;
-  overflow-x: auto;
-  overflow-y: scroll;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  min-width: 61.25em;
-  min-height: 100%;
-  max-width: 1920px;
-  margin: 0 auto;
-  background: #ffffff;
-}
-
-/* Templates */
-
-.template {
-  display: none;
-}
-
 /* Selection */
 
 ::-moz-selection {
@@ -432,6 +384,54 @@ textarea {
   height: 13.375rem;
   padding: .375rem 15px;
   font-size: inherit;
+}
+
+/* Phone Baseline */
+
+@media handheld, only screen and (max-width: 45em) {
+
+  /* Typography & Rhythm */
+
+  table, tr, th, td {
+    display: block;
+  }
+
+}
+
+/* Lists Reset */
+
+.u-listReset, .u-listReset > li {
+  padding: 0;
+  margin: 0;
+}
+
+.u-listReset {
+  list-style: none;
+}
+
+/* Layout Base */
+
+html {
+  -webkit-overflow-scrolling: touch;
+  min-height: 100%;
+}
+
+body {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: scroll;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  min-width: 61.25em;
+  min-height: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  background: #ffffff;
+}
+
+/* Templates */
+
+.template {
+  display: none;
 }
 
 /* Custom Forms */
