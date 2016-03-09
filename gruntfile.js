@@ -655,17 +655,6 @@ module.exports = function(grunt) {
         ext: '.gz',
         extDot: 'last',
         expand: true
-      },
-      build: {
-        options: {
-          mode: 'zip',
-          archive: project.name + '.build.zip'
-        },
-        cwd: project.build.dir,
-        src: ['**'],
-        dest: '.',
-        extDot: 'last',
-        expand: true
       }
     },
 
@@ -898,10 +887,6 @@ module.exports = function(grunt) {
     'compile-critical',
     'cleanempty:build',
     'reminder'
-  ]);
-
-  grunt.registerTask('compress-build', [
-    'compress:build'
   ]);
 
 };
